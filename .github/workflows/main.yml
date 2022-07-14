@@ -43,7 +43,7 @@ jobs:
           aws s3 sync dist/upload s3://builds.loraserver.io/chirpstack-rest-api
 
   docker:
-    needs: tests
+    needs: test
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
