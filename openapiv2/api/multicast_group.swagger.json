@@ -1,0 +1,727 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/multicast_group.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "MulticastGroupService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/multcast-groups/{queueItem.multicastGroupId}/queue": {
+      "post": {
+        "summary": "Add the given item to the multcast group queue.",
+        "operationId": "MulticastGroupService_Enqueue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiEnqueueMulticastGroupQueueItemResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "queueItem.multicastGroupId",
+            "description": "Multicast group ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "queueItem": {
+                  "type": "object",
+                  "properties": {
+                    "fCnt": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Downlink frame-counter.\nThis will be automatically set on enqueue."
+                    },
+                    "fPort": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "FPort (must be \u003e 0)."
+                    },
+                    "data": {
+                      "type": "string",
+                      "format": "byte",
+                      "description": "Payload."
+                    }
+                  },
+                  "description": "Multicast queue-item to enqueue.",
+                  "title": "Multicast queue-item to enqueue."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      }
+    },
+    "/api/multicast-groups": {
+      "get": {
+        "summary": "List the available multicast groups.",
+        "operationId": "MulticastGroupService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListMulticastGroupsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of multicast groups to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "description": "If set, the given string will be used to search on name.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "applicationId",
+            "description": "Application ID to list the multicast groups for.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      },
+      "post": {
+        "summary": "Create the given multicast group.",
+        "operationId": "MulticastGroupService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiCreateMulticastGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateMulticastGroupRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      }
+    },
+    "/api/multicast-groups/{id}": {
+      "get": {
+        "summary": "Get returns the multicast group for the given ID.",
+        "operationId": "MulticastGroupService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetMulticastGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Multicast group ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the multicast-group with the given ID.",
+        "operationId": "MulticastGroupService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Multicast group iD.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      }
+    },
+    "/api/multicast-groups/{multicastGroup.id}": {
+      "put": {
+        "summary": "Update the given multicast group.",
+        "operationId": "MulticastGroupService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "multicastGroup.id",
+            "description": "ID (UUID).\nThis will be generated automatically on create.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "multicastGroup": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name."
+                    },
+                    "applicationId": {
+                      "type": "string",
+                      "description": "Application ID.\nAfter creation, this can not be updated."
+                    },
+                    "region": {
+                      "$ref": "#/definitions/commonRegion",
+                      "description": "Region."
+                    },
+                    "mcAddr": {
+                      "type": "string",
+                      "description": "Multicast address (HEX encoded DevAddr)."
+                    },
+                    "mcNwkSKey": {
+                      "type": "string",
+                      "description": "Multicast network session key (HEX encoded AES128 key)."
+                    },
+                    "mcAppSKey": {
+                      "type": "string",
+                      "description": "Multicast application session key (HEX encoded AES128 key)."
+                    },
+                    "fCnt": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Frame-counter."
+                    },
+                    "groupType": {
+                      "$ref": "#/definitions/apiMulticastGroupType",
+                      "description": "Multicast group type."
+                    },
+                    "dr": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Data-rate."
+                    },
+                    "frequency": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Frequency (Hz)."
+                    },
+                    "classBPingSlotPeriod": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Ping-slot period (only for Class-B)."
+                    }
+                  },
+                  "description": "Multicast group object to update.",
+                  "title": "Multicast group object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      }
+    },
+    "/api/multicast-groups/{multicastGroupId}/devices": {
+      "post": {
+        "summary": "Add a device to the multicast group.",
+        "operationId": "MulticastGroupService_AddDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "multicastGroupId",
+            "description": "Multicast group ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "devEui": {
+                  "type": "string",
+                  "description": "Device EUI (HEX encoded)."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      }
+    },
+    "/api/multicast-groups/{multicastGroupId}/devices/{devEui}": {
+      "delete": {
+        "summary": "Remove a device from the multicast group.",
+        "operationId": "MulticastGroupService_RemoveDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "multicastGroupId",
+            "description": "Multicast group ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "devEui",
+            "description": "Device EUI (HEX encoded).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      }
+    },
+    "/api/multicast-groups/{multicastGroupId}/queue": {
+      "get": {
+        "summary": "List the items in the multicast group queue.",
+        "operationId": "MulticastGroupService_ListQueue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListMulticastGroupQueueResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "multicastGroupId",
+            "description": "Multicast group ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      },
+      "delete": {
+        "summary": "Flush the queue for the given multicast group.",
+        "operationId": "MulticastGroupService_FlushQueue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "multicastGroupId",
+            "description": "Multicast group ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MulticastGroupService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiCreateMulticastGroupRequest": {
+      "type": "object",
+      "properties": {
+        "multicastGroup": {
+          "$ref": "#/definitions/apiMulticastGroup",
+          "description": "Multicast group to create."
+        }
+      }
+    },
+    "apiCreateMulticastGroupResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID of created multicast group (UUID)."
+        }
+      }
+    },
+    "apiEnqueueMulticastGroupQueueItemResponse": {
+      "type": "object",
+      "properties": {
+        "fCnt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Frame-counter of the enqueued payload."
+        }
+      }
+    },
+    "apiGetMulticastGroupResponse": {
+      "type": "object",
+      "properties": {
+        "multicastGroup": {
+          "$ref": "#/definitions/apiMulticastGroup",
+          "description": "Multicast group object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        }
+      }
+    },
+    "apiListMulticastGroupQueueResponse": {
+      "type": "object",
+      "properties": {
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMulticastGroupQueueItem"
+          }
+        }
+      }
+    },
+    "apiListMulticastGroupsResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of multicast groups."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiMulticastGroupListItem"
+          },
+          "description": "Result-test."
+        }
+      }
+    },
+    "apiMulticastGroup": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID (UUID).\nThis will be generated automatically on create."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID.\nAfter creation, this can not be updated."
+        },
+        "region": {
+          "$ref": "#/definitions/commonRegion",
+          "description": "Region."
+        },
+        "mcAddr": {
+          "type": "string",
+          "description": "Multicast address (HEX encoded DevAddr)."
+        },
+        "mcNwkSKey": {
+          "type": "string",
+          "description": "Multicast network session key (HEX encoded AES128 key)."
+        },
+        "mcAppSKey": {
+          "type": "string",
+          "description": "Multicast application session key (HEX encoded AES128 key)."
+        },
+        "fCnt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Frame-counter."
+        },
+        "groupType": {
+          "$ref": "#/definitions/apiMulticastGroupType",
+          "description": "Multicast group type."
+        },
+        "dr": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Data-rate."
+        },
+        "frequency": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Frequency (Hz)."
+        },
+        "classBPingSlotPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Ping-slot period (only for Class-B)."
+        }
+      }
+    },
+    "apiMulticastGroupListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "region": {
+          "$ref": "#/definitions/commonRegion",
+          "description": "Region."
+        },
+        "groupType": {
+          "$ref": "#/definitions/apiMulticastGroupType",
+          "description": "Multicast group type."
+        }
+      }
+    },
+    "apiMulticastGroupQueueItem": {
+      "type": "object",
+      "properties": {
+        "multicastGroupId": {
+          "type": "string",
+          "description": "Multicast group ID."
+        },
+        "fCnt": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Downlink frame-counter.\nThis will be automatically set on enqueue."
+        },
+        "fPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "FPort (must be \u003e 0)."
+        },
+        "data": {
+          "type": "string",
+          "format": "byte",
+          "description": "Payload."
+        }
+      }
+    },
+    "apiMulticastGroupType": {
+      "type": "string",
+      "enum": [
+        "CLASS_C",
+        "CLASS_B"
+      ],
+      "default": "CLASS_C",
+      "description": " - CLASS_C: Class C.\n - CLASS_B: Class-B."
+    },
+    "commonRegion": {
+      "type": "string",
+      "enum": [
+        "EU868",
+        "US915",
+        "CN779",
+        "EU433",
+        "AU915",
+        "CN470",
+        "AS923",
+        "AS923_2",
+        "AS923_3",
+        "AS923_4",
+        "KR920",
+        "IN865",
+        "RU864",
+        "ISM2400"
+      ],
+      "default": "EU868",
+      "title": "- EU868: EU868\n - US915: US915\n - CN779: CN779\n - EU433: EU433\n - AU915: AU915\n - CN470: CN470\n - AS923: AS923\n - AS923_2: AS923 with -1.80 MHz frequency offset\n - AS923_3: AS923 with -6.60 MHz frequency offset\n - AS923_4: (AS923 with -5.90 MHz frequency offset).\n - KR920: KR920\n - IN865: IN865\n - RU864: RU864\n - ISM2400: ISM2400 (LoRaWAN 2.4 GHz)"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

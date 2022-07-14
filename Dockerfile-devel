@@ -1,0 +1,17 @@
+FROM golang:1.18-alpine
+
+ENV PROJECT_PATH=/chirpstack-rest-api
+ENV PATH=$PATH:$PROJECT_PATH/build
+ENV CGO_ENABLED=0
+ENV GO_EXTRA_BUILD_ARGS="-a -installsuffix cgo"
+
+RUN apk add --no-cache ca-certificates make git bash alpine-sdk protobuf protobuf-dev
+RUN git clone https://github.com/googleapis/googleapis.git /googleapis
+RUN git config --global --add safe.directory /chirpstack-rest-api
+git config --global --add safe.directory /chirpstack-rest-api/chirpstack
+
+RUN mkdir -p $PROJECT_PATH
+COPY . $PROJECT_PATH
+WORKDIR $PROJECT_PATH
+
+RUN make dev-requirements

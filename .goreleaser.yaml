@@ -1,0 +1,46 @@
+project_name: chirpstack-rest-api
+
+builds:
+  -
+    binary: chirpstack-rest-api
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  -
+    format: tar.gz
+
+release:
+  disable: true
+
+nfpms:
+  -
+    vendor: ChirpStack
+    homepage: https://www.chirpstack.io/
+    maintainer: Orne Brocaar <info@brocaar.com>
+    description: ChirpStack gRPC to REST proxy
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    bindir: /usr/bin
+    contents:
+      -
+        src: packaging/files/chirpstack-rest-api.service
+        dst: /lib/systemd/system/chirpstack-rest-api.service
+      -
+        src: packaging/files/environment
+        dst: /etc/chirpstack-rest-api/environment
+        type: "config|noreplace"
+        file_info:
+          owner: chirpstack
+          group: chirpstack
+    scripts:
+      preinstall: packaging/files/pre-install.sh
+      postinstall: packaging/files/post-install.sh
+      preremove: packaging/files/pre-remove.sh

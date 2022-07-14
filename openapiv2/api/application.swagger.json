@@ -1,0 +1,2790 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/application.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "ApplicationService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/applications": {
+      "get": {
+        "summary": "Get the list of applications.",
+        "operationId": "ApplicationService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListApplicationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of applications to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "description": "If set, the given string will be used to search on name (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "description": "Tenant ID to list the applications for.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "post": {
+        "summary": "Create creates the given application.",
+        "operationId": "ApplicationService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiCreateApplicationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateApplicationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{application.id}": {
+      "put": {
+        "summary": "Update updates the given application.",
+        "operationId": "ApplicationService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "application.id",
+            "description": "Application ID (UUID).\nNote: on create this will be automatically generated.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "application": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Application name."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Application description."
+                    },
+                    "tenantId": {
+                      "type": "string",
+                      "description": "Tenant ID (UUID)."
+                    }
+                  },
+                  "description": "Application object.",
+                  "title": "Application object."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations": {
+      "get": {
+        "summary": "List all configured integrations.",
+        "operationId": "ApplicationService_ListIntegrations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListIntegrationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/aws-sns": {
+      "get": {
+        "summary": "Get AWS SNS integration.",
+        "operationId": "ApplicationService_GetAwsSnsIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetAwsSnsIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete AWS SNS integration.",
+        "operationId": "ApplicationService_DeleteAwsSnsIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/azure-service-bus": {
+      "get": {
+        "summary": "Get Azure Service-Bus integration.",
+        "operationId": "ApplicationService_GetAzureServiceBusIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetAzureServiceBusIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete Azure Service-Bus integration.",
+        "operationId": "ApplicationService_DeleteAzureServiceBusIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/gcp-pub-sub": {
+      "get": {
+        "summary": "Get GCP Pub/Sub integration.",
+        "operationId": "ApplicationService_GetGcpPubSubIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetGcpPubSubIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete GCP Pub/Sub integration.",
+        "operationId": "ApplicationService_DeleteGcpPubSubIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/http": {
+      "get": {
+        "summary": "Get the configured HTTP integration.",
+        "operationId": "ApplicationService_GetHttpIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetHttpIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the HTTP integration.",
+        "operationId": "ApplicationService_DeleteHttpIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/ifttt": {
+      "get": {
+        "summary": "Get IFTTT integration.",
+        "operationId": "ApplicationService_GetIftttIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetIftttIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete IFTTT integration.",
+        "operationId": "ApplicationService_DeleteIftttIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/influxdb": {
+      "get": {
+        "summary": "Get InfluxDb integration.",
+        "operationId": "ApplicationService_GetInfluxDbIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetInfluxDbIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete InfluxDb integration.",
+        "operationId": "ApplicationService_DeleteInfluxDbIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/loracloud": {
+      "get": {
+        "summary": "Get LoRaCloud integration.",
+        "operationId": "ApplicationService_GetLoraCloudIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetLoraCloudIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete LoRaCloud integration.",
+        "operationId": "ApplicationService_DeleteLoraCloudIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/mqtt/certificate": {
+      "post": {
+        "summary": "Generates application ID specific client-certificate.",
+        "operationId": "ApplicationService_GenerateMqttIntegrationClientCertificate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGenerateMqttIntegrationClientCertificateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/mydevices": {
+      "get": {
+        "summary": "Get myDevices integration.",
+        "operationId": "ApplicationService_GetMyDevicesIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetMyDevicesIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete myDevices integration.",
+        "operationId": "ApplicationService_DeleteMyDevicesIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/pilot-things": {
+      "get": {
+        "summary": "Get Pilot Things integration.",
+        "operationId": "ApplicationService_GetPilotThingsIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetPilotThingsIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete Pilot Things integration.",
+        "operationId": "ApplicationService_DeletePilotThingsIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/integrations/thingsboard": {
+      "get": {
+        "summary": "Get ThingsBoard integration.",
+        "operationId": "ApplicationService_GetThingsBoardIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetThingsBoardIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete ThingsBoard integration.",
+        "operationId": "ApplicationService_DeleteThingsBoardIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{id}": {
+      "get": {
+        "summary": "Get the application for the given ID.",
+        "operationId": "ApplicationService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetApplicationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the application for the given ID.",
+        "operationId": "ApplicationService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/aws-sns": {
+      "post": {
+        "summary": "Create AWS SNS integration.",
+        "operationId": "ApplicationService_CreateAwsSnsIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "encoding": {
+                      "$ref": "#/definitions/apiEncoding",
+                      "description": "Encoding."
+                    },
+                    "region": {
+                      "type": "string",
+                      "description": "AWS region."
+                    },
+                    "accessKeyId": {
+                      "type": "string",
+                      "description": "AWS Access Key ID."
+                    },
+                    "secretAccessKey": {
+                      "type": "string",
+                      "description": "AWS Secret Access Key."
+                    },
+                    "topicArn": {
+                      "type": "string",
+                      "description": "Topic ARN."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update AWS SNS integration.",
+        "operationId": "ApplicationService_UpdateAwsSnsIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "encoding": {
+                      "$ref": "#/definitions/apiEncoding",
+                      "description": "Encoding."
+                    },
+                    "region": {
+                      "type": "string",
+                      "description": "AWS region."
+                    },
+                    "accessKeyId": {
+                      "type": "string",
+                      "description": "AWS Access Key ID."
+                    },
+                    "secretAccessKey": {
+                      "type": "string",
+                      "description": "AWS Secret Access Key."
+                    },
+                    "topicArn": {
+                      "type": "string",
+                      "description": "Topic ARN."
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/azure-service-bus": {
+      "post": {
+        "summary": "Create Azure Service-Bus integration.",
+        "operationId": "ApplicationService_CreateAzureServiceBusIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "encoding": {
+                      "$ref": "#/definitions/apiEncoding",
+                      "description": "Encoding."
+                    },
+                    "connectionString": {
+                      "type": "string",
+                      "description": "Connection string."
+                    },
+                    "publishName": {
+                      "type": "string",
+                      "description": "Publish name.\nThis is the name of the topic or queue."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update Azure Service-Bus integration.",
+        "operationId": "ApplicationService_UpdateAzureServiceBusIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "encoding": {
+                      "$ref": "#/definitions/apiEncoding",
+                      "description": "Encoding."
+                    },
+                    "connectionString": {
+                      "type": "string",
+                      "description": "Connection string."
+                    },
+                    "publishName": {
+                      "type": "string",
+                      "description": "Publish name.\nThis is the name of the topic or queue."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/gcp-pub-sub": {
+      "post": {
+        "summary": "Create GCP Pub/Sub integration.",
+        "operationId": "ApplicationService_CreateGcpPubSubIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "encoding": {
+                      "$ref": "#/definitions/apiEncoding",
+                      "description": "Encoding."
+                    },
+                    "credentialsFile": {
+                      "type": "string",
+                      "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following Pub/Sub roles:\n* Pub/Sub Publisher"
+                    },
+                    "projectId": {
+                      "type": "string",
+                      "description": "Project ID."
+                    },
+                    "topicName": {
+                      "type": "string",
+                      "description": "Topic name.\nThis is the name of the Pub/Sub topic."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update GCP Pub/Sub integration.",
+        "operationId": "ApplicationService_UpdateGcpPubSubIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "encoding": {
+                      "$ref": "#/definitions/apiEncoding",
+                      "description": "Encoding."
+                    },
+                    "credentialsFile": {
+                      "type": "string",
+                      "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following Pub/Sub roles:\n* Pub/Sub Publisher"
+                    },
+                    "projectId": {
+                      "type": "string",
+                      "description": "Project ID."
+                    },
+                    "topicName": {
+                      "type": "string",
+                      "description": "Topic name.\nThis is the name of the Pub/Sub topic."
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/http": {
+      "post": {
+        "summary": "Create HTTP integration.",
+        "operationId": "ApplicationService_CreateHttpIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "headers": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "HTTP headers to set when making requests."
+                    },
+                    "encoding": {
+                      "$ref": "#/definitions/apiEncoding",
+                      "description": "Payload encoding."
+                    },
+                    "eventEndpointUrl": {
+                      "type": "string",
+                      "description": "Event endpoint URL.\nThe HTTP integration will POST all events to this enpoint. The request\nwill contain a query parameters \"event\" containing the type of the\nevent."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update the HTTP integration.",
+        "operationId": "ApplicationService_UpdateHttpIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "headers": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "HTTP headers to set when making requests."
+                    },
+                    "encoding": {
+                      "$ref": "#/definitions/apiEncoding",
+                      "description": "Payload encoding."
+                    },
+                    "eventEndpointUrl": {
+                      "type": "string",
+                      "description": "Event endpoint URL.\nThe HTTP integration will POST all events to this enpoint. The request\nwill contain a query parameters \"event\" containing the type of the\nevent."
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/ifttt": {
+      "post": {
+        "summary": "Create IFTTT integration.",
+        "operationId": "ApplicationService_CreateIftttIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "Key.\nThis key can be obtained from the IFTTT Webhooks documentation page."
+                    },
+                    "uplinkValues": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Note: The first value is always used for the DevEUI.",
+                      "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
+                    }
+                  },
+                  "description": "Integration object.",
+                  "title": "Integration object."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update IFTTT integration.",
+        "operationId": "ApplicationService_UpdateIftttIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string",
+                      "description": "Key.\nThis key can be obtained from the IFTTT Webhooks documentation page."
+                    },
+                    "uplinkValues": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Note: The first value is always used for the DevEUI.",
+                      "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/influxdb": {
+      "post": {
+        "summary": "Create InfluxDb integration.",
+        "operationId": "ApplicationService_CreateInfluxDbIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "endpoint": {
+                      "type": "string",
+                      "description": "InfluxDb API write endpoint (e.g. http://localhost:8086/write)."
+                    },
+                    "db": {
+                      "type": "string",
+                      "title": "InfluxDb database name. (InfluxDb v1)"
+                    },
+                    "username": {
+                      "type": "string",
+                      "title": "InfluxDb username. (InfluxDb v1)"
+                    },
+                    "password": {
+                      "type": "string",
+                      "title": "InfluxDb password. (InfluxDb v1)"
+                    },
+                    "retentionPolicyName": {
+                      "type": "string",
+                      "title": "InfluxDb retention policy name. (InfluxDb v1)"
+                    },
+                    "precision": {
+                      "$ref": "#/definitions/apiInfluxDbPrecision",
+                      "description": "InfluxDb timestamp precision (InfluxDb v1)."
+                    },
+                    "version": {
+                      "$ref": "#/definitions/apiInfluxDbVersion",
+                      "description": "InfluxDb version."
+                    },
+                    "token": {
+                      "type": "string",
+                      "title": "Token. (InfluxDb v2)"
+                    },
+                    "organization": {
+                      "type": "string",
+                      "title": "Organization. (InfluxDb v2)"
+                    },
+                    "bucket": {
+                      "type": "string",
+                      "title": "Bucket. (InfluxDb v2)"
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update InfluxDb integration.",
+        "operationId": "ApplicationService_UpdateInfluxDbIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "endpoint": {
+                      "type": "string",
+                      "description": "InfluxDb API write endpoint (e.g. http://localhost:8086/write)."
+                    },
+                    "db": {
+                      "type": "string",
+                      "title": "InfluxDb database name. (InfluxDb v1)"
+                    },
+                    "username": {
+                      "type": "string",
+                      "title": "InfluxDb username. (InfluxDb v1)"
+                    },
+                    "password": {
+                      "type": "string",
+                      "title": "InfluxDb password. (InfluxDb v1)"
+                    },
+                    "retentionPolicyName": {
+                      "type": "string",
+                      "title": "InfluxDb retention policy name. (InfluxDb v1)"
+                    },
+                    "precision": {
+                      "$ref": "#/definitions/apiInfluxDbPrecision",
+                      "description": "InfluxDb timestamp precision (InfluxDb v1)."
+                    },
+                    "version": {
+                      "$ref": "#/definitions/apiInfluxDbVersion",
+                      "description": "InfluxDb version."
+                    },
+                    "token": {
+                      "type": "string",
+                      "title": "Token. (InfluxDb v2)"
+                    },
+                    "organization": {
+                      "type": "string",
+                      "title": "Organization. (InfluxDb v2)"
+                    },
+                    "bucket": {
+                      "type": "string",
+                      "title": "Bucket. (InfluxDb v2)"
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/loracloud": {
+      "post": {
+        "summary": "Create LoRaCloud integration.",
+        "operationId": "ApplicationService_CreateLoraCloudIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "modemGeolocationServices": {
+                      "$ref": "#/definitions/apiLoraCloudModemGeolocationServices",
+                      "description": "Modem \u0026 Geolocation Services configuration."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update LoRaCloud integration.",
+        "operationId": "ApplicationService_UpdateLoraCloudIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "modemGeolocationServices": {
+                      "$ref": "#/definitions/apiLoraCloudModemGeolocationServices",
+                      "description": "Modem \u0026 Geolocation Services configuration."
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/mydevices": {
+      "post": {
+        "summary": "Create myDevices integration.",
+        "operationId": "ApplicationService_CreateMyDevicesIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "endpoint": {
+                      "type": "string",
+                      "description": "myDevices API endpoint."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update myDevices integration.",
+        "operationId": "ApplicationService_UpdateMyDevicesIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "endpoint": {
+                      "type": "string",
+                      "description": "myDevices API endpoint."
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/pilot-things": {
+      "post": {
+        "summary": "Create Pilot Things integration.",
+        "operationId": "ApplicationService_CreatePilotThingsIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "server": {
+                      "type": "string",
+                      "description": "Server URL."
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "Authentication token."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update Pilot Things integration.",
+        "operationId": "ApplicationService_UpdatePilotThingsIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "server": {
+                      "type": "string",
+                      "description": "Server URL."
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "Authentication token."
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/thingsboard": {
+      "post": {
+        "summary": "Create ThingsBoard integration.",
+        "operationId": "ApplicationService_CreateThingsBoardIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "server": {
+                      "type": "string",
+                      "title": "ThingsBoard server endpoint, e.g. https://example.com"
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update ThingsBoard integration.",
+        "operationId": "ApplicationService_UpdateThingsBoardIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUIO).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "server": {
+                      "type": "string",
+                      "title": "ThingsBoard server endpoint, e.g. https://example.com"
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiApplication": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Application ID (UUID).\nNote: on create this will be automatically generated."
+        },
+        "name": {
+          "type": "string",
+          "description": "Application name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Application description."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID (UUID)."
+        }
+      }
+    },
+    "apiApplicationListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "name": {
+          "type": "string",
+          "description": "Application name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Application description."
+        }
+      }
+    },
+    "apiAwsSnsIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        },
+        "encoding": {
+          "$ref": "#/definitions/apiEncoding",
+          "description": "Encoding."
+        },
+        "region": {
+          "type": "string",
+          "description": "AWS region."
+        },
+        "accessKeyId": {
+          "type": "string",
+          "description": "AWS Access Key ID."
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "description": "AWS Secret Access Key."
+        },
+        "topicArn": {
+          "type": "string",
+          "description": "Topic ARN."
+        }
+      }
+    },
+    "apiAzureServiceBusIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        },
+        "encoding": {
+          "$ref": "#/definitions/apiEncoding",
+          "description": "Encoding."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "Connection string."
+        },
+        "publishName": {
+          "type": "string",
+          "description": "Publish name.\nThis is the name of the topic or queue."
+        }
+      }
+    },
+    "apiCreateApplicationRequest": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "$ref": "#/definitions/apiApplication",
+          "description": "Application object to create."
+        }
+      }
+    },
+    "apiCreateApplicationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        }
+      }
+    },
+    "apiEncoding": {
+      "type": "string",
+      "enum": [
+        "JSON",
+        "PROTOBUF"
+      ],
+      "default": "JSON"
+    },
+    "apiGcpPubSubIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        },
+        "encoding": {
+          "$ref": "#/definitions/apiEncoding",
+          "description": "Encoding."
+        },
+        "credentialsFile": {
+          "type": "string",
+          "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following Pub/Sub roles:\n* Pub/Sub Publisher"
+        },
+        "projectId": {
+          "type": "string",
+          "description": "Project ID."
+        },
+        "topicName": {
+          "type": "string",
+          "description": "Topic name.\nThis is the name of the Pub/Sub topic."
+        }
+      }
+    },
+    "apiGenerateMqttIntegrationClientCertificateResponse": {
+      "type": "object",
+      "properties": {
+        "tlsCert": {
+          "type": "string",
+          "description": "TLS certificate."
+        },
+        "tlsKey": {
+          "type": "string",
+          "description": "TLS key."
+        },
+        "caCert": {
+          "type": "string",
+          "description": "CA certificate."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expires at defines the expiration date of the certificate."
+        }
+      }
+    },
+    "apiGetApplicationResponse": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "$ref": "#/definitions/apiApplication",
+          "description": "Application object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "measurementKeys": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Measurement keys.\nThis contains the measurement keys from all the device-profiles that\nare used by the devices under this application."
+        }
+      }
+    },
+    "apiGetAwsSnsIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiAwsSnsIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetAzureServiceBusIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiAzureServiceBusIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetGcpPubSubIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiGcpPubSubIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetHttpIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiHttpIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetIftttIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiIftttIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetInfluxDbIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiInfluxDbIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetLoraCloudIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiLoraCloudIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetMyDevicesIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiMyDevicesIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetPilotThingsIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiPilotThingsIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetThingsBoardIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiThingsBoardIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiHttpIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUIO)."
+        },
+        "headers": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "HTTP headers to set when making requests."
+        },
+        "encoding": {
+          "$ref": "#/definitions/apiEncoding",
+          "description": "Payload encoding."
+        },
+        "eventEndpointUrl": {
+          "type": "string",
+          "description": "Event endpoint URL.\nThe HTTP integration will POST all events to this enpoint. The request\nwill contain a query parameters \"event\" containing the type of the\nevent."
+        }
+      }
+    },
+    "apiIftttIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        },
+        "key": {
+          "type": "string",
+          "description": "Key.\nThis key can be obtained from the IFTTT Webhooks documentation page."
+        },
+        "uplinkValues": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Note: The first value is always used for the DevEUI.",
+          "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
+        }
+      }
+    },
+    "apiInfluxDbIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUIO)."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "InfluxDb API write endpoint (e.g. http://localhost:8086/write)."
+        },
+        "db": {
+          "type": "string",
+          "title": "InfluxDb database name. (InfluxDb v1)"
+        },
+        "username": {
+          "type": "string",
+          "title": "InfluxDb username. (InfluxDb v1)"
+        },
+        "password": {
+          "type": "string",
+          "title": "InfluxDb password. (InfluxDb v1)"
+        },
+        "retentionPolicyName": {
+          "type": "string",
+          "title": "InfluxDb retention policy name. (InfluxDb v1)"
+        },
+        "precision": {
+          "$ref": "#/definitions/apiInfluxDbPrecision",
+          "description": "InfluxDb timestamp precision (InfluxDb v1)."
+        },
+        "version": {
+          "$ref": "#/definitions/apiInfluxDbVersion",
+          "description": "InfluxDb version."
+        },
+        "token": {
+          "type": "string",
+          "title": "Token. (InfluxDb v2)"
+        },
+        "organization": {
+          "type": "string",
+          "title": "Organization. (InfluxDb v2)"
+        },
+        "bucket": {
+          "type": "string",
+          "title": "Bucket. (InfluxDb v2)"
+        }
+      }
+    },
+    "apiInfluxDbPrecision": {
+      "type": "string",
+      "enum": [
+        "NS",
+        "U",
+        "MS",
+        "S",
+        "M",
+        "H"
+      ],
+      "default": "NS"
+    },
+    "apiInfluxDbVersion": {
+      "type": "string",
+      "enum": [
+        "INFLUXDB_1",
+        "INFLUXDB_2"
+      ],
+      "default": "INFLUXDB_1"
+    },
+    "apiIntegrationKind": {
+      "type": "string",
+      "enum": [
+        "HTTP",
+        "INFLUX_DB",
+        "THINGS_BOARD",
+        "MY_DEVICES",
+        "LORA_CLOUD",
+        "GCP_PUB_SUB",
+        "AWS_SNS",
+        "AZURE_SERVICE_BUS",
+        "PILOT_THINGS",
+        "MQTT_GLOBAL",
+        "IFTTT"
+      ],
+      "default": "HTTP"
+    },
+    "apiIntegrationListItem": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/apiIntegrationKind",
+          "description": "Integration kind."
+        }
+      }
+    },
+    "apiListApplicationsResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of applications."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiApplicationListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiListIntegrationsResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of integrations available within the result-set."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiIntegrationListItem"
+          },
+          "description": "Integrations within result-set."
+        }
+      }
+    },
+    "apiLoraCloudIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        },
+        "modemGeolocationServices": {
+          "$ref": "#/definitions/apiLoraCloudModemGeolocationServices",
+          "description": "Modem \u0026 Geolocation Services configuration."
+        }
+      }
+    },
+    "apiLoraCloudModemGeolocationServices": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "API token."
+        },
+        "modemEnabled": {
+          "type": "boolean",
+          "description": "Device implements Modem / Modem-E stack."
+        },
+        "modemPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Modem port (fPort).\nChirpStack will only forward the FrmPayload to the MGS if the port\nis equal to the configured value."
+        },
+        "gnssPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "GNSS port (fPort).\nChirpStack will forward the FrmPayload to MGS as GNSS payload if the\nport is equal to the configured value."
+        },
+        "gnssUseRxTime": {
+          "type": "boolean",
+          "description": "Use rx time for GNSS resolving.\nIn case this is set to true, the MGS resolver will use the RX time of the\nnetwork instead of the timestamp included in the LR1110 payload."
+        },
+        "parseTlv": {
+          "type": "boolean",
+          "description": "Parse TLV records.\nIf enabled, stream records (expected in TLV format) are scanned for GNSS\ndata (0x06 or 0x07). If found, ChirpStack will make an additional\ngeolocation call to the MGS API for resolving the location of the detected\npayload."
+        },
+        "geolocationBufferTtl": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Geolocation buffer TTL (in seconds).\nIf \u003e 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation."
+        },
+        "geolocationMinBufferSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Geolocation minimum buffer size.\nIf \u003e 0, geolocation will only be performed when the buffer has\nat least the given size."
+        },
+        "geolocationTdoa": {
+          "type": "boolean",
+          "description": "TDOA based geolocation is enabled."
+        },
+        "geolocationRssi": {
+          "type": "boolean",
+          "description": "RSSI based geolocation is enabled."
+        },
+        "geolocationGnss": {
+          "type": "boolean",
+          "description": "GNSS based geolocation is enabled (LR1110)."
+        },
+        "geolocationGnssPayloadField": {
+          "type": "string",
+          "description": "GNSS payload field.\nThis holds the name of the field in the decoded payload object which\ncontains the GNSS payload bytes (as HEX string)."
+        },
+        "geolocationGnssUseRxTime": {
+          "type": "boolean",
+          "description": "GNSS use RX time.\nIn case this is set to true, the resolver will use the RX time of the\nnetwork instead of the timestamp included in the LR1110 payload."
+        },
+        "geolocationWifi": {
+          "type": "boolean",
+          "description": "Wifi based geolocation is enabled."
+        },
+        "geolocationWifiPayloadField": {
+          "type": "string",
+          "title": "Wifi payload field.\nThis holds the name of the field in the decoded payload object which\ncontains an array of objects with the following fields:\n* macAddress - e.g. 01:23:45:67:89:ab\n* signalStrength - e.g. -51 (optional)"
+        }
+      }
+    },
+    "apiMyDevicesIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUIO)."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "myDevices API endpoint."
+        }
+      }
+    },
+    "apiPilotThingsIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        },
+        "server": {
+          "type": "string",
+          "description": "Server URL."
+        },
+        "token": {
+          "type": "string",
+          "description": "Authentication token."
+        }
+      }
+    },
+    "apiThingsBoardIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUIO)."
+        },
+        "server": {
+          "type": "string",
+          "title": "ThingsBoard server endpoint, e.g. https://example.com"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

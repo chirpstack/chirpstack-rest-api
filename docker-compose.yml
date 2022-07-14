@@ -1,0 +1,9 @@
+services:
+  chirpstack-rest-api:
+    build:
+      context: .
+      dockerfile: Dockerfile-devel
+    volumes:
+      - ./:/chirpstack-rest-api
+    ports:
+      - "8090:8090"

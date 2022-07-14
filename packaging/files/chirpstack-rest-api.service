@@ -1,0 +1,15 @@
+[Unit]
+Description=ChirpStack gRPC to REST API proxy
+Documentation=https://www.chirpstack.io/
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=chirpstack
+Group=chirpstack
+ExecStart=/usr/bin/chirpstack-rest-api
+EnvironmentFile=/etc/chirpstack-rest-api/environment
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

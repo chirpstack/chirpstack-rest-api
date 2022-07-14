@@ -1,0 +1,769 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/tenant.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TenantService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/tenants": {
+      "get": {
+        "summary": "Get the list of tenants.",
+        "operationId": "TenantService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListTenantsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of tenants to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "description": "If set, the given string will be used to search on name.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      },
+      "post": {
+        "summary": "Create a new tenant.",
+        "operationId": "TenantService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiCreateTenantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateTenantRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      }
+    },
+    "/api/tenants/{id}": {
+      "get": {
+        "summary": "Get the tenant for the given ID.",
+        "operationId": "TenantService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTenantResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Tenant ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the tenant with the given ID.",
+        "operationId": "TenantService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Tenant ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      }
+    },
+    "/api/tenants/{tenant.id}": {
+      "put": {
+        "summary": "Update the given tenant.",
+        "operationId": "TenantService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenant.id",
+            "description": "Tenant ID (UUID).\nNote: this value will be automatically generated on create.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tenant": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "title": "Tenant name,"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Tenant description."
+                    },
+                    "canHaveGateways": {
+                      "type": "boolean",
+                      "title": "Can the tenant create and \"own\" Gateways?"
+                    },
+                    "maxGatewayCount": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Max. gateway count for tenant.\nWhen set to 0, the tenant can have unlimited gateways."
+                    },
+                    "maxDeviceCount": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Max. device count for tenant.\nWhen set to 0, the tenant can have unlimited devices."
+                    },
+                    "privateGateways": {
+                      "type": "boolean",
+                      "description": "Private gateways.\nGateways under this tenant are private."
+                    }
+                  },
+                  "description": "Tenant object.",
+                  "title": "Tenant object."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      }
+    },
+    "/api/tenants/{tenantId}/users": {
+      "get": {
+        "summary": "Get the list of tenant users.",
+        "operationId": "TenantService_ListUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListTenantUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenantId",
+            "description": "Tenant ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Max number of tenants to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      }
+    },
+    "/api/tenants/{tenantId}/users/{userId}": {
+      "get": {
+        "summary": "Get the the tenant user for the given tenant and user IDs.",
+        "operationId": "TenantService_GetUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetTenantUserResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenantId",
+            "description": "Tenant ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "User ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the given tenant user.",
+        "operationId": "TenantService_DeleteUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenantId",
+            "description": "Tenant ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "User ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      }
+    },
+    "/api/tenants/{tenantUser.tenantId}/users": {
+      "post": {
+        "summary": "Add an user to the tenant.\nNote: the user must already exist.",
+        "operationId": "TenantService_AddUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenantUser.tenantId",
+            "description": "Tenant ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tenantUser": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "string",
+                      "description": "User ID (UUID)."
+                    },
+                    "isAdmin": {
+                      "type": "boolean",
+                      "description": "User is admin within the context of the tenant.\nThere is no need to set the is_device_admin and is_gateway_admin flags."
+                    },
+                    "isDeviceAdmin": {
+                      "type": "boolean",
+                      "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups)."
+                    },
+                    "isGatewayAdmin": {
+                      "type": "boolean",
+                      "description": "User is able to modify gateways."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email (only used on get and when adding a user to a tenant)."
+                    }
+                  },
+                  "description": "Tenant user object.",
+                  "title": "Tenant user object."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      }
+    },
+    "/api/tenants/{tenantUser.tenantId}/users/{tenantUser.userId}": {
+      "put": {
+        "summary": "Update the given tenant user.",
+        "operationId": "TenantService_UpdateUser",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenantUser.tenantId",
+            "description": "Tenant ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantUser.userId",
+            "description": "User ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tenantUser": {
+                  "type": "object",
+                  "properties": {
+                    "isAdmin": {
+                      "type": "boolean",
+                      "description": "User is admin within the context of the tenant.\nThere is no need to set the is_device_admin and is_gateway_admin flags."
+                    },
+                    "isDeviceAdmin": {
+                      "type": "boolean",
+                      "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups)."
+                    },
+                    "isGatewayAdmin": {
+                      "type": "boolean",
+                      "description": "User is able to modify gateways."
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Email (only used on get and when adding a user to a tenant)."
+                    }
+                  },
+                  "description": "Tenant user object.",
+                  "title": "Tenant user object."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiCreateTenantRequest": {
+      "type": "object",
+      "properties": {
+        "tenant": {
+          "$ref": "#/definitions/apiTenant",
+          "description": "Tenant object to create."
+        }
+      }
+    },
+    "apiCreateTenantResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Tenant ID."
+        }
+      }
+    },
+    "apiGetTenantResponse": {
+      "type": "object",
+      "properties": {
+        "tenant": {
+          "$ref": "#/definitions/apiTenant",
+          "description": "Tenant object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        }
+      }
+    },
+    "apiGetTenantUserResponse": {
+      "type": "object",
+      "properties": {
+        "tenantUser": {
+          "$ref": "#/definitions/apiTenantUser",
+          "description": "Tenant user object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        }
+      }
+    },
+    "apiListTenantUsersResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tenants."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTenantUserListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiListTenantsResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of tenants."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiTenantListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiTenant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Tenant ID (UUID).\nNote: this value will be automatically generated on create."
+        },
+        "name": {
+          "type": "string",
+          "title": "Tenant name,"
+        },
+        "description": {
+          "type": "string",
+          "description": "Tenant description."
+        },
+        "canHaveGateways": {
+          "type": "boolean",
+          "title": "Can the tenant create and \"own\" Gateways?"
+        },
+        "maxGatewayCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Max. gateway count for tenant.\nWhen set to 0, the tenant can have unlimited gateways."
+        },
+        "maxDeviceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Max. device count for tenant.\nWhen set to 0, the tenant can have unlimited devices."
+        },
+        "privateGateways": {
+          "type": "boolean",
+          "description": "Private gateways.\nGateways under this tenant are private."
+        }
+      }
+    },
+    "apiTenantListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Tenant ID (UUID)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "name": {
+          "type": "string",
+          "description": "Tenant name."
+        },
+        "canHaveGateways": {
+          "type": "boolean",
+          "title": "Can the tenant create and \"own\" Gateways?"
+        },
+        "privateGateways": {
+          "type": "boolean",
+          "description": "Gateways are private to tenant."
+        },
+        "maxGatewayCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Max gateway count.\n0 = unlimited."
+        },
+        "maxDeviceCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Max device count.\n0 = unlimited."
+        }
+      }
+    },
+    "apiTenantUser": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID (UUID)."
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID (UUID)."
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "description": "User is admin within the context of the tenant.\nThere is no need to set the is_device_admin and is_gateway_admin flags."
+        },
+        "isDeviceAdmin": {
+          "type": "boolean",
+          "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups)."
+        },
+        "isGatewayAdmin": {
+          "type": "boolean",
+          "description": "User is able to modify gateways."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email (only used on get and when adding a user to a tenant)."
+        }
+      }
+    },
+    "apiTenantUserListItem": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID (UUID)."
+        },
+        "userId": {
+          "type": "string",
+          "description": "User ID (UUID)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "email": {
+          "type": "string",
+          "description": "Email."
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "description": "User is admin within the context of the tenant.\nThere is no need to set the is_device_admin and is_gateway_admin flags."
+        },
+        "isDeviceAdmin": {
+          "type": "boolean",
+          "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups)."
+        },
+        "isGatewayAdmin": {
+          "type": "boolean",
+          "description": "User is able to modify gateways."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

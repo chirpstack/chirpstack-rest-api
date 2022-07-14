@@ -1,0 +1,15 @@
+# hidden files
+.*
+
+# excluded hidden files
+!.gitmodules
+!.goreleaser.yaml
+
+# builds
+/build
+/dist
+
+# For testing
+Vagrantfile
+
+dist/

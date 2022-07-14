@@ -1,0 +1,733 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/device_profile.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "DeviceProfileService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/device-profiles": {
+      "get": {
+        "summary": "List the available device-profiles.",
+        "operationId": "DeviceProfileService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListDeviceProfilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of device-profiles to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "description": "If set, the given string will be used to search on name.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "description": "Tenant ID to list the device-profiles for.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      },
+      "post": {
+        "summary": "Create the given device-profile.",
+        "operationId": "DeviceProfileService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiCreateDeviceProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateDeviceProfileRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    },
+    "/api/device-profiles/adr-algorithms": {
+      "get": {
+        "summary": "List available ADR algorithms.",
+        "operationId": "DeviceProfileService_ListAdrAlgorithms",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListDeviceProfileAdrAlgorithmsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    },
+    "/api/device-profiles/{deviceProfile.id}": {
+      "put": {
+        "summary": "Update the given device-profile.",
+        "operationId": "DeviceProfileService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "deviceProfile.id",
+            "description": "Device-profile ID (UUID).\nNote: on create this will be automatically generated.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "deviceProfile": {
+                  "type": "object",
+                  "properties": {
+                    "tenantId": {
+                      "type": "string",
+                      "description": "Tenant ID (UUID)."
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Name."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description."
+                    },
+                    "region": {
+                      "$ref": "#/definitions/commonRegion",
+                      "description": "Region."
+                    },
+                    "macVersion": {
+                      "$ref": "#/definitions/commonMacVersion",
+                      "description": "LoRaWAN mac-version."
+                    },
+                    "regParamsRevision": {
+                      "$ref": "#/definitions/commonRegParamsRevision",
+                      "description": "Regional parameters revision."
+                    },
+                    "adrAlgorithmId": {
+                      "type": "string",
+                      "description": "ADR algorithm ID."
+                    },
+                    "payloadCodecRuntime": {
+                      "$ref": "#/definitions/apiCodecRuntime",
+                      "description": "Payload codec runtime."
+                    },
+                    "payloadCodecScript": {
+                      "type": "string",
+                      "description": "Payload codec script."
+                    },
+                    "flushQueueOnActivate": {
+                      "type": "boolean",
+                      "description": "Flush queue on device activation."
+                    },
+                    "uplinkInterval": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Uplink interval (seconds).\nThis defines the expected uplink interval which the device uses for\ncommunication. When the uplink interval has expired and no uplink has\nbeen received, the device is considered inactive."
+                    },
+                    "deviceStatusReqInterval": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the device-status\nfrom the device."
+                    },
+                    "supportsOtaa": {
+                      "type": "boolean",
+                      "description": "Supports OTAA."
+                    },
+                    "supportsClassB": {
+                      "type": "boolean",
+                      "description": "Supports Class B."
+                    },
+                    "supportsClassC": {
+                      "type": "boolean",
+                      "description": "Supports Class-C."
+                    },
+                    "classBTimeout": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+                    },
+                    "classBPingSlotPeriod": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-B ping-slot periodicity."
+                    },
+                    "classBPingSlotDr": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-B ping-slot DR."
+                    },
+                    "classBPingSlotFreq": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-B ping-slot freq (Hz)."
+                    },
+                    "classCTimeout": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+                    },
+                    "abpRx1Delay": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX1 delay (for ABP)."
+                    },
+                    "abpRx1DrOffset": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX1 DR offset (for ABP)."
+                    },
+                    "abpRx2Dr": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX2 DR (for ABP)."
+                    },
+                    "abpRx2Freq": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX2 frequency (for ABP, Hz)."
+                    },
+                    "tags": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "User defined tags."
+                    },
+                    "measurements": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "$ref": "#/definitions/apiMeasurement"
+                      },
+                      "description": "Measurements.\nIf defined, ChirpStack will visualize these metrics in the web-interface."
+                    }
+                  },
+                  "description": "Device-profile object.",
+                  "title": "Device-profile object."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    },
+    "/api/device-profiles/{id}": {
+      "get": {
+        "summary": "Get the device-profile for the given ID.",
+        "operationId": "DeviceProfileService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDeviceProfileResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the device-profile with the given ID.",
+        "operationId": "DeviceProfileService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiAdrAlgorithmListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Algorithm ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Algorithm name."
+        }
+      }
+    },
+    "apiCodecRuntime": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "CAYENNE_LPP",
+        "JS"
+      ],
+      "default": "NONE",
+      "description": " - NONE: None.\n - CAYENNE_LPP: Cayenne LPP.\n - JS: JavaScript."
+    },
+    "apiCreateDeviceProfileRequest": {
+      "type": "object",
+      "properties": {
+        "deviceProfile": {
+          "$ref": "#/definitions/apiDeviceProfile",
+          "description": "Object to create."
+        }
+      }
+    },
+    "apiCreateDeviceProfileResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID (UUID)."
+        }
+      }
+    },
+    "apiDeviceProfile": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Device-profile ID (UUID).\nNote: on create this will be automatically generated."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID (UUID)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description."
+        },
+        "region": {
+          "$ref": "#/definitions/commonRegion",
+          "description": "Region."
+        },
+        "macVersion": {
+          "$ref": "#/definitions/commonMacVersion",
+          "description": "LoRaWAN mac-version."
+        },
+        "regParamsRevision": {
+          "$ref": "#/definitions/commonRegParamsRevision",
+          "description": "Regional parameters revision."
+        },
+        "adrAlgorithmId": {
+          "type": "string",
+          "description": "ADR algorithm ID."
+        },
+        "payloadCodecRuntime": {
+          "$ref": "#/definitions/apiCodecRuntime",
+          "description": "Payload codec runtime."
+        },
+        "payloadCodecScript": {
+          "type": "string",
+          "description": "Payload codec script."
+        },
+        "flushQueueOnActivate": {
+          "type": "boolean",
+          "description": "Flush queue on device activation."
+        },
+        "uplinkInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Uplink interval (seconds).\nThis defines the expected uplink interval which the device uses for\ncommunication. When the uplink interval has expired and no uplink has\nbeen received, the device is considered inactive."
+        },
+        "deviceStatusReqInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the device-status\nfrom the device."
+        },
+        "supportsOtaa": {
+          "type": "boolean",
+          "description": "Supports OTAA."
+        },
+        "supportsClassB": {
+          "type": "boolean",
+          "description": "Supports Class B."
+        },
+        "supportsClassC": {
+          "type": "boolean",
+          "description": "Supports Class-C."
+        },
+        "classBTimeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+        },
+        "classBPingSlotPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-B ping-slot periodicity."
+        },
+        "classBPingSlotDr": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-B ping-slot DR."
+        },
+        "classBPingSlotFreq": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-B ping-slot freq (Hz)."
+        },
+        "classCTimeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+        },
+        "abpRx1Delay": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX1 delay (for ABP)."
+        },
+        "abpRx1DrOffset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX1 DR offset (for ABP)."
+        },
+        "abpRx2Dr": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX2 DR (for ABP)."
+        },
+        "abpRx2Freq": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX2 frequency (for ABP, Hz)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "User defined tags."
+        },
+        "measurements": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiMeasurement"
+          },
+          "description": "Measurements.\nIf defined, ChirpStack will visualize these metrics in the web-interface."
+        }
+      }
+    },
+    "apiDeviceProfileListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Device-profile ID (UUID)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "region": {
+          "$ref": "#/definitions/commonRegion",
+          "description": "Region."
+        },
+        "macVersion": {
+          "$ref": "#/definitions/commonMacVersion",
+          "description": "LoRaWAN mac-version."
+        },
+        "regParamsRevision": {
+          "$ref": "#/definitions/commonRegParamsRevision",
+          "description": "Regional parameters revision."
+        },
+        "supportsOtaa": {
+          "type": "boolean",
+          "description": "Supports OTAA."
+        },
+        "supportsClassB": {
+          "type": "boolean",
+          "description": "Supports Class-B."
+        },
+        "supportsClassC": {
+          "type": "boolean",
+          "description": "Supports Class-C."
+        }
+      }
+    },
+    "apiGetDeviceProfileResponse": {
+      "type": "object",
+      "properties": {
+        "deviceProfile": {
+          "$ref": "#/definitions/apiDeviceProfile",
+          "description": "Device-profile object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        }
+      }
+    },
+    "apiListDeviceProfileAdrAlgorithmsResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of algorithms."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiAdrAlgorithmListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiListDeviceProfilesResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of device-profiles."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDeviceProfileListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiMeasurement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name (user defined)."
+        },
+        "kind": {
+          "$ref": "#/definitions/apiMeasurementKind",
+          "description": "Kind."
+        }
+      }
+    },
+    "apiMeasurementKind": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "COUNTER",
+        "ABSOLUTE",
+        "GAUGE",
+        "STRING"
+      ],
+      "default": "UNKNOWN",
+      "description": " - UNKNOWN: Unknown (in which case it is not tracked).\n - COUNTER: Incrementing counters that never decrease (these are not reset on each reading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value.\n - STRING: E.g. a firmware version, true / false value."
+    },
+    "commonMacVersion": {
+      "type": "string",
+      "enum": [
+        "LORAWAN_1_0_0",
+        "LORAWAN_1_0_1",
+        "LORAWAN_1_0_2",
+        "LORAWAN_1_0_3",
+        "LORAWAN_1_0_4",
+        "LORAWAN_1_1_0"
+      ],
+      "default": "LORAWAN_1_0_0"
+    },
+    "commonRegParamsRevision": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "RP002_1_0_0",
+        "RP002_1_0_1",
+        "RP002_1_0_2",
+        "RP002_1_0_3"
+      ],
+      "default": "A"
+    },
+    "commonRegion": {
+      "type": "string",
+      "enum": [
+        "EU868",
+        "US915",
+        "CN779",
+        "EU433",
+        "AU915",
+        "CN470",
+        "AS923",
+        "AS923_2",
+        "AS923_3",
+        "AS923_4",
+        "KR920",
+        "IN865",
+        "RU864",
+        "ISM2400"
+      ],
+      "default": "EU868",
+      "title": "- EU868: EU868\n - US915: US915\n - CN779: CN779\n - EU433: EU433\n - AU915: AU915\n - CN470: CN470\n - AS923: AS923\n - AS923_2: AS923 with -1.80 MHz frequency offset\n - AS923_3: AS923 with -6.60 MHz frequency offset\n - AS923_4: (AS923 with -5.90 MHz frequency offset).\n - KR920: KR920\n - IN865: IN865\n - RU864: RU864\n - ISM2400: ISM2400 (LoRaWAN 2.4 GHz)"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

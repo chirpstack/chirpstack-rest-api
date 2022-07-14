@@ -1,0 +1,5 @@
+BIND=0.0.0.0:8090
+SERVER=0.0.0.0:8080
+
+# Comment out to enable TLS
+INSECURE=true

@@ -1,0 +1,674 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/device_profile_template.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "DeviceProfileTemplateService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/device-profile-templates": {
+      "get": {
+        "summary": "List the available device-profile templates.",
+        "operationId": "DeviceProfileTemplateService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListDeviceProfileTemplatesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of device-profile templates to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "DeviceProfileTemplateService"
+        ]
+      },
+      "post": {
+        "summary": "Create the given device-profile template.",
+        "operationId": "DeviceProfileTemplateService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateDeviceProfileTemplateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceProfileTemplateService"
+        ]
+      }
+    },
+    "/api/device-profile-templates/{deviceProfileTemplate.id}": {
+      "put": {
+        "summary": "Update the given device-profile template.",
+        "operationId": "DeviceProfileTemplateService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "deviceProfileTemplate.id",
+            "description": "Device-profile template ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "deviceProfileTemplate": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description."
+                    },
+                    "vendor": {
+                      "type": "string",
+                      "description": "Vendor."
+                    },
+                    "firmware": {
+                      "type": "string",
+                      "description": "Firmware."
+                    },
+                    "region": {
+                      "$ref": "#/definitions/commonRegion",
+                      "description": "Region."
+                    },
+                    "macVersion": {
+                      "$ref": "#/definitions/commonMacVersion",
+                      "description": "LoRaWAN mac-version."
+                    },
+                    "regParamsRevision": {
+                      "$ref": "#/definitions/commonRegParamsRevision",
+                      "description": "Regional parameters revision."
+                    },
+                    "adrAlgorithmId": {
+                      "type": "string",
+                      "description": "ADR algorithm ID."
+                    },
+                    "payloadCodecRuntime": {
+                      "$ref": "#/definitions/apiCodecRuntime",
+                      "description": "Payload codec runtime."
+                    },
+                    "payloadCodecScript": {
+                      "type": "string",
+                      "description": "Payload codec script."
+                    },
+                    "flushQueueOnActivate": {
+                      "type": "boolean",
+                      "description": "Flush queue on device activation."
+                    },
+                    "uplinkInterval": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Uplink interval (seconds).\nThis defines the expected uplink interval which the device uses for\ncommunication. When the uplink interval has expired and no uplink has\nbeen received, the device is considered inactive."
+                    },
+                    "deviceStatusReqInterval": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the device-status\nfrom the device."
+                    },
+                    "supportsOtaa": {
+                      "type": "boolean",
+                      "description": "Supports OTAA."
+                    },
+                    "supportsClassB": {
+                      "type": "boolean",
+                      "description": "Supports Class B."
+                    },
+                    "supportsClassC": {
+                      "type": "boolean",
+                      "description": "Supports Class-C."
+                    },
+                    "classBTimeout": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+                    },
+                    "classBPingSlotPeriod": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-B ping-slot periodicity."
+                    },
+                    "classBPingSlotDr": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-B ping-slot DR."
+                    },
+                    "classBPingSlotFreq": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-B ping-slot freq (Hz)."
+                    },
+                    "classCTimeout": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+                    },
+                    "abpRx1Delay": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX1 delay (for ABP)."
+                    },
+                    "abpRx1DrOffset": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX1 DR offset (for ABP)."
+                    },
+                    "abpRx2Dr": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX2 DR (for ABP)."
+                    },
+                    "abpRx2Freq": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX2 frequency (for ABP, Hz)."
+                    },
+                    "tags": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "User defined tags."
+                    },
+                    "measurements": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "$ref": "#/definitions/apiMeasurement"
+                      },
+                      "description": "Measurements.\nIf defined, ChirpStack will visualize these metrics in the web-interface."
+                    }
+                  },
+                  "description": "Object to update.",
+                  "title": "Object to update."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "DeviceProfileTemplateService"
+        ]
+      }
+    },
+    "/api/device-profile-templates/{id}": {
+      "get": {
+        "summary": "Get the device-profile template for the given ID.",
+        "operationId": "DeviceProfileTemplateService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDeviceProfileTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileTemplateService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the device-profile template with the given ID.",
+        "operationId": "DeviceProfileTemplateService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileTemplateService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiCodecRuntime": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "CAYENNE_LPP",
+        "JS"
+      ],
+      "default": "NONE",
+      "description": " - NONE: None.\n - CAYENNE_LPP: Cayenne LPP.\n - JS: JavaScript."
+    },
+    "apiCreateDeviceProfileTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "deviceProfileTemplate": {
+          "$ref": "#/definitions/apiDeviceProfileTemplate",
+          "description": "Object to create."
+        }
+      }
+    },
+    "apiDeviceProfileTemplate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Device-profile template ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description."
+        },
+        "vendor": {
+          "type": "string",
+          "description": "Vendor."
+        },
+        "firmware": {
+          "type": "string",
+          "description": "Firmware."
+        },
+        "region": {
+          "$ref": "#/definitions/commonRegion",
+          "description": "Region."
+        },
+        "macVersion": {
+          "$ref": "#/definitions/commonMacVersion",
+          "description": "LoRaWAN mac-version."
+        },
+        "regParamsRevision": {
+          "$ref": "#/definitions/commonRegParamsRevision",
+          "description": "Regional parameters revision."
+        },
+        "adrAlgorithmId": {
+          "type": "string",
+          "description": "ADR algorithm ID."
+        },
+        "payloadCodecRuntime": {
+          "$ref": "#/definitions/apiCodecRuntime",
+          "description": "Payload codec runtime."
+        },
+        "payloadCodecScript": {
+          "type": "string",
+          "description": "Payload codec script."
+        },
+        "flushQueueOnActivate": {
+          "type": "boolean",
+          "description": "Flush queue on device activation."
+        },
+        "uplinkInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Uplink interval (seconds).\nThis defines the expected uplink interval which the device uses for\ncommunication. When the uplink interval has expired and no uplink has\nbeen received, the device is considered inactive."
+        },
+        "deviceStatusReqInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the device-status\nfrom the device."
+        },
+        "supportsOtaa": {
+          "type": "boolean",
+          "description": "Supports OTAA."
+        },
+        "supportsClassB": {
+          "type": "boolean",
+          "description": "Supports Class B."
+        },
+        "supportsClassC": {
+          "type": "boolean",
+          "description": "Supports Class-C."
+        },
+        "classBTimeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+        },
+        "classBPingSlotPeriod": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-B ping-slot periodicity."
+        },
+        "classBPingSlotDr": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-B ping-slot DR."
+        },
+        "classBPingSlotFreq": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-B ping-slot freq (Hz)."
+        },
+        "classCTimeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+        },
+        "abpRx1Delay": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX1 delay (for ABP)."
+        },
+        "abpRx1DrOffset": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX1 DR offset (for ABP)."
+        },
+        "abpRx2Dr": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX2 DR (for ABP)."
+        },
+        "abpRx2Freq": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX2 frequency (for ABP, Hz)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "User defined tags."
+        },
+        "measurements": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/apiMeasurement"
+          },
+          "description": "Measurements.\nIf defined, ChirpStack will visualize these metrics in the web-interface."
+        }
+      }
+    },
+    "apiDeviceProfileTemplateListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Device-profile template ID."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "vendor": {
+          "type": "string",
+          "description": "Vendor."
+        },
+        "firmware": {
+          "type": "string",
+          "description": "Firmware."
+        },
+        "region": {
+          "$ref": "#/definitions/commonRegion",
+          "description": "Region."
+        },
+        "macVersion": {
+          "$ref": "#/definitions/commonMacVersion",
+          "description": "LoRaWAN mac-version."
+        },
+        "regParamsRevision": {
+          "$ref": "#/definitions/commonRegParamsRevision",
+          "description": "Regional parameters revision."
+        },
+        "supportsOtaa": {
+          "type": "boolean",
+          "description": "Supports OTAA."
+        },
+        "supportsClassB": {
+          "type": "boolean",
+          "description": "Supports Class-B."
+        },
+        "supportsClassC": {
+          "type": "boolean",
+          "description": "Supports Class-C."
+        }
+      }
+    },
+    "apiGetDeviceProfileTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "deviceProfileTemplate": {
+          "$ref": "#/definitions/apiDeviceProfileTemplate",
+          "description": "Device-profile template object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        }
+      }
+    },
+    "apiListDeviceProfileTemplatesResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of device-profile templates."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDeviceProfileTemplateListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiMeasurement": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name (user defined)."
+        },
+        "kind": {
+          "$ref": "#/definitions/apiMeasurementKind",
+          "description": "Kind."
+        }
+      }
+    },
+    "apiMeasurementKind": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "COUNTER",
+        "ABSOLUTE",
+        "GAUGE",
+        "STRING"
+      ],
+      "default": "UNKNOWN",
+      "description": " - UNKNOWN: Unknown (in which case it is not tracked).\n - COUNTER: Incrementing counters that never decrease (these are not reset on each reading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value.\n - STRING: E.g. a firmware version, true / false value."
+    },
+    "commonMacVersion": {
+      "type": "string",
+      "enum": [
+        "LORAWAN_1_0_0",
+        "LORAWAN_1_0_1",
+        "LORAWAN_1_0_2",
+        "LORAWAN_1_0_3",
+        "LORAWAN_1_0_4",
+        "LORAWAN_1_1_0"
+      ],
+      "default": "LORAWAN_1_0_0"
+    },
+    "commonRegParamsRevision": {
+      "type": "string",
+      "enum": [
+        "A",
+        "B",
+        "RP002_1_0_0",
+        "RP002_1_0_1",
+        "RP002_1_0_2",
+        "RP002_1_0_3"
+      ],
+      "default": "A"
+    },
+    "commonRegion": {
+      "type": "string",
+      "enum": [
+        "EU868",
+        "US915",
+        "CN779",
+        "EU433",
+        "AU915",
+        "CN470",
+        "AS923",
+        "AS923_2",
+        "AS923_3",
+        "AS923_4",
+        "KR920",
+        "IN865",
+        "RU864",
+        "ISM2400"
+      ],
+      "default": "EU868",
+      "title": "- EU868: EU868\n - US915: US915\n - CN779: CN779\n - EU433: EU433\n - AU915: AU915\n - CN470: CN470\n - AS923: AS923\n - AS923_2: AS923 with -1.80 MHz frequency offset\n - AS923_3: AS923 with -6.60 MHz frequency offset\n - AS923_4: (AS923 with -5.90 MHz frequency offset).\n - KR920: KR920\n - IN865: IN865\n - RU864: RU864\n - ISM2400: ISM2400 (LoRaWAN 2.4 GHz)"
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

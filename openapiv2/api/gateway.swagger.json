@@ -1,0 +1,657 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/gateway.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "GatewayService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/gateways": {
+      "get": {
+        "summary": "Get the list of gateways.",
+        "operationId": "GatewayService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListGatewaysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of gateways to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "search",
+            "description": "If set, the given string will be used to search on name (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "description": "Tenant ID (UUID) to filter gateways on.\nTo list all gateways as a global admin user, this field can be left blank.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      },
+      "post": {
+        "summary": "Create creates the given gateway.",
+        "operationId": "GatewayService_Create",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/apiCreateGatewayRequest"
+            }
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
+    "/api/gateways/{gateway.gatewayId}": {
+      "put": {
+        "summary": "Update updates the given gateway.",
+        "operationId": "GatewayService_Update",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "gateway.gatewayId",
+            "description": "Gateway ID (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "gateway": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description."
+                    },
+                    "location": {
+                      "$ref": "#/definitions/commonLocation",
+                      "description": "Gateway location."
+                    },
+                    "tenantId": {
+                      "type": "string",
+                      "description": "Tenant ID (UUID)."
+                    },
+                    "tags": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Tags."
+                    },
+                    "properties": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Properties (provided by the gateway)."
+                    }
+                  },
+                  "description": "Gateway object.",
+                  "title": "Gateway object."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
+    "/api/gateways/{gatewayId}": {
+      "get": {
+        "summary": "Get returns the gateway for the given Gateway ID.",
+        "operationId": "GatewayService_Get",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetGatewayResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "gatewayId",
+            "description": "Gateway ID (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete deletes the gateway matching the given Gateway ID.",
+        "operationId": "GatewayService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "gatewayId",
+            "description": "Gateway ID (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
+    "/api/gateways/{gatewayId}/generate-certificate": {
+      "post": {
+        "summary": "Generate client-certificate for the gateway.",
+        "operationId": "GatewayService_GenerateClientCertificate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGenerateGatewayClientCertificateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "gatewayId",
+            "description": "Gateway ID (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
+    "/api/gateways/{gatewayId}/metrics": {
+      "get": {
+        "summary": "GetMetrics returns the gateway metrics.",
+        "operationId": "GatewayService_GetMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetGatewayMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "gatewayId",
+            "description": "Gateway ID (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start",
+            "description": "Interval start timestamp.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end",
+            "description": "Interval end timestamp.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "aggregation",
+            "description": "Aggregation.\n\n - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "HOUR",
+              "DAY",
+              "MONTH"
+            ],
+            "default": "HOUR"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "apiCreateGatewayRequest": {
+      "type": "object",
+      "properties": {
+        "gateway": {
+          "$ref": "#/definitions/apiGateway",
+          "description": "Gateway object."
+        }
+      }
+    },
+    "apiGateway": {
+      "type": "object",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "Gateway ID (EUI64)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description."
+        },
+        "location": {
+          "$ref": "#/definitions/commonLocation",
+          "description": "Gateway location."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID (UUID)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Properties (provided by the gateway)."
+        }
+      }
+    },
+    "apiGatewayListItem": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "gatewayId": {
+          "type": "string",
+          "description": "Gateway ID (EUI64)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description."
+        },
+        "location": {
+          "$ref": "#/definitions/commonLocation",
+          "description": "Location."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gateway properties."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last seen at timestamp."
+        }
+      }
+    },
+    "apiGenerateGatewayClientCertificateResponse": {
+      "type": "object",
+      "properties": {
+        "tlsCert": {
+          "type": "string",
+          "description": "TLS certificate."
+        },
+        "tlsKey": {
+          "type": "string",
+          "description": "TLS key."
+        },
+        "caCert": {
+          "type": "string",
+          "description": "CA certificate."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expires at defines the expiration date of the certificate."
+        }
+      }
+    },
+    "apiGetGatewayMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "rxPackets": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "RX packets."
+        },
+        "txPackets": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "TX packets."
+        },
+        "txPacketsPerFreq": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "TX packets / frequency."
+        },
+        "rxPacketsPerFreq": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "RX packets / frequency."
+        },
+        "txPacketsPerDr": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "TX packets / DR."
+        },
+        "rxPacketsPerDr": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "RX packets / DR."
+        },
+        "txPacketsPerStatus": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "TX packets per status."
+        }
+      }
+    },
+    "apiGetGatewayResponse": {
+      "type": "object",
+      "properties": {
+        "gateway": {
+          "$ref": "#/definitions/apiGateway",
+          "description": "Gateway object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last seen at timestamp."
+        }
+      }
+    },
+    "apiListGatewaysResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of gateways."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiGatewayListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "commonAggregation": {
+      "type": "string",
+      "enum": [
+        "HOUR",
+        "DAY",
+        "MONTH"
+      ],
+      "default": "HOUR",
+      "description": " - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month."
+    },
+    "commonLocation": {
+      "type": "object",
+      "properties": {
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Latitude."
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Longitude."
+        },
+        "altitude": {
+          "type": "number",
+          "format": "double",
+          "description": "Altitude."
+        },
+        "source": {
+          "$ref": "#/definitions/commonLocationSource",
+          "description": "Location source."
+        },
+        "accuracy": {
+          "type": "number",
+          "format": "float",
+          "description": "Accuracy."
+        }
+      }
+    },
+    "commonLocationSource": {
+      "type": "string",
+      "enum": [
+        "UNKNOWN",
+        "GPS",
+        "CONFIG",
+        "GEO_RESOLVER_TDOA",
+        "GEO_RESOLVER_RSSI",
+        "GEO_RESOLVER_GNSS",
+        "GEO_RESOLVER_WIFI"
+      ],
+      "default": "UNKNOWN",
+      "description": " - UNKNOWN: Unknown.\n - GPS: GPS.\n - CONFIG: Manually configured.\n - GEO_RESOLVER_TDOA: Geo resolver (TDOA).\n - GEO_RESOLVER_RSSI: Geo resolver (RSSI).\n - GEO_RESOLVER_GNSS: Geo resolver (GNSS).\n - GEO_RESOLVER_WIFI: Geo resolver (WIFI)."
+    },
+    "commonMetric": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "timestamps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "description": "Timestamps."
+        },
+        "datasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/commonMetricDataset"
+          },
+          "description": "Datasets."
+        }
+      }
+    },
+    "commonMetricDataset": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Label."
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "description": "Data.\nEach value index corresponds with the same timestamp index of the Metric."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
