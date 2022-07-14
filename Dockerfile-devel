@@ -8,7 +8,7 @@ ENV GO_EXTRA_BUILD_ARGS="-a -installsuffix cgo"
 RUN apk add --no-cache ca-certificates make git bash alpine-sdk protobuf protobuf-dev
 RUN git clone https://github.com/googleapis/googleapis.git /googleapis
 RUN git config --global --add safe.directory /chirpstack-rest-api
-git config --global --add safe.directory /chirpstack-rest-api/chirpstack
+RUN git config --global --add safe.directory /chirpstack-rest-api/chirpstack
 
 RUN mkdir -p $PROJECT_PATH
 COPY . $PROJECT_PATH
