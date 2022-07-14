@@ -11,6 +11,10 @@ build:
 
 dist:
 	goreleaser
+	mkdir -p dist/upload
+	mv dist/*.tar.gz dist/upload
+	mv dist/*.deb dist/upload
+	mv dist/*.rpm dist/upload
 
 snapshot:
 	goreleaser --snapshot

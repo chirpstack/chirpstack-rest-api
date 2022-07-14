@@ -4,6 +4,7 @@
 # excluded hidden files
 !.gitmodules
 !.goreleaser.yaml
+!.github
 
 # builds
 /build
