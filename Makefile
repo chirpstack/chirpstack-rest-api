@@ -1,5 +1,5 @@
 .PHONY: build dev-requirements devshell
-VERSION := $(shell git describe --always |sed -e "s/^v//")
+BUILD_VERSION := $(shell git describe --always |sed -e "s/^v//")
 
 GW_GEN := protoc -I=/googleapis -I=chirpstack/api/proto --grpc-gateway_out=paths=source_relative,logtostderr=true:.
 API_GEN := protoc -I=/googleapis -I=chirpstack/api/proto --openapiv2_out ./openapiv2 --openapiv2_opt logtostderr=true
@@ -7,7 +7,7 @@ GRPC_GEN := protoc -I=/googleapis -I=chirpstack/api/proto --go_out=. --go_opt=pa
 
 build:
 	mkdir -p build
-	go build $(GO_EXTRA_BUILD_ARGS) -ldflags "-s -w -X main.version=$(VERSION)" -o build/chirpstack-rest-api main.go
+	go build $(GO_EXTRA_BUILD_ARGS) -ldflags "-s -w -X main.version=$(BUILD_VERSION)" -o build/chirpstack-rest-api main.go
 
 dist:
 	goreleaser
