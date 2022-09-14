@@ -57,6 +57,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "userId",
+            "description": "If set, filters the result set to the tenants of the user.\nOnly global API keys are able to filter by this field.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
