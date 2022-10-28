@@ -4,9 +4,11 @@ import (
 	"context"
 	"crypto/tls"
 	"flag"
+	"fmt"
 	"net/http"
 	"os"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
 	"google.golang.org/grpc"
@@ -21,6 +23,7 @@ var (
 	server = flag.String("server", envString("SERVER", "localhost:8080"), "ChirpStack API endpoint")
 	bind   = flag.String("bind", envString("BIND", "0.0.0.0:8090"), "REST API server bind")
 	insec  = flag.Bool("insecure", envBool("INSECURE", false), "Use insecure (non-TLS) connection to server")
+	cors   = flag.String("cors", envString("CORS", "0.0.0.0"), "Set AllowedOrigins Header for CORS")
 )
 
 func envString(key string, defVal string) string {
@@ -58,8 +61,9 @@ func run() error {
 		w.Write(data)
 	})
 	r.PathPrefix("/").Handler(http.FileServer(http.FS(ui.FS)))
+	corsObj := handlers.AllowedOrigins([]string{*cors})
 
-	return http.ListenAndServe(*bind, r)
+	return http.ListenAndServe(*bind, handlers.CORS(corsObj)(r))
 }
 
 func getGatewayHandler(ctx context.Context) (http.Handler, error) {
@@ -101,6 +105,7 @@ func getGatewayHandler(ctx context.Context) (http.Handler, error) {
 }
 
 func main() {
+	fmt.Println("Starting ChirpStack REST API server")
 	flag.Parse()
 
 	if err := run(); err != nil {
