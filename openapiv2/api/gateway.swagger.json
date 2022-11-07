@@ -163,12 +163,12 @@
                       },
                       "description": "Tags."
                     },
-                    "properties": {
+                    "metadata": {
                       "type": "object",
                       "additionalProperties": {
                         "type": "string"
                       },
-                      "description": "Properties (provided by the gateway)."
+                      "description": "Metadata (provided by the gateway)."
                     }
                   },
                   "description": "Gateway object.",
@@ -380,12 +380,12 @@
           },
           "description": "Tags."
         },
-        "properties": {
+        "metadata": {
           "type": "object",
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Properties (provided by the gateway)."
+          "description": "Metadata (provided by the gateway)."
         }
       }
     },

@@ -250,6 +250,10 @@
                         "$ref": "#/definitions/apiMeasurement"
                       },
                       "description": "Measurements.\nIf defined, ChirpStack will visualize these metrics in the web-interface."
+                    },
+                    "autoDetectMeasurements": {
+                      "type": "boolean",
+                      "description": "Auto-detect measurements.\nIf set to true, measurements will be automatically added based on the\nkeys of the decoded payload. In cases where the decoded payload contains\nrandom keys in the data, you want to set this to false."
                     }
                   },
                   "description": "Object to update.",
@@ -479,6 +483,10 @@
             "$ref": "#/definitions/apiMeasurement"
           },
           "description": "Measurements.\nIf defined, ChirpStack will visualize these metrics in the web-interface."
+        },
+        "autoDetectMeasurements": {
+          "type": "boolean",
+          "description": "Auto-detect measurements.\nIf set to true, measurements will be automatically added based on the\nkeys of the decoded payload. In cases where the decoded payload contains\nrandom keys in the data, you want to set this to false."
         }
       }
     },
