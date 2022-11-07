@@ -9,7 +9,7 @@ the ChirpStack Application Server.
 ## Usage
 
 ```bash
-chirpstack-rest-api --server localhost:8080 --bind 0.0.0.0:8090 --insecure
+chirpstack-rest-api --server localhost:8080 --bind 0.0.0.0:8090 --insecure --cors "*"
 ```
 
 * `--server` points to the ChirpStack gRPC endpoint. If ChirpStack is installed
@@ -21,6 +21,7 @@ chirpstack-rest-api --server localhost:8080 --bind 0.0.0.0:8090 --insecure
 * `--insecure` indicates that the gRPC interface is not secured using a TLS
   certificate. You can also use the environment variable `INSECURE` (setting
   this to any value enables insecure mode, e.g. do not use `INSECURE=false`!).
+* `--cors` defines the CORS policy by setting the AllowedOrigins Header. You can also use the environment variable `CORS`. `--cors "*"` allows all origins. Default is `--cors 0.0.0.0` which disables CORS.
 
 ## Building from source
 
