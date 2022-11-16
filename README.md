@@ -23,6 +23,32 @@ chirpstack-rest-api --server localhost:8080 --bind 0.0.0.0:8090 --insecure --cor
   this to any value enables insecure mode, e.g. do not use `INSECURE=false`!).
 * `--cors` defines the CORS policy by setting the AllowedOrigins Header. You can also use the environment variable `CORS`. `--cors "*"` allows all origins. Default is `--cors 0.0.0.0` which disables CORS.
 
+## Debian / Ubuntu
+
+### Add ChirpStack repository
+
+Add the ChirpStack repository as described in the [Documentation](https://www.chirpstack.io/docs/chirpstack/downloads.html#debian--ubuntu-repository).
+
+### Install package
+
+After you have added the ChirpStack repository, you can install this component
+using the following command:
+
+```bash
+sudo apt install chirpstack-rest-api
+```
+
+### Configuration
+
+Environment variables can be used to configure the ChirpStack REST API proxy.
+You will find this configuration in `/etc/chirpstack-rest-api/environment`.
+
+### (Re)start and stop
+
+```bash
+sudo systemctl [restart|start|stop] chirpstack-rest-api
+```
+
 ## Building from source
 
 To start the Docker Compose based development environment:
