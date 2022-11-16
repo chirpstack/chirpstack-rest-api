@@ -49,6 +49,10 @@ You will find this configuration in `/etc/chirpstack-rest-api/environment`.
 sudo systemctl [restart|start|stop] chirpstack-rest-api
 ```
 
+## Downloads
+
+Please refer to: [https://artifacts.chirpstack.io/downloads/chirpstack-rest-api/](https://artifacts.chirpstack.io/downloads/chirpstack-rest-api/).
+
 ## Building from source
 
 To start the Docker Compose based development environment:
