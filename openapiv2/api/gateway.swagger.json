@@ -169,6 +169,11 @@
                         "type": "string"
                       },
                       "description": "Metadata (provided by the gateway)."
+                    },
+                    "statsInterval": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
                     }
                   },
                   "description": "Gateway object.",
@@ -386,6 +391,11 @@
             "type": "string"
           },
           "description": "Metadata (provided by the gateway)."
+        },
+        "statsInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
         }
       }
     },
@@ -433,8 +443,22 @@
           "type": "string",
           "format": "date-time",
           "description": "Last seen at timestamp."
+        },
+        "state": {
+          "$ref": "#/definitions/apiGatewayState",
+          "description": "Gateway state.\nPlease note that the state of the gateway is driven by the stats\npackages that are sent by the gateway."
         }
       }
+    },
+    "apiGatewayState": {
+      "type": "string",
+      "enum": [
+        "NEVER_SEEN",
+        "ONLINE",
+        "OFFLINE"
+      ],
+      "default": "NEVER_SEEN",
+      "description": " - NEVER_SEEN: The gateway has never sent any stats.\n - ONLINE: Online.\n - OFFLINE: Offline."
     },
     "apiGenerateGatewayClientCertificateResponse": {
       "type": "object",

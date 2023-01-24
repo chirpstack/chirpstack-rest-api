@@ -197,10 +197,10 @@
                       "format": "int64",
                       "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
                     },
-                    "classBPingSlotPeriod": {
+                    "classBPingSlotNbK": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "Class-B ping-slot periodicity."
+                      "description": "Class-B ping-slots per beacon period.\nValid options are: 0 - 7.\n\nThe actual number of ping-slots per beacon period equals to 2^k."
                     },
                     "classBPingSlotDr": {
                       "type": "integer",
@@ -430,10 +430,10 @@
           "format": "int64",
           "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
         },
-        "classBPingSlotPeriod": {
+        "classBPingSlotNbK": {
           "type": "integer",
           "format": "int64",
-          "description": "Class-B ping-slot periodicity."
+          "description": "Class-B ping-slots per beacon period.\nValid options are: 0 - 7.\n\nThe actual number of ping-slots per beacon period equals to 2^k."
         },
         "classBPingSlotDr": {
           "type": "integer",
