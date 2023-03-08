@@ -64,6 +64,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "multicastGroupId",
+            "description": "Multicast-group ID (UUID) to filter gateways on.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [

@@ -224,9 +224,13 @@
                       "format": "int64",
                       "description": "Max. device count for tenant.\nWhen set to 0, the tenant can have unlimited devices."
                     },
-                    "privateGateways": {
+                    "privateGatewaysUp": {
                       "type": "boolean",
-                      "description": "Private gateways.\nGateways under this tenant are private."
+                      "description": "Private gateways (uplink).\nIf enabled, then uplink messages will not be shared with other tenants."
+                    },
+                    "privateGatewaysDown": {
+                      "type": "boolean",
+                      "description": "Private gateways (downlink).\nIf enabled, then other tenants will not be able to schedule downlink\nmessages through the gateways of this tenant. For example, in case you\ndo want to share uplinks with other tenants (private_gateways_up=false),\nbut you want to prevent other tenants from using gateway airtime."
                     }
                   },
                   "description": "Tenant object.",
@@ -630,9 +634,13 @@
           "format": "int64",
           "description": "Max. device count for tenant.\nWhen set to 0, the tenant can have unlimited devices."
         },
-        "privateGateways": {
+        "privateGatewaysUp": {
           "type": "boolean",
-          "description": "Private gateways.\nGateways under this tenant are private."
+          "description": "Private gateways (uplink).\nIf enabled, then uplink messages will not be shared with other tenants."
+        },
+        "privateGatewaysDown": {
+          "type": "boolean",
+          "description": "Private gateways (downlink).\nIf enabled, then other tenants will not be able to schedule downlink\nmessages through the gateways of this tenant. For example, in case you\ndo want to share uplinks with other tenants (private_gateways_up=false),\nbut you want to prevent other tenants from using gateway airtime."
         }
       }
     },
@@ -661,9 +669,13 @@
           "type": "boolean",
           "title": "Can the tenant create and \"own\" Gateways?"
         },
-        "privateGateways": {
+        "privateGatewaysUp": {
           "type": "boolean",
-          "description": "Gateways are private to tenant."
+          "description": "Private gateways (uplink)."
+        },
+        "privateGatewaysDown": {
+          "type": "boolean",
+          "description": "Private gateways (downlink)."
         },
         "maxGatewayCount": {
           "type": "integer",
