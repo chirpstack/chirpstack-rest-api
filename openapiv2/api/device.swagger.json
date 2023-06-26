@@ -175,7 +175,7 @@
     },
     "/api/devices/{devEui}/activation": {
       "get": {
-        "summary": "GetActivation returns the current activation details of the device (OTAA or ABP).",
+        "summary": "GetActivation returns the current activation details of the device (OTAA or\nABP).",
         "operationId": "DeviceService_GetActivation",
         "responses": {
           "200": {
@@ -271,7 +271,7 @@
     },
     "/api/devices/{devEui}/get-random-dev-addr": {
       "post": {
-        "summary": "GetRandomDevAddr returns a random DevAddr taking the NwkID prefix into account.",
+        "summary": "GetRandomDevAddr returns a random DevAddr taking the NwkID prefix into\naccount.",
         "operationId": "DeviceService_GetRandomDevAddr",
         "responses": {
           "200": {
@@ -427,7 +427,7 @@
     },
     "/api/devices/{devEui}/metrics": {
       "get": {
-        "summary": "GetMetrics returns the device metrics.\nNote that this requires a device-profile with codec and measurements configured.",
+        "summary": "GetMetrics returns the device metrics.\nNote that this requires a device-profile with codec and measurements\nconfigured.",
         "operationId": "DeviceService_GetMetrics",
         "responses": {
           "200": {
@@ -611,7 +611,7 @@
                     },
                     "skipFcntCheck": {
                       "type": "boolean",
-                      "description": "Skip frame-counter checks (this is insecure, but could be helpful for debugging)."
+                      "description": "Skip frame-counter checks (this is insecure, but could be helpful for\ndebugging)."
                     },
                     "isDisabled": {
                       "type": "boolean",
@@ -630,6 +630,10 @@
                         "type": "string"
                       },
                       "description": "Tags (user defined).\nThese tags are exposed in the event payloads or to integration. Tags are\nintended for aggregation and filtering."
+                    },
+                    "joinEui": {
+                      "type": "string",
+                      "description": "JoinEUI (optional, EUI64).\nThis field will be automatically set / updated on OTAA. However, in some\ncases it must be pre-configured. For example to allow OTAA using a Relay.\nIn this case the Relay needs to know the JoinEUI + DevEUI combinations\nof the devices for which it needs to forward uplinks."
                     }
                   },
                   "description": "Device object.",
@@ -646,7 +650,7 @@
     },
     "/api/devices/{deviceActivation.devEui}/activate": {
       "post": {
-        "summary": "Activate (re)activates the device with the given parameters (for ABP or for importing OTAA activations).",
+        "summary": "Activate (re)activates the device with the given parameters (for ABP or for\nimporting OTAA activations).",
         "operationId": "DeviceService_Activate",
         "responses": {
           "200": {
@@ -957,7 +961,7 @@
         },
         "skipFcntCheck": {
           "type": "boolean",
-          "description": "Skip frame-counter checks (this is insecure, but could be helpful for debugging)."
+          "description": "Skip frame-counter checks (this is insecure, but could be helpful for\ndebugging)."
         },
         "isDisabled": {
           "type": "boolean",
@@ -976,6 +980,10 @@
             "type": "string"
           },
           "description": "Tags (user defined).\nThese tags are exposed in the event payloads or to integration. Tags are\nintended for aggregation and filtering."
+        },
+        "joinEui": {
+          "type": "string",
+          "description": "JoinEUI (optional, EUI64).\nThis field will be automatically set / updated on OTAA. However, in some\ncases it must be pre-configured. For example to allow OTAA using a Relay.\nIn this case the Relay needs to know the JoinEUI + DevEUI combinations\nof the devices for which it needs to forward uplinks."
         }
       }
     },
@@ -1281,6 +1289,10 @@
         "deviceStatus": {
           "$ref": "#/definitions/apiDeviceStatus",
           "description": "Device status."
+        },
+        "classEnabled": {
+          "$ref": "#/definitions/commonDeviceClass",
+          "description": "Enabled device class."
         }
       }
     },
@@ -1319,6 +1331,16 @@
       ],
       "default": "HOUR",
       "description": " - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month."
+    },
+    "commonDeviceClass": {
+      "type": "string",
+      "enum": [
+        "CLASS_A",
+        "CLASS_B",
+        "CLASS_C"
+      ],
+      "default": "CLASS_A",
+      "description": " - CLASS_A: Class-A.\n - CLASS_B: Class-B.\n - CLASS_C: Class-C."
     },
     "commonMetric": {
       "type": "object",
@@ -1373,7 +1395,7 @@
         "GAUGE"
       ],
       "default": "COUNTER",
-      "description": " - COUNTER: Incrementing counters that never decrease (these are not reset on each reading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value."
+      "description": " - COUNTER: Incrementing counters that never decrease (these are not reset on each\nreading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value."
     },
     "protobufAny": {
       "type": "object",

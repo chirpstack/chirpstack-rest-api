@@ -406,7 +406,7 @@
         "parameters": [
           {
             "name": "applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -437,7 +437,7 @@
         "parameters": [
           {
             "name": "applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -532,7 +532,7 @@
         "parameters": [
           {
             "name": "applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -563,7 +563,7 @@
         "parameters": [
           {
             "name": "applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -690,7 +690,7 @@
         "parameters": [
           {
             "name": "applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -721,7 +721,7 @@
         "parameters": [
           {
             "name": "applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -816,7 +816,7 @@
         "parameters": [
           {
             "name": "applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -847,7 +847,7 @@
         "parameters": [
           {
             "name": "applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1224,7 +1224,7 @@
                     },
                     "credentialsFile": {
                       "type": "string",
-                      "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following Pub/Sub roles:\n* Pub/Sub Publisher"
+                      "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following\nPub/Sub roles:\n* Pub/Sub Publisher"
                     },
                     "projectId": {
                       "type": "string",
@@ -1288,7 +1288,7 @@
                     },
                     "credentialsFile": {
                       "type": "string",
-                      "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following Pub/Sub roles:\n* Pub/Sub Publisher"
+                      "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following\nPub/Sub roles:\n* Pub/Sub Publisher"
                     },
                     "projectId": {
                       "type": "string",
@@ -1333,7 +1333,7 @@
         "parameters": [
           {
             "name": "integration.applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1396,7 +1396,7 @@
         "parameters": [
           {
             "name": "integration.applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1485,8 +1485,16 @@
                       "items": {
                         "type": "string"
                       },
-                      "description": "Note: The first value is always used for the DevEUI.",
+                      "description": "Notes: The first value is always used for the DevEUI.\nIgnored if arbitrary_json is set to true.",
                       "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
+                    },
+                    "arbitraryJson": {
+                      "type": "boolean",
+                      "description": "Arbitrary JSON.\nIf set to true, ChirpStack events will be sent as-is as arbitrary JSON\npayload. If set to false (default), the 3 JSON values format will be used."
+                    },
+                    "eventPrefix": {
+                      "type": "string",
+                      "description": "Event prefix.\nIf set, the event name will be PREFIX_EVENT. For example if event_prefix\nis set to weatherstation, and uplink event will be sent as\nweatherstation_up to the IFTTT webhook.\nNote: Only characters in the A-Z, a-z and 0-9 range are allowed."
                     }
                   },
                   "description": "Integration object.",
@@ -1545,8 +1553,16 @@
                       "items": {
                         "type": "string"
                       },
-                      "description": "Note: The first value is always used for the DevEUI.",
+                      "description": "Notes: The first value is always used for the DevEUI.\nIgnored if arbitrary_json is set to true.",
                       "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
+                    },
+                    "arbitraryJson": {
+                      "type": "boolean",
+                      "description": "Arbitrary JSON.\nIf set to true, ChirpStack events will be sent as-is as arbitrary JSON\npayload. If set to false (default), the 3 JSON values format will be used."
+                    },
+                    "eventPrefix": {
+                      "type": "string",
+                      "description": "Event prefix.\nIf set, the event name will be PREFIX_EVENT. For example if event_prefix\nis set to weatherstation, and uplink event will be sent as\nweatherstation_up to the IFTTT webhook.\nNote: Only characters in the A-Z, a-z and 0-9 range are allowed."
                     }
                   },
                   "description": "Integration object to update.",
@@ -1583,7 +1599,7 @@
         "parameters": [
           {
             "name": "integration.applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1671,7 +1687,7 @@
         "parameters": [
           {
             "name": "integration.applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1867,7 +1883,7 @@
         "parameters": [
           {
             "name": "integration.applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1919,7 +1935,7 @@
         "parameters": [
           {
             "name": "integration.applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -2087,7 +2103,7 @@
         "parameters": [
           {
             "name": "integration.applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -2139,7 +2155,7 @@
         "parameters": [
           {
             "name": "integration.applicationId",
-            "description": "Application ID (UUIO).",
+            "description": "Application ID (UUID).",
             "in": "path",
             "required": true,
             "type": "string"
@@ -2310,7 +2326,7 @@
         },
         "credentialsFile": {
           "type": "string",
-          "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following Pub/Sub roles:\n* Pub/Sub Publisher"
+          "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following\nPub/Sub roles:\n* Pub/Sub Publisher"
         },
         "projectId": {
           "type": "string",
@@ -2465,7 +2481,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "Application ID (UUIO)."
+          "description": "Application ID (UUID)."
         },
         "headers": {
           "type": "object",
@@ -2500,8 +2516,16 @@
           "items": {
             "type": "string"
           },
-          "description": "Note: The first value is always used for the DevEUI.",
+          "description": "Notes: The first value is always used for the DevEUI.\nIgnored if arbitrary_json is set to true.",
           "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
+        },
+        "arbitraryJson": {
+          "type": "boolean",
+          "description": "Arbitrary JSON.\nIf set to true, ChirpStack events will be sent as-is as arbitrary JSON\npayload. If set to false (default), the 3 JSON values format will be used."
+        },
+        "eventPrefix": {
+          "type": "string",
+          "description": "Event prefix.\nIf set, the event name will be PREFIX_EVENT. For example if event_prefix\nis set to weatherstation, and uplink event will be sent as\nweatherstation_up to the IFTTT webhook.\nNote: Only characters in the A-Z, a-z and 0-9 range are allowed."
         }
       }
     },
@@ -2510,7 +2534,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "Application ID (UUIO)."
+          "description": "Application ID (UUID)."
         },
         "endpoint": {
           "type": "string",
@@ -2658,19 +2682,21 @@
           "type": "boolean",
           "description": "Device implements Modem / Modem-E stack."
         },
-        "modemPort": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Modem port (fPort).\nChirpStack will only forward the FrmPayload to the MGS if the port\nis equal to the configured value."
-        },
-        "gnssPort": {
-          "type": "integer",
-          "format": "int64",
-          "description": "GNSS port (fPort).\nChirpStack will forward the FrmPayload to MGS as GNSS payload if the\nport is equal to the configured value."
+        "forwardFPorts": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "Forward FPorts.\nForward uplink messages matching the given FPorts to the MGS."
         },
         "gnssUseRxTime": {
           "type": "boolean",
           "description": "Use rx time for GNSS resolving.\nIn case this is set to true, the MGS resolver will use the RX time of the\nnetwork instead of the timestamp included in the LR1110 payload."
+        },
+        "gnssUseGatewayLocation": {
+          "type": "boolean",
+          "description": "Use gateway location for GNSS resolving.\nIn the case this is set to true, ChirpStack will provide the location of\none of the gateways to the MGS resolver to aid the resolving process.\nDisable this in case the gateway location is not accurate / incorrectly\nconfigured as an incorrect location will cause the resolver to return an\nerror."
         },
         "parseTlv": {
           "type": "boolean",
@@ -2721,7 +2747,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "Application ID (UUIO)."
+          "description": "Application ID (UUID)."
         },
         "endpoint": {
           "type": "string",
@@ -2751,7 +2777,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "Application ID (UUIO)."
+          "description": "Application ID (UUID)."
         },
         "server": {
           "type": "string",

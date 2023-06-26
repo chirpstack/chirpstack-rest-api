@@ -669,7 +669,7 @@
         "GAUGE"
       ],
       "default": "COUNTER",
-      "description": " - COUNTER: Incrementing counters that never decrease (these are not reset on each reading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value."
+      "description": " - COUNTER: Incrementing counters that never decrease (these are not reset on each\nreading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value."
     },
     "protobufAny": {
       "type": "object",

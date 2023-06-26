@@ -290,6 +290,109 @@
                     "regionConfigId": {
                       "type": "string",
                       "description": "Region configuration ID.\nIf set, devices will only use the associated region. If let blank, then\ndevices will use all regions matching the selected common-name. Note\nthat multiple region configurations can exist for the same common-name,\ne.g. to provide an 8 channel and 16 channel configuration for the US915\nband."
+                    },
+                    "isRelay": {
+                      "type": "boolean",
+                      "description": "Device is a Relay device.\nEnable this in case the device is a Relay. A Relay device implements TS011\nand is able to relay data from relay capable devices.\nSee for more information the TS011 specification."
+                    },
+                    "isRelayEd": {
+                      "type": "boolean",
+                      "description": "Device is a Relay end-device.\nEnable this in case the device is an end-device that can operate under a\nRelay. Please refer to the TS011 specification for more information."
+                    },
+                    "relayEdRelayOnly": {
+                      "type": "boolean",
+                      "description": "End-device only accept data through relay.\nOnly accept data for this device through a relay. This setting is useful\nfor testing as in case of a test-setup, the end-device is usually within\nrange of the gateway."
+                    },
+                    "relayEnabled": {
+                      "type": "boolean",
+                      "description": "Relay must be enabled."
+                    },
+                    "relayCadPeriodicity": {
+                      "$ref": "#/definitions/apiCadPeriodicity",
+                      "description": "Relay CAD periodicity."
+                    },
+                    "relayDefaultChannelIndex": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay default channel index.\nValid values are 0 and 1, please refer to the RP002 specification for\nthe meaning of these values."
+                    },
+                    "relaySecondChannelFreq": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay second channel frequency (Hz)."
+                    },
+                    "relaySecondChannelDr": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay second channel DR."
+                    },
+                    "relaySecondChannelAckOffset": {
+                      "$ref": "#/definitions/apiSecondChAckOffset",
+                      "description": "Relay second channel ACK offset."
+                    },
+                    "relayEdActivationMode": {
+                      "$ref": "#/definitions/apiRelayModeActivation",
+                      "description": "Relay end-device activation mode."
+                    },
+                    "relayEdSmartEnableLevel": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay end-device smart-enable level."
+                    },
+                    "relayEdBackOff": {
+                      "type": "integer",
+                      "format": "int64",
+                      "title": "Relay end-device back-off (in case it does not receive WOR ACK frame).\n0 = Always send a LoRaWAN uplink\n1..63 = Send a LoRaWAN uplink after X WOR frames without a WOR ACK"
+                    },
+                    "relayEdUplinkLimitBucketSize": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay end-device uplink limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+                    },
+                    "relayEdUplinkLimitReloadRate": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay end-device uplink limit reload rate.\n\nValid values:\n  * 0 - 62 = X tokens every hour\n  * 63     = no limitation"
+                    },
+                    "relayJoinReqLimitReloadRate": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay join-request limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+                    },
+                    "relayNotifyLimitReloadRate": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay notify limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+                    },
+                    "relayGlobalUplinkLimitReloadRate": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay global uplink limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+                    },
+                    "relayOverallLimitReloadRate": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay overall limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+                    },
+                    "relayJoinReqLimitBucketSize": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay join-request limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+                    },
+                    "relayNotifyLimitBucketSize": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay notify limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+                    },
+                    "relayGlobalUplinkLimitBucketSize": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay globak uplink limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+                    },
+                    "relayOverallLimitBucketSize": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Relay overall limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
                     }
                   },
                   "description": "Device-profile object.",
@@ -381,6 +484,19 @@
           "description": "Algorithm name."
         }
       }
+    },
+    "apiCadPeriodicity": {
+      "type": "string",
+      "enum": [
+        "SEC_1",
+        "MS_500",
+        "MS_250",
+        "MS_100",
+        "MS_50",
+        "MS_20"
+      ],
+      "default": "SEC_1",
+      "title": "- SEC_1: 1 second.\n - MS_500: 500 milliseconds\n - MS_250: 250 milliseconds\n - MS_100: 100 milliseconds\n - MS_50: 50 milliseconds\n - MS_20: 20 milliseconds"
     },
     "apiCodecRuntime": {
       "type": "string",
@@ -545,6 +661,109 @@
         "regionConfigId": {
           "type": "string",
           "description": "Region configuration ID.\nIf set, devices will only use the associated region. If let blank, then\ndevices will use all regions matching the selected common-name. Note\nthat multiple region configurations can exist for the same common-name,\ne.g. to provide an 8 channel and 16 channel configuration for the US915\nband."
+        },
+        "isRelay": {
+          "type": "boolean",
+          "description": "Device is a Relay device.\nEnable this in case the device is a Relay. A Relay device implements TS011\nand is able to relay data from relay capable devices.\nSee for more information the TS011 specification."
+        },
+        "isRelayEd": {
+          "type": "boolean",
+          "description": "Device is a Relay end-device.\nEnable this in case the device is an end-device that can operate under a\nRelay. Please refer to the TS011 specification for more information."
+        },
+        "relayEdRelayOnly": {
+          "type": "boolean",
+          "description": "End-device only accept data through relay.\nOnly accept data for this device through a relay. This setting is useful\nfor testing as in case of a test-setup, the end-device is usually within\nrange of the gateway."
+        },
+        "relayEnabled": {
+          "type": "boolean",
+          "description": "Relay must be enabled."
+        },
+        "relayCadPeriodicity": {
+          "$ref": "#/definitions/apiCadPeriodicity",
+          "description": "Relay CAD periodicity."
+        },
+        "relayDefaultChannelIndex": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay default channel index.\nValid values are 0 and 1, please refer to the RP002 specification for\nthe meaning of these values."
+        },
+        "relaySecondChannelFreq": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay second channel frequency (Hz)."
+        },
+        "relaySecondChannelDr": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay second channel DR."
+        },
+        "relaySecondChannelAckOffset": {
+          "$ref": "#/definitions/apiSecondChAckOffset",
+          "description": "Relay second channel ACK offset."
+        },
+        "relayEdActivationMode": {
+          "$ref": "#/definitions/apiRelayModeActivation",
+          "description": "Relay end-device activation mode."
+        },
+        "relayEdSmartEnableLevel": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay end-device smart-enable level."
+        },
+        "relayEdBackOff": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Relay end-device back-off (in case it does not receive WOR ACK frame).\n0 = Always send a LoRaWAN uplink\n1..63 = Send a LoRaWAN uplink after X WOR frames without a WOR ACK"
+        },
+        "relayEdUplinkLimitBucketSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay end-device uplink limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+        },
+        "relayEdUplinkLimitReloadRate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay end-device uplink limit reload rate.\n\nValid values:\n  * 0 - 62 = X tokens every hour\n  * 63     = no limitation"
+        },
+        "relayJoinReqLimitReloadRate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay join-request limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+        },
+        "relayNotifyLimitReloadRate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay notify limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+        },
+        "relayGlobalUplinkLimitReloadRate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay global uplink limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+        },
+        "relayOverallLimitReloadRate": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay overall limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+        },
+        "relayJoinReqLimitBucketSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay join-request limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+        },
+        "relayNotifyLimitBucketSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay notify limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+        },
+        "relayGlobalUplinkLimitBucketSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay globak uplink limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+        },
+        "relayOverallLimitBucketSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Relay overall limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
         }
       }
     },
@@ -672,6 +891,30 @@
       ],
       "default": "UNKNOWN",
       "description": " - UNKNOWN: Unknown (in which case it is not tracked).\n - COUNTER: Incrementing counters that never decrease (these are not reset on each reading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value.\n - STRING: E.g. a firmware version, true / false value."
+    },
+    "apiRelayModeActivation": {
+      "type": "string",
+      "enum": [
+        "DISABLE_RELAY_MODE",
+        "ENABLE_RELAY_MODE",
+        "DYNAMIC",
+        "END_DEVICE_CONTROLLED"
+      ],
+      "default": "DISABLE_RELAY_MODE",
+      "description": " - DISABLE_RELAY_MODE: Disable the relay mode.\n - ENABLE_RELAY_MODE: Enable the relay model.\n - DYNAMIC: Dynamic.\n - END_DEVICE_CONTROLLED: End-device controlled."
+    },
+    "apiSecondChAckOffset": {
+      "type": "string",
+      "enum": [
+        "KHZ_0",
+        "KHZ_200",
+        "KHZ_400",
+        "KHZ_800",
+        "KHZ_1600",
+        "KHZ_3200"
+      ],
+      "default": "KHZ_0",
+      "description": " - KHZ_0: 0 kHz.\n - KHZ_200: 200 kHz.\n - KHZ_400: 400 kHz.\n - KHZ_800: 800 kHz.\n - KHZ_1600: 1600 kHz.\n - KHZ_3200: 3200 kHz."
     },
     "commonMacVersion": {
       "type": "string",
