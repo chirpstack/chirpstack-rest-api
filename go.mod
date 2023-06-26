@@ -3,7 +3,7 @@ module github.com/chirpstack/chirpstack-rest-api
 go 1.18
 
 require (
-	github.com/chirpstack/chirpstack/api/go/v4 v4.0.0-test.7
+	github.com/chirpstack/chirpstack/api/go/v4 v4.4.0
 	github.com/goreleaser/goreleaser v1.10.2
 	github.com/goreleaser/nfpm/v2 v2.16.0
 	github.com/gorilla/mux v1.8.0

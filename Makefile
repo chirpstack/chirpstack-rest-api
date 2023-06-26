@@ -35,6 +35,7 @@ devshell:
 	docker-compose run --rm chirpstack-rest-api bash
 
 generate:
+	go get -u github.com/chirpstack/chirpstack/api/go/v4@${VERSION}
 	cd chirpstack && git fetch && git checkout ${VERSION}
 	${GW_GEN} api/application.proto
 	${GW_GEN} api/device.proto
