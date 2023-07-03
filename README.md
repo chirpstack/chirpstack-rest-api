@@ -2,7 +2,7 @@
 
 The ChirpStack gRPC to REST API proxy exposes the ChirpStack (v4) gRPC as REST
 API. While the gRPC API interface exposed by ChirpStack (v4) is recommended,
-in some use-cases a REST API cna be more convenient. It could also help when
+in some use-cases a REST API can be more convenient. It could also help when
 migrating from ChirpStack v3 to v4 as previously this proxy was embedded inside
 the ChirpStack Application Server.
 
