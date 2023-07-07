@@ -62,8 +62,10 @@ func run() error {
 	})
 	r.PathPrefix("/").Handler(http.FileServer(http.FS(ui.FS)))
 	corsObj := handlers.AllowedOrigins([]string{*cors})
+	corsMethods := handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"})
+	corsHeaders := handlers.AllowedHeaders([]string{"Content-Type", "Authorization"})
 
-	return http.ListenAndServe(*bind, handlers.CORS(corsObj)(r))
+	return http.ListenAndServe(*bind, handlers.CORS(corsObj, corsMethods, corsHeaders)(r))
 }
 
 func getGatewayHandler(ctx context.Context) (http.Handler, error) {
