@@ -67,6 +67,10 @@ type DeviceServiceClient interface {
 	FlushQueue(ctx context.Context, in *FlushDeviceQueueRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// GetQueue returns the downlink device-queue.
 	GetQueue(ctx context.Context, in *GetDeviceQueueItemsRequest, opts ...grpc.CallOption) (*GetDeviceQueueItemsResponse, error)
+	// GetNextFCntDown returns the next FCntDown to use for enqueing encrypted
+	// downlinks. The difference with the DeviceActivation f_cont_down is that
+	// this method takes potential existing queue-items into account.
+	GetNextFCntDown(ctx context.Context, in *GetDeviceNextFCntDownRequest, opts ...grpc.CallOption) (*GetDeviceNextFCntDownResponse, error)
 }
 
 type deviceServiceClient struct {
@@ -248,6 +252,15 @@ func (c *deviceServiceClient) GetQueue(ctx context.Context, in *GetDeviceQueueIt
 	return out, nil
 }
 
+func (c *deviceServiceClient) GetNextFCntDown(ctx context.Context, in *GetDeviceNextFCntDownRequest, opts ...grpc.CallOption) (*GetDeviceNextFCntDownResponse, error) {
+	out := new(GetDeviceNextFCntDownResponse)
+	err := c.cc.Invoke(ctx, "/api.DeviceService/GetNextFCntDown", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DeviceServiceServer is the server API for DeviceService service.
 // All implementations must embed UnimplementedDeviceServiceServer
 // for forward compatibility
@@ -296,6 +309,10 @@ type DeviceServiceServer interface {
 	FlushQueue(context.Context, *FlushDeviceQueueRequest) (*emptypb.Empty, error)
 	// GetQueue returns the downlink device-queue.
 	GetQueue(context.Context, *GetDeviceQueueItemsRequest) (*GetDeviceQueueItemsResponse, error)
+	// GetNextFCntDown returns the next FCntDown to use for enqueing encrypted
+	// downlinks. The difference with the DeviceActivation f_cont_down is that
+	// this method takes potential existing queue-items into account.
+	GetNextFCntDown(context.Context, *GetDeviceNextFCntDownRequest) (*GetDeviceNextFCntDownResponse, error)
 	mustEmbedUnimplementedDeviceServiceServer()
 }
 
@@ -359,6 +376,9 @@ func (UnimplementedDeviceServiceServer) FlushQueue(context.Context, *FlushDevice
 }
 func (UnimplementedDeviceServiceServer) GetQueue(context.Context, *GetDeviceQueueItemsRequest) (*GetDeviceQueueItemsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetQueue not implemented")
+}
+func (UnimplementedDeviceServiceServer) GetNextFCntDown(context.Context, *GetDeviceNextFCntDownRequest) (*GetDeviceNextFCntDownResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNextFCntDown not implemented")
 }
 func (UnimplementedDeviceServiceServer) mustEmbedUnimplementedDeviceServiceServer() {}
 
@@ -715,6 +735,24 @@ func _DeviceService_GetQueue_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DeviceService_GetNextFCntDown_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDeviceNextFCntDownRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DeviceServiceServer).GetNextFCntDown(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.DeviceService/GetNextFCntDown",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DeviceServiceServer).GetNextFCntDown(ctx, req.(*GetDeviceNextFCntDownRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DeviceService_ServiceDesc is the grpc.ServiceDesc for DeviceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -797,6 +835,10 @@ var DeviceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetQueue",
 			Handler:    _DeviceService_GetQueue_Handler,
+		},
+		{
+			MethodName: "GetNextFCntDown",
+			Handler:    _DeviceService_GetNextFCntDown_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

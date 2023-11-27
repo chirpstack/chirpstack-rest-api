@@ -210,7 +210,7 @@
                     "deviceStatusReqInterval": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the device-status\nfrom the device."
+                      "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the\ndevice-status from the device."
                     },
                     "supportsOtaa": {
                       "type": "boolean",
@@ -227,7 +227,7 @@
                     "classBTimeout": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+                      "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement\nfrom the device (if requested)."
                     },
                     "classBPingSlotNbK": {
                       "type": "integer",
@@ -247,7 +247,7 @@
                     "classCTimeout": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+                      "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement\nfrom the device (if requested)."
                     },
                     "abpRx1Delay": {
                       "type": "integer",
@@ -274,7 +274,7 @@
                       "additionalProperties": {
                         "type": "string"
                       },
-                      "description": "User defined tags."
+                      "description": "Tags (user defined).\nThese tags can be used to add additional information the the\ndevice-profile. These tags are exposed in all the integration events of\ndevices using this device-profile."
                     },
                     "measurements": {
                       "type": "object",
@@ -581,7 +581,7 @@
         "deviceStatusReqInterval": {
           "type": "integer",
           "format": "int64",
-          "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the device-status\nfrom the device."
+          "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the\ndevice-status from the device."
         },
         "supportsOtaa": {
           "type": "boolean",
@@ -598,7 +598,7 @@
         "classBTimeout": {
           "type": "integer",
           "format": "int64",
-          "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+          "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement\nfrom the device (if requested)."
         },
         "classBPingSlotNbK": {
           "type": "integer",
@@ -618,7 +618,7 @@
         "classCTimeout": {
           "type": "integer",
           "format": "int64",
-          "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement from the device (if requested)."
+          "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement\nfrom the device (if requested)."
         },
         "abpRx1Delay": {
           "type": "integer",
@@ -645,7 +645,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "User defined tags."
+          "description": "Tags (user defined).\nThese tags can be used to add additional information the the\ndevice-profile. These tags are exposed in all the integration events of\ndevices using this device-profile."
         },
         "measurements": {
           "type": "object",
@@ -890,7 +890,7 @@
         "STRING"
       ],
       "default": "UNKNOWN",
-      "description": " - UNKNOWN: Unknown (in which case it is not tracked).\n - COUNTER: Incrementing counters that never decrease (these are not reset on each reading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value.\n - STRING: E.g. a firmware version, true / false value."
+      "description": " - UNKNOWN: Unknown (in which case it is not tracked).\n - COUNTER: Incrementing counters that never decrease (these are not reset on each\nreading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value.\n - STRING: E.g. a firmware version, true / false value."
     },
     "apiRelayModeActivation": {
       "type": "string",

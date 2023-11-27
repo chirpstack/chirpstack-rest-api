@@ -604,7 +604,7 @@
         "STRING"
       ],
       "default": "UNKNOWN",
-      "description": " - UNKNOWN: Unknown (in which case it is not tracked).\n - COUNTER: Incrementing counters that never decrease (these are not reset on each reading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value.\n - STRING: E.g. a firmware version, true / false value."
+      "description": " - UNKNOWN: Unknown (in which case it is not tracked).\n - COUNTER: Incrementing counters that never decrease (these are not reset on each\nreading).\n - ABSOLUTE: Counters that do get reset upon reading.\n - GAUGE: E.g. a temperature value.\n - STRING: E.g. a firmware version, true / false value."
     },
     "commonMacVersion": {
       "type": "string",

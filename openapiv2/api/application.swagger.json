@@ -150,6 +150,13 @@
                     "tenantId": {
                       "type": "string",
                       "description": "Tenant ID (UUID)."
+                    },
+                    "tags": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Tags (user defined).\nThese tags can be used to add additional information to the application.\nThese tags are exposed in all the integration events of devices under\nthis application."
                     }
                   },
                   "description": "Application object.",
@@ -2207,6 +2214,13 @@
         "tenantId": {
           "type": "string",
           "description": "Tenant ID (UUID)."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags (user defined).\nThese tags can be used to add additional information to the application.\nThese tags are exposed in all the integration events of devices under\nthis application."
         }
       }
     },

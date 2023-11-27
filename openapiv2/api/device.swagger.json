@@ -269,6 +269,46 @@
         ]
       }
     },
+    "/api/devices/{devEui}/get-next-f-cnt-down": {
+      "post": {
+        "summary": "GetNextFCntDown returns the next FCntDown to use for enqueing encrypted\ndownlinks. The difference with the DeviceActivation f_cont_down is that\nthis method takes potential existing queue-items into account.",
+        "operationId": "DeviceService_GetNextFCntDown",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDeviceNextFCntDownResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "devEui",
+            "description": "Device EUI (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "tags": [
+          "DeviceService"
+        ]
+      }
+    },
     "/api/devices/{devEui}/get-random-dev-addr": {
       "post": {
         "summary": "GetRandomDevAddr returns a random DevAddr taking the NwkID prefix into\naccount.",
@@ -629,7 +669,7 @@
                       "additionalProperties": {
                         "type": "string"
                       },
-                      "description": "Tags (user defined).\nThese tags are exposed in the event payloads or to integration. Tags are\nintended for aggregation and filtering."
+                      "description": "Tags (user defined).\nThese tags can be used to add additional information to the device.\nThese tags are exposed in all the integration events."
                     },
                     "joinEui": {
                       "type": "string",
@@ -907,12 +947,16 @@
                     },
                     "isPending": {
                       "type": "boolean",
-                      "description": "Is pending.\nThis is set to true when the downlink is pending."
+                      "description": "Is pending.\nThis is set by ChirpStack to true when the downlink is pending (e.g. it\nhas been sent, but a confirmation is still pending)."
                     },
                     "fCntDown": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "Downlink frame-counter.\nThis is set when the payload has been sent as downlink."
+                      "description": "Downlink frame-counter.\nDo not set this for plain-text data payloads. It will be automatically set\nby ChirpStack when the payload has been sent as downlink."
+                    },
+                    "isEncrypted": {
+                      "type": "boolean",
+                      "description": "Is encrypted.\nThis must be set to true if the end-application has already encrypted\nthe data payload. In this case, the f_cnt_down field must be set to\nthe corresponding frame-counter which has been used during the encryption."
                     }
                   }
                 }
@@ -979,7 +1023,7 @@
           "additionalProperties": {
             "type": "string"
           },
-          "description": "Tags (user defined).\nThese tags are exposed in the event payloads or to integration. Tags are\nintended for aggregation and filtering."
+          "description": "Tags (user defined).\nThese tags can be used to add additional information to the device.\nThese tags are exposed in all the integration events."
         },
         "joinEui": {
           "type": "string",
@@ -1123,12 +1167,16 @@
         },
         "isPending": {
           "type": "boolean",
-          "description": "Is pending.\nThis is set to true when the downlink is pending."
+          "description": "Is pending.\nThis is set by ChirpStack to true when the downlink is pending (e.g. it\nhas been sent, but a confirmation is still pending)."
         },
         "fCntDown": {
           "type": "integer",
           "format": "int64",
-          "description": "Downlink frame-counter.\nThis is set when the payload has been sent as downlink."
+          "description": "Downlink frame-counter.\nDo not set this for plain-text data payloads. It will be automatically set\nby ChirpStack when the payload has been sent as downlink."
+        },
+        "isEncrypted": {
+          "type": "boolean",
+          "description": "Is encrypted.\nThis must be set to true if the end-application has already encrypted\nthe data payload. In this case, the f_cnt_down field must be set to\nthe corresponding frame-counter which has been used during the encryption."
         }
       }
     },
@@ -1244,6 +1292,16 @@
           "additionalProperties": {
             "$ref": "#/definitions/apiDeviceState"
           }
+        }
+      }
+    },
+    "apiGetDeviceNextFCntDownResponse": {
+      "type": "object",
+      "properties": {
+        "fCntDown": {
+          "type": "integer",
+          "format": "int64",
+          "description": "FCntDown."
         }
       }
     },

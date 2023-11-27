@@ -231,6 +231,13 @@
                     "privateGatewaysDown": {
                       "type": "boolean",
                       "description": "Private gateways (downlink).\nIf enabled, then other tenants will not be able to schedule downlink\nmessages through the gateways of this tenant. For example, in case you\ndo want to share uplinks with other tenants (private_gateways_up=false),\nbut you want to prevent other tenants from using gateway airtime."
+                    },
+                    "tags": {
+                      "type": "object",
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "description": "Tags (user defined).\nThese tags can be used to add additional information to the tenant. These\ntags are NOT exposed in the integration events."
                     }
                   },
                   "description": "Tenant object.",
@@ -641,6 +648,13 @@
         "privateGatewaysDown": {
           "type": "boolean",
           "description": "Private gateways (downlink).\nIf enabled, then other tenants will not be able to schedule downlink\nmessages through the gateways of this tenant. For example, in case you\ndo want to share uplinks with other tenants (private_gateways_up=false),\nbut you want to prevent other tenants from using gateway airtime."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Tags (user defined).\nThese tags can be used to add additional information to the tenant. These\ntags are NOT exposed in the integration events."
         }
       }
     },
