@@ -393,6 +393,10 @@
                       "type": "integer",
                       "format": "int64",
                       "description": "Relay overall limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+                    },
+                    "allowRoaming": {
+                      "type": "boolean",
+                      "description": "Allow roaming.\n\nIf set to true, it means that the device is allowed to use roaming."
                     }
                   },
                   "description": "Device-profile object.",
@@ -764,6 +768,10 @@
           "type": "integer",
           "format": "int64",
           "description": "Relay overall limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+        },
+        "allowRoaming": {
+          "type": "boolean",
+          "description": "Allow roaming.\n\nIf set to true, it means that the device is allowed to use roaming."
         }
       }
     },
