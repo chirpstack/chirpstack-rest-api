@@ -1227,6 +1227,10 @@
         "deviceActivation": {
           "$ref": "#/definitions/apiDeviceActivation",
           "description": "Device activation object."
+        },
+        "joinServerContext": {
+          "$ref": "#/definitions/commonJoinServerContext",
+          "description": "Join-Server context.\nA non-empty value indicatest that ChirpStack does not have access to\nthe AppSKey and that the encryption / decryption of the payloads is\nthe responsibility of the end-application."
         }
       }
     },
@@ -1399,6 +1403,34 @@
       ],
       "default": "CLASS_A",
       "description": " - CLASS_A: Class-A.\n - CLASS_B: Class-B.\n - CLASS_C: Class-C."
+    },
+    "commonJoinServerContext": {
+      "type": "object",
+      "properties": {
+        "sessionKeyId": {
+          "type": "string",
+          "description": "Session-key ID."
+        },
+        "appSKey": {
+          "$ref": "#/definitions/commonKeyEnvelope",
+          "description": "AppSKey envelope."
+        }
+      },
+      "description": "Join-Server context."
+    },
+    "commonKeyEnvelope": {
+      "type": "object",
+      "properties": {
+        "kekLabel": {
+          "type": "string",
+          "description": "KEK label."
+        },
+        "aesKey": {
+          "type": "string",
+          "format": "byte",
+          "description": "AES key (when the kek_label is set, this value must first be decrypted)."
+        }
+      }
     },
     "commonMetric": {
       "type": "object",

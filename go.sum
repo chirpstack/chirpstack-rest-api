@@ -235,6 +235,8 @@ github.com/chirpstack/chirpstack/api/go/v4 v4.6.0-test.4 h1:m8deHrKeSgBI3HRB4UVH
 github.com/chirpstack/chirpstack/api/go/v4 v4.6.0-test.4/go.mod h1:6+68s1PGHq2QWZ216RTwXhp7h1vCiMc6kX3f4s74ZzQ=
 github.com/chirpstack/chirpstack/api/go/v4 v4.6.0 h1:l+nr/QhFab1y9E8LVOJq/lDG+o0+mShcZOCNBvFYXUA=
 github.com/chirpstack/chirpstack/api/go/v4 v4.6.0/go.mod h1:6+68s1PGHq2QWZ216RTwXhp7h1vCiMc6kX3f4s74ZzQ=
+github.com/chirpstack/chirpstack/api/go/v4 v4.7.0 h1:LgtwvUm/pDvmBYgVc62khybuFdXnx0Hyj9MfKGkXufI=
+github.com/chirpstack/chirpstack/api/go/v4 v4.7.0/go.mod h1:6+68s1PGHq2QWZ216RTwXhp7h1vCiMc6kX3f4s74ZzQ=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e/go.mod h1:nSuG5e5PlCu98SY8svDHJxuZscDgtXS6KTTbou5AhLI=
 github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1/go.mod h1:Q3SI9o4m/ZMnBNeIyt5eFwwo7qiLfzFZmjNmxjkiQlU=
