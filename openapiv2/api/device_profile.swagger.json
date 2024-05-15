@@ -397,6 +397,11 @@
                     "allowRoaming": {
                       "type": "boolean",
                       "description": "Allow roaming.\n\nIf set to true, it means that the device is allowed to use roaming."
+                    },
+                    "rx1Delay": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "RX1 Delay.\n\nThis makes it possible to override the system RX1 Delay. Please note that\nthis values only has effect in case it is higher than the system value.\nIn other words, it can be used to increase the RX1 Delay but not to decrease\nit.\nValid options are 1 - 15 (0 = always use system RX1 Delay)."
                     }
                   },
                   "description": "Device-profile object.",
@@ -772,6 +777,11 @@
         "allowRoaming": {
           "type": "boolean",
           "description": "Allow roaming.\n\nIf set to true, it means that the device is allowed to use roaming."
+        },
+        "rx1Delay": {
+          "type": "integer",
+          "format": "int64",
+          "description": "RX1 Delay.\n\nThis makes it possible to override the system RX1 Delay. Please note that\nthis values only has effect in case it is higher than the system value.\nIn other words, it can be used to increase the RX1 Delay but not to decrease\nit.\nValid options are 1 - 15 (0 = always use system RX1 Delay)."
         }
       }
     },
@@ -944,7 +954,8 @@
         "RP002_1_0_0",
         "RP002_1_0_1",
         "RP002_1_0_2",
-        "RP002_1_0_3"
+        "RP002_1_0_3",
+        "RP002_1_0_4"
       ],
       "default": "A"
     },

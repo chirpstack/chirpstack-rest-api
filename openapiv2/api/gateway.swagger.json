@@ -258,6 +258,54 @@
         ]
       }
     },
+    "/api/gateways/{gatewayId}/duty-cycle-metrics": {
+      "get": {
+        "summary": "GetDutyCycleMetrics returns the duty-cycle metrics.\nNote that only the last 2 hours of data are stored. Currently only per minute aggregation is available.",
+        "operationId": "GatewayService_GetDutyCycleMetrics",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetGatewayDutyCycleMetricsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "gatewayId",
+            "description": "Gateway ID (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "start",
+            "description": "Interval start timestamp.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end",
+            "description": "Interval end timestamp.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
     "/api/gateways/{gatewayId}/generate-certificate": {
       "post": {
         "summary": "Generate client-certificate for the gateway.",
@@ -334,14 +382,15 @@
           },
           {
             "name": "aggregation",
-            "description": "Aggregation.\n\n - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.",
+            "description": "Aggregation.\n\n - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.\n - MINUTE: Minute.",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
               "HOUR",
               "DAY",
-              "MONTH"
+              "MONTH",
+              "MINUTE"
             ],
             "default": "HOUR"
           }
@@ -489,6 +538,19 @@
         }
       }
     },
+    "apiGetGatewayDutyCycleMetricsResponse": {
+      "type": "object",
+      "properties": {
+        "maxLoadPercentage": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "Percentage relative to max load."
+        },
+        "windowPercentage": {
+          "$ref": "#/definitions/commonMetric",
+          "description": "Percentage relative to tracking window."
+        }
+      }
+    },
     "apiGetGatewayMetricsResponse": {
       "type": "object",
       "properties": {
@@ -568,10 +630,11 @@
       "enum": [
         "HOUR",
         "DAY",
-        "MONTH"
+        "MONTH",
+        "MINUTE"
       ],
       "default": "HOUR",
-      "description": " - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month."
+      "description": " - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.\n - MINUTE: Minute."
     },
     "commonLocation": {
       "type": "object",

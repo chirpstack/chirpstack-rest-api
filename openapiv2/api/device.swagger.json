@@ -448,14 +448,15 @@
           },
           {
             "name": "aggregation",
-            "description": "Aggregation.\n\n - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.",
+            "description": "Aggregation.\n\n - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.\n - MINUTE: Minute.",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
               "HOUR",
               "DAY",
-              "MONTH"
+              "MONTH",
+              "MINUTE"
             ],
             "default": "HOUR"
           }
@@ -509,14 +510,15 @@
           },
           {
             "name": "aggregation",
-            "description": "Aggregation.\n\n - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.",
+            "description": "Aggregation.\n\n - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.\n - MINUTE: Minute.",
             "in": "query",
             "required": false,
             "type": "string",
             "enum": [
               "HOUR",
               "DAY",
-              "MONTH"
+              "MONTH",
+              "MINUTE"
             ],
             "default": "HOUR"
           }
@@ -1389,10 +1391,11 @@
       "enum": [
         "HOUR",
         "DAY",
-        "MONTH"
+        "MONTH",
+        "MINUTE"
       ],
       "default": "HOUR",
-      "description": " - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month."
+      "description": " - HOUR: Hour.\n - DAY: Day.\n - MONTH: Month.\n - MINUTE: Minute."
     },
     "commonDeviceClass": {
       "type": "string",
