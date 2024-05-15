@@ -1,4 +1,4 @@
-FROM golang:1.21-alpine AS development
+FROM golang:1.22-alpine AS development
 
 ENV PROJECT_PATH=/chirpstack-rest-api
 ENV PATH=$PATH:$PROJECT_PATH/build
