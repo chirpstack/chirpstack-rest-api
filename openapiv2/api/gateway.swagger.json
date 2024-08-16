@@ -110,6 +110,205 @@
         ]
       }
     },
+    "/api/gateways/relay-gateways": {
+      "get": {
+        "summary": "List the detected Relay Gateways.",
+        "operationId": "GatewayService_ListRelayGateways",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListRelayGatewaysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of relay-gateways to return in the result-set.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "tenantId",
+            "description": "Tenant ID (UUID) to filter relay-gateways on.\nTo list all relay-gateways as a global admin user, this field can be left blank.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
+    "/api/gateways/relay-gateways/{relayGateway.tenantId}/{relayGateway.relayId}": {
+      "put": {
+        "summary": "Update the given Relay Gateway.",
+        "operationId": "GatewayService_UpdateRelayGateway",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "relayGateway.tenantId",
+            "description": "Tenant ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayGateway.relayId",
+            "description": "Relay ID (4 byte HEX).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "relayGateway": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Name."
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "Description."
+                    },
+                    "statsInterval": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
+                    },
+                    "regionConfigId": {
+                      "type": "string",
+                      "description": "Region configuration ID."
+                    }
+                  },
+                  "description": "Relay Gateway object.",
+                  "title": "Relay Gateway object."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
+    "/api/gateways/relay-gateways/{tenantId}/{relayId}": {
+      "get": {
+        "summary": "Get the given Relay Gateway.",
+        "operationId": "GatewayService_GetRelayGateway",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetRelayGatewayResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenantId",
+            "description": "Tenant ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayId",
+            "description": "Relay ID (4 byte HEX).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the given Relay Gateway.",
+        "operationId": "GatewayService_DeleteRelayGateway",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "tenantId",
+            "description": "Tenant ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "relayId",
+            "description": "Relay ID (4 byte HEX).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "GatewayService"
+        ]
+      }
+    },
     "/api/gateways/{gateway.gatewayId}": {
       "put": {
         "summary": "Update updates the given gateway.",
@@ -608,6 +807,30 @@
         }
       }
     },
+    "apiGetRelayGatewayResponse": {
+      "type": "object",
+      "properties": {
+        "relayGateway": {
+          "$ref": "#/definitions/apiRelayGateway",
+          "description": "Relay Gateway object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last seen at timestamp."
+        }
+      }
+    },
     "apiListGatewaysResponse": {
       "type": "object",
       "properties": {
@@ -622,6 +845,97 @@
             "$ref": "#/definitions/apiGatewayListItem"
           },
           "description": "Result-set."
+        }
+      }
+    },
+    "apiListRelayGatewaysResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of relay-gateways."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiRelayGatewayListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiRelayGateway": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "relayId": {
+          "type": "string",
+          "description": "Relay ID (4 byte HEX)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description."
+        },
+        "statsInterval": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
+        },
+        "regionConfigId": {
+          "type": "string",
+          "description": "Region configuration ID."
+        }
+      }
+    },
+    "apiRelayGatewayListItem": {
+      "type": "object",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "Tenant ID."
+        },
+        "relayId": {
+          "type": "string",
+          "description": "Relay ID (4 byte HEX)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "lastSeenAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last seen at timestamp."
+        },
+        "state": {
+          "$ref": "#/definitions/apiGatewayState",
+          "description": "Gateway state.\nPlease note that the state of the relay is driven by the last\nreceived stats packet sent by the relay-gateway."
+        },
+        "regionConfigId": {
+          "type": "string",
+          "description": "Region configuration ID."
         }
       }
     },

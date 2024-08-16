@@ -737,7 +737,7 @@
                     },
                     "nwkSEncKey": {
                       "type": "string",
-                      "description": "Network session encryption key (HEX encoded)."
+                      "title": "Network session encryption key (HEX encoded).\nNote: For ABP in LoRaWAN 1.0.x, use this, the serving and the forwarding\nnetwork session integrity key fields with the LoRaWAN 1.0.x 'NwkSKey`!"
                     },
                     "sNwkSIntKey": {
                       "type": "string",
@@ -1050,7 +1050,7 @@
         },
         "nwkSEncKey": {
           "type": "string",
-          "description": "Network session encryption key (HEX encoded)."
+          "title": "Network session encryption key (HEX encoded).\nNote: For ABP in LoRaWAN 1.0.x, use this, the serving and the forwarding\nnetwork session integrity key fields with the LoRaWAN 1.0.x 'NwkSKey`!"
         },
         "sNwkSIntKey": {
           "type": "string",
@@ -1505,7 +1505,7 @@
         "NULL_VALUE"
       ],
       "default": "NULL_VALUE",
-      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\n The JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
+      "description": "`NullValue` is a singleton enumeration to represent the null value for the\n`Value` type union.\n\nThe JSON representation for `NullValue` is JSON `null`.\n\n - NULL_VALUE: Null value."
     },
     "rpcStatus": {
       "type": "object",
