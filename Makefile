@@ -32,7 +32,7 @@ dev-requirements:
 	go install github.com/goreleaser/nfpm/v2/cmd/nfpm
 
 devshell:
-	docker-compose run --rm chirpstack-rest-api bash
+	docker compose run --rm chirpstack-rest-api bash
 
 generate:
 	go get -u github.com/chirpstack/chirpstack/api/go/v4@${VERSION}

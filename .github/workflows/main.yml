@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       -
         name: Test building snapshot
-        run: docker-compose run --rm chirpstack-rest-api make snapshot
+        run: docker compose run --rm chirpstack-rest-api make snapshot
 
   dist:
     needs: test
@@ -35,7 +35,7 @@ jobs:
           aws-region: eu-west-1
       -
         name: Build distributable binaries
-        run: docker-compose run --rm chirpstack-rest-api make dist
+        run: docker compose run --rm chirpstack-rest-api make dist
       -
         name: Upload binaries to S3
         if: startsWith(github.ref, 'refs/tags/v')
