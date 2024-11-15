@@ -959,6 +959,11 @@
                     "isEncrypted": {
                       "type": "boolean",
                       "description": "Is encrypted.\nThis must be set to true if the end-application has already encrypted\nthe data payload. In this case, the f_cnt_down field must be set to\nthe corresponding frame-counter which has been used during the encryption."
+                    },
+                    "expiresAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Expires at (optional).\nExpired queue-items will be automatically removed from the queue."
                     }
                   }
                 }
@@ -1179,6 +1184,11 @@
         "isEncrypted": {
           "type": "boolean",
           "description": "Is encrypted.\nThis must be set to true if the end-application has already encrypted\nthe data payload. In this case, the f_cnt_down field must be set to\nthe corresponding frame-counter which has been used during the encryption."
+        },
+        "expiresAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expires at (optional).\nExpired queue-items will be automatically removed from the queue."
         }
       }
     },
