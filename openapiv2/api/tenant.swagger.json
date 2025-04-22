@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "limit",
-            "description": "Max number of tenants to return in the result-set.",
+            "description": "Max number of tenants to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -280,7 +280,7 @@
           },
           {
             "name": "limit",
-            "description": "Max number of tenants to return in the result-set.",
+            "description": "Max number of tenants to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
             "in": "query",
             "required": false,
             "type": "integer",

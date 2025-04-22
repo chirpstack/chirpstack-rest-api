@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "limit",
-            "description": "Max number of gateways to return in the result-set.",
+            "description": "Max number of gateways to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -71,6 +71,26 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "If set, the given value will be used to sort by (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "NAME",
+              "GATEWAY_ID",
+              "LAST_SEEN_AT"
+            ],
+            "default": "NAME"
+          },
+          {
+            "name": "orderByDesc",
+            "description": "If set, the sorting direction will be decending (default = ascending) (optional).",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -131,7 +151,7 @@
         "parameters": [
           {
             "name": "limit",
-            "description": "Max number of relay-gateways to return in the result-set.",
+            "description": "Max number of relay-gateways to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -601,6 +621,15 @@
     }
   },
   "definitions": {
+    "ListGatewaysRequestOrderBy": {
+      "type": "string",
+      "enum": [
+        "NAME",
+        "GATEWAY_ID",
+        "LAST_SEEN_AT"
+      ],
+      "default": "NAME"
+    },
     "apiCreateGatewayRequest": {
       "type": "object",
       "properties": {

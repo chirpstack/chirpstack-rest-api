@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "limit",
-            "description": "Max number of applications to return in the result-set.",
+            "description": "Max number of applications to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -164,6 +164,70 @@
                 }
               }
             }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/device-profiles": {
+      "get": {
+        "summary": "List device-profiles used within the given application.",
+        "operationId": "ApplicationService_ListDeviceProfiles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListApplicationDeviceProfilesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{applicationId}/device-tags": {
+      "get": {
+        "summary": "List device tags used within the given application.",
+        "operationId": "ApplicationService_ListDeviceTags",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListApplicationDeviceTagsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -2224,6 +2288,35 @@
         }
       }
     },
+    "apiApplicationDeviceProfileListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Device-profile ID (UUID)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        }
+      }
+    },
+    "apiApplicationDeviceTagListItem": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Tag key."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Used values."
+        }
+      }
+    },
     "apiApplicationListItem": {
       "type": "object",
       "properties": {
@@ -2635,6 +2728,30 @@
         "kind": {
           "$ref": "#/definitions/apiIntegrationKind",
           "description": "Integration kind."
+        }
+      }
+    },
+    "apiListApplicationDeviceProfilesResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiApplicationDeviceProfileListItem"
+          },
+          "description": "Device-profiles."
+        }
+      }
+    },
+    "apiListApplicationDeviceTagsResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiApplicationDeviceTagListItem"
+          },
+          "description": "Device tags."
         }
       }
     },

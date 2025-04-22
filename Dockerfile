@@ -1,4 +1,4 @@
-FROM golang:1.22-alpine AS development
+FROM golang:1.24-alpine AS development
 
 ENV PROJECT_PATH=/chirpstack-rest-api
 ENV PATH=$PATH:$PROJECT_PATH/build
@@ -14,7 +14,7 @@ WORKDIR $PROJECT_PATH
 RUN make dev-requirements
 RUN make
 
-FROM alpine:3.18.0 AS production
+FROM alpine:3.21.0 AS production
 
 RUN apk --no-cache add ca-certificates
 COPY --from=development /chirpstack-rest-api/build/chirpstack-rest-api /usr/bin/chirpstack-rest-api

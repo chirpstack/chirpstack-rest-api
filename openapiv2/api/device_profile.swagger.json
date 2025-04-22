@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "limit",
-            "description": "Max number of device-profiles to return in the result-set.",
+            "description": "Max number of device-profiles to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -402,6 +402,10 @@
                       "type": "integer",
                       "format": "int64",
                       "description": "RX1 Delay.\n\nThis makes it possible to override the system RX1 Delay. Please note that\nthis values only has effect in case it is higher than the system value.\nIn other words, it can be used to increase the RX1 Delay but not to decrease\nit.\nValid options are 1 - 15 (0 = always use system RX1 Delay)."
+                    },
+                    "appLayerParams": {
+                      "$ref": "#/definitions/apiAppLayerParams",
+                      "description": "Application Layer parameters."
                     }
                   },
                   "description": "Device-profile object.",
@@ -491,6 +495,38 @@
         "name": {
           "type": "string",
           "description": "Algorithm name."
+        }
+      }
+    },
+    "apiAppLayerParams": {
+      "type": "object",
+      "properties": {
+        "ts003Version": {
+          "$ref": "#/definitions/apiTs003Version",
+          "description": "TS003 version (Application Layer Clock Sync)."
+        },
+        "ts003FPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "TS003 fPort."
+        },
+        "ts004Version": {
+          "$ref": "#/definitions/apiTs004Version",
+          "description": "TS004 version (Fragmented Data Block Transport)."
+        },
+        "ts004FPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "TS004 fPort."
+        },
+        "ts005Version": {
+          "$ref": "#/definitions/apiTs005Version",
+          "description": "TS005 version (Remote Multicast Setup)."
+        },
+        "ts005FPort": {
+          "type": "integer",
+          "format": "int64",
+          "description": "TS005 fPort."
         }
       }
     },
@@ -782,6 +818,10 @@
           "type": "integer",
           "format": "int64",
           "description": "RX1 Delay.\n\nThis makes it possible to override the system RX1 Delay. Please note that\nthis values only has effect in case it is higher than the system value.\nIn other words, it can be used to increase the RX1 Delay but not to decrease\nit.\nValid options are 1 - 15 (0 = always use system RX1 Delay)."
+        },
+        "appLayerParams": {
+          "$ref": "#/definitions/apiAppLayerParams",
+          "description": "Application Layer parameters."
         }
       }
     },
@@ -933,6 +973,36 @@
       ],
       "default": "KHZ_0",
       "description": " - KHZ_0: 0 kHz.\n - KHZ_200: 200 kHz.\n - KHZ_400: 400 kHz.\n - KHZ_800: 800 kHz.\n - KHZ_1600: 1600 kHz.\n - KHZ_3200: 3200 kHz."
+    },
+    "apiTs003Version": {
+      "type": "string",
+      "enum": [
+        "TS003_NOT_IMPLEMENTED",
+        "TS003_V100",
+        "TS003_v200"
+      ],
+      "default": "TS003_NOT_IMPLEMENTED",
+      "title": "- TS003_NOT_IMPLEMENTED: Not implemented.\n - TS003_V100: v1.0.0.\n - TS003_v200: v2.0.0"
+    },
+    "apiTs004Version": {
+      "type": "string",
+      "enum": [
+        "TS004_NOT_IMPLEMENTED",
+        "TS004_V100",
+        "TS004_V200"
+      ],
+      "default": "TS004_NOT_IMPLEMENTED",
+      "title": "- TS004_NOT_IMPLEMENTED: Not implemented.\n - TS004_V100: v1.0.0.\n - TS004_V200: v2.0.0"
+    },
+    "apiTs005Version": {
+      "type": "string",
+      "enum": [
+        "TS005_NOT_IMPLEMENTED",
+        "TS005_V100",
+        "TS005_V200"
+      ],
+      "default": "TS005_NOT_IMPLEMENTED",
+      "title": "- TS005_NOT_IMPLEMENTED: Not implemented.\n - TS005_V100: v1.0.0.\n - TS005_V200: v2.0.0"
     },
     "commonMacVersion": {
       "type": "string",

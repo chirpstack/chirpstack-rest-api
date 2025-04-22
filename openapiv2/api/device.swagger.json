@@ -37,7 +37,7 @@
         "parameters": [
           {
             "name": "limit",
-            "description": "Max number of devices to return in the result-set.",
+            "description": "Max number of devices to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
             "in": "query",
             "required": false,
             "type": "integer",
@@ -68,6 +68,34 @@
           {
             "name": "multicastGroupId",
             "description": "Multicst-group ID (UUID) to filter devices on.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "description": "If set, the given value will be used to sort by (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "NAME",
+              "DEV_EUI",
+              "LAST_SEEN_AT",
+              "DEVICE_PROFILE_NAME"
+            ],
+            "default": "NAME"
+          },
+          {
+            "name": "orderByDesc",
+            "description": "If set, the sorting direction will be decending (default = ascending) (optional).",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "deviceProfileId",
+            "description": "Device-profile ID (UUID) to filter devices on.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -819,6 +847,10 @@
                     "appKey": {
                       "type": "string",
                       "title": "Application root key (128 bit).\nNote: This field only needs to be set for LoRaWAN 1.1.x devices!"
+                    },
+                    "genAppKey": {
+                      "type": "string",
+                      "description": "Gen App Key (128 bit).\nNote: This field only needs to be set for LoRaWAN 1.0.x devices that\nimplement TS005 (remote multicast setup)."
                     }
                   },
                   "description": "Device-keys object.",
@@ -875,6 +907,10 @@
                     "appKey": {
                       "type": "string",
                       "title": "Application root key (128 bit).\nNote: This field only needs to be set for LoRaWAN 1.1.x devices!"
+                    },
+                    "genAppKey": {
+                      "type": "string",
+                      "description": "Gen App Key (128 bit).\nNote: This field only needs to be set for LoRaWAN 1.0.x devices that\nimplement TS005 (remote multicast setup)."
                     }
                   },
                   "description": "Device-keys object.",
@@ -978,6 +1014,16 @@
     }
   },
   "definitions": {
+    "ListDevicesRequestOrderBy": {
+      "type": "string",
+      "enum": [
+        "NAME",
+        "DEV_EUI",
+        "LAST_SEEN_AT",
+        "DEVICE_PROFILE_NAME"
+      ],
+      "default": "NAME"
+    },
     "apiCreateDeviceRequest": {
       "type": "object",
       "properties": {
@@ -1096,6 +1142,10 @@
         "appKey": {
           "type": "string",
           "title": "Application root key (128 bit).\nNote: This field only needs to be set for LoRaWAN 1.1.x devices!"
+        },
+        "genAppKey": {
+          "type": "string",
+          "description": "Gen App Key (128 bit).\nNote: This field only needs to be set for LoRaWAN 1.0.x devices that\nimplement TS005 (remote multicast setup)."
         }
       }
     },
@@ -1140,6 +1190,13 @@
         "deviceStatus": {
           "$ref": "#/definitions/apiDeviceStatus",
           "description": "Device status."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Device tags."
         }
       }
     },
