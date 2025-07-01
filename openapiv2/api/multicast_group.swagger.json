@@ -245,16 +245,10 @@
                       "format": "int64",
                       "description": "Frequency (Hz)."
                     },
-                    "classBPingSlotPeriod": {
+                    "classBPingSlotPeriodicity": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "Ping-slot period (only for Class-B).\nDeprecated: use class_b_ping_slot_nb_k."
-                    },
-                    "classBPingSlotNbK": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "The actual number of ping-slots per beacon period equals to 2^k.",
-                      "title": "Class-B ping-slots per beacon period (only for Class-B).\nValid options are: 0 - 7;"
+                      "description": "Class-B ping-slot periodicity (only for Class-B).\nValid options are: 0 - 7.\n\nNumber of ping-slots per beacon-period:\npingNb = 2^(7-periodicity)\n\nPeriodicity: 0 = 128 ping-slots per beacon period = ~ every 1 sec\nPeriodicity: 7 = 1 ping-slot per beacon period = ~ every 128 sec"
                     },
                     "classCSchedulingType": {
                       "$ref": "#/definitions/apiMulticastGroupSchedulingType",
@@ -706,16 +700,10 @@
           "format": "int64",
           "description": "Frequency (Hz)."
         },
-        "classBPingSlotPeriod": {
+        "classBPingSlotPeriodicity": {
           "type": "integer",
           "format": "int64",
-          "description": "Ping-slot period (only for Class-B).\nDeprecated: use class_b_ping_slot_nb_k."
-        },
-        "classBPingSlotNbK": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The actual number of ping-slots per beacon period equals to 2^k.",
-          "title": "Class-B ping-slots per beacon period (only for Class-B).\nValid options are: 0 - 7;"
+          "description": "Class-B ping-slot periodicity (only for Class-B).\nValid options are: 0 - 7.\n\nNumber of ping-slots per beacon-period:\npingNb = 2^(7-periodicity)\n\nPeriodicity: 0 = 128 ping-slots per beacon period = ~ every 1 sec\nPeriodicity: 7 = 1 ping-slot per beacon period = ~ every 128 sec"
         },
         "classCSchedulingType": {
           "$ref": "#/definitions/apiMulticastGroupSchedulingType",

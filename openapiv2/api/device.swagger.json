@@ -765,15 +765,15 @@
                     },
                     "nwkSEncKey": {
                       "type": "string",
-                      "title": "Network session encryption key (HEX encoded).\nNote: For ABP in LoRaWAN 1.0.x, use this, the serving and the forwarding\nnetwork session integrity key fields with the LoRaWAN 1.0.x 'NwkSKey`!"
+                      "description": "Network session encryption key (HEX encoded).\nNote: For LoRaWAN 1.0.x devices, set this to the NwkSKey."
                     },
                     "sNwkSIntKey": {
                       "type": "string",
-                      "description": "Serving network session integrity key (HEX encoded)."
+                      "description": "Serving network session integrity key (HEX encoded).\nNote: For LoRaWAN 1.0.x devices, set this to the NwkSKey."
                     },
                     "fNwkSIntKey": {
                       "type": "string",
-                      "description": "Forwarding network session integrity key (HEX encoded)."
+                      "description": "Forwarding network session integrity key (HEX encoded).\nNote: For LoRaWAN 1.0.x devices, set this to the NwkSKey."
                     },
                     "fCntUp": {
                       "type": "integer",
@@ -1101,15 +1101,15 @@
         },
         "nwkSEncKey": {
           "type": "string",
-          "title": "Network session encryption key (HEX encoded).\nNote: For ABP in LoRaWAN 1.0.x, use this, the serving and the forwarding\nnetwork session integrity key fields with the LoRaWAN 1.0.x 'NwkSKey`!"
+          "description": "Network session encryption key (HEX encoded).\nNote: For LoRaWAN 1.0.x devices, set this to the NwkSKey."
         },
         "sNwkSIntKey": {
           "type": "string",
-          "description": "Serving network session integrity key (HEX encoded)."
+          "description": "Serving network session integrity key (HEX encoded).\nNote: For LoRaWAN 1.0.x devices, set this to the NwkSKey."
         },
         "fNwkSIntKey": {
           "type": "string",
-          "description": "Forwarding network session integrity key (HEX encoded)."
+          "description": "Forwarding network session integrity key (HEX encoded).\nNote: For LoRaWAN 1.0.x devices, set this to the NwkSKey."
         },
         "fCntUp": {
           "type": "integer",
