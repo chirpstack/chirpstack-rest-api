@@ -972,7 +972,7 @@
                     "fPort": {
                       "type": "integer",
                       "format": "int64",
-                      "description": "FPort (must be \u003e 0)."
+                      "description": "FPort (must be \u003e 0).\nOn enqueue and if using a JavaScript codec, this value might be\nautomatically set by the codec function."
                     },
                     "data": {
                       "type": "string",
@@ -1218,7 +1218,7 @@
         "fPort": {
           "type": "integer",
           "format": "int64",
-          "description": "FPort (must be \u003e 0)."
+          "description": "FPort (must be \u003e 0).\nOn enqueue and if using a JavaScript codec, this value might be\nautomatically set by the codec function."
         },
         "data": {
           "type": "string",

@@ -645,69 +645,6 @@
         ]
       }
     },
-    "/api/applications/{applicationId}/integrations/loracloud": {
-      "get": {
-        "summary": "Get LoRaCloud integration.",
-        "operationId": "ApplicationService_GetLoraCloudIntegration",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/apiGetLoraCloudIntegrationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "applicationId",
-            "description": "Application ID (UUID).",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ApplicationService"
-        ]
-      },
-      "delete": {
-        "summary": "Delete LoRaCloud integration.",
-        "operationId": "ApplicationService_DeleteLoraCloudIntegration",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "applicationId",
-            "description": "Application ID (UUID).",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ApplicationService"
-        ]
-      }
-    },
     "/api/applications/{applicationId}/integrations/mqtt/certificate": {
       "post": {
         "summary": "Generates application ID specific client-certificate.",
@@ -1826,112 +1763,6 @@
         ]
       }
     },
-    "/api/applications/{integration.applicationId}/integrations/loracloud": {
-      "post": {
-        "summary": "Create LoRaCloud integration.",
-        "operationId": "ApplicationService_CreateLoraCloudIntegration",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "integration.applicationId",
-            "description": "Application ID (UUID).",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "modemGeolocationServices": {
-                      "$ref": "#/definitions/apiLoraCloudModemGeolocationServices",
-                      "description": "Modem \u0026 Geolocation Services configuration."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
-            }
-          }
-        ],
-        "tags": [
-          "ApplicationService"
-        ]
-      },
-      "put": {
-        "summary": "Update LoRaCloud integration.",
-        "operationId": "ApplicationService_UpdateLoraCloudIntegration",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "type": "object",
-              "properties": {}
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/rpcStatus"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "integration.applicationId",
-            "description": "Application ID (UUID).",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "modemGeolocationServices": {
-                      "$ref": "#/definitions/apiLoraCloudModemGeolocationServices",
-                      "description": "Modem \u0026 Geolocation Services configuration."
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
-            }
-          }
-        ],
-        "tags": [
-          "ApplicationService"
-        ]
-      }
-    },
     "/api/applications/{integration.applicationId}/integrations/mydevices": {
       "post": {
         "summary": "Create myDevices integration.",
@@ -2547,15 +2378,6 @@
         }
       }
     },
-    "apiGetLoraCloudIntegrationResponse": {
-      "type": "object",
-      "properties": {
-        "integration": {
-          "$ref": "#/definitions/apiLoraCloudIntegration",
-          "description": "Integration object."
-        }
-      }
-    },
     "apiGetMyDevicesIntegrationResponse": {
       "type": "object",
       "properties": {
@@ -2712,7 +2534,6 @@
         "INFLUX_DB",
         "THINGS_BOARD",
         "MY_DEVICES",
-        "LORA_CLOUD",
         "GCP_PUB_SUB",
         "AWS_SNS",
         "AZURE_SERVICE_BUS",
@@ -2786,90 +2607,6 @@
             "$ref": "#/definitions/apiIntegrationListItem"
           },
           "description": "Integrations within result-set."
-        }
-      }
-    },
-    "apiLoraCloudIntegration": {
-      "type": "object",
-      "properties": {
-        "applicationId": {
-          "type": "string",
-          "description": "Application ID (UUID)."
-        },
-        "modemGeolocationServices": {
-          "$ref": "#/definitions/apiLoraCloudModemGeolocationServices",
-          "description": "Modem \u0026 Geolocation Services configuration."
-        }
-      }
-    },
-    "apiLoraCloudModemGeolocationServices": {
-      "type": "object",
-      "properties": {
-        "token": {
-          "type": "string",
-          "description": "API token."
-        },
-        "modemEnabled": {
-          "type": "boolean",
-          "description": "Device implements Modem / Modem-E stack."
-        },
-        "forwardFPorts": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "description": "Forward FPorts.\nForward uplink messages matching the given FPorts to the MGS."
-        },
-        "gnssUseRxTime": {
-          "type": "boolean",
-          "description": "Use rx time for GNSS resolving.\nIn case this is set to true, the MGS resolver will use the RX time of the\nnetwork instead of the timestamp included in the LR1110 payload."
-        },
-        "gnssUseGatewayLocation": {
-          "type": "boolean",
-          "description": "Use gateway location for GNSS resolving.\nIn the case this is set to true, ChirpStack will provide the location of\none of the gateways to the MGS resolver to aid the resolving process.\nDisable this in case the gateway location is not accurate / incorrectly\nconfigured as an incorrect location will cause the resolver to return an\nerror."
-        },
-        "parseTlv": {
-          "type": "boolean",
-          "description": "Parse TLV records.\nIf enabled, stream records (expected in TLV format) are scanned for GNSS\ndata (0x06 or 0x07). If found, ChirpStack will make an additional\ngeolocation call to the MGS API for resolving the location of the detected\npayload."
-        },
-        "geolocationBufferTtl": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Geolocation buffer TTL (in seconds).\nIf \u003e 0, uplink RX meta-data will be stored in a buffer so that\nthe meta-data of multiple uplinks can be used for geolocation."
-        },
-        "geolocationMinBufferSize": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Geolocation minimum buffer size.\nIf \u003e 0, geolocation will only be performed when the buffer has\nat least the given size."
-        },
-        "geolocationTdoa": {
-          "type": "boolean",
-          "description": "TDOA based geolocation is enabled."
-        },
-        "geolocationRssi": {
-          "type": "boolean",
-          "description": "RSSI based geolocation is enabled."
-        },
-        "geolocationGnss": {
-          "type": "boolean",
-          "description": "GNSS based geolocation is enabled (LR1110)."
-        },
-        "geolocationGnssPayloadField": {
-          "type": "string",
-          "description": "GNSS payload field.\nThis holds the name of the field in the decoded payload object which\ncontains the GNSS payload bytes (as HEX string)."
-        },
-        "geolocationGnssUseRxTime": {
-          "type": "boolean",
-          "description": "GNSS use RX time.\nIn case this is set to true, the resolver will use the RX time of the\nnetwork instead of the timestamp included in the LR1110 payload."
-        },
-        "geolocationWifi": {
-          "type": "boolean",
-          "description": "Wifi based geolocation is enabled."
-        },
-        "geolocationWifiPayloadField": {
-          "type": "string",
-          "title": "Wifi payload field.\nThis holds the name of the field in the decoded payload object which\ncontains an array of objects with the following fields:\n* macAddress - e.g. 01:23:45:67:89:ab\n* signalStrength - e.g. -51 (optional)"
         }
       }
     },
