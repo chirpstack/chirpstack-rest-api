@@ -393,6 +393,69 @@
         ]
       }
     },
+    "/api/applications/{applicationId}/integrations/blynk": {
+      "get": {
+        "summary": "Get Blynk integration.",
+        "operationId": "ApplicationService_GetBlynkIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetBlynkIntegrationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete Blynk integration.",
+        "operationId": "ApplicationService_DeleteBlynkIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
     "/api/applications/{applicationId}/integrations/gcp-pub-sub": {
       "get": {
         "summary": "Get GCP Pub/Sub integration.",
@@ -1179,6 +1242,112 @@
                   },
                   "description": "Integration object to create.",
                   "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      }
+    },
+    "/api/applications/{integration.applicationId}/integrations/blynk": {
+      "post": {
+        "summary": "Create Blynk integration.",
+        "operationId": "ApplicationService_CreateBlynkIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Blynk integration token."
+                    }
+                  },
+                  "description": "Integration object to create.",
+                  "title": "Integration object to create."
+                }
+              }
+            }
+          }
+        ],
+        "tags": [
+          "ApplicationService"
+        ]
+      },
+      "put": {
+        "summary": "Update Blynk integration.",
+        "operationId": "ApplicationService_UpdateBlynkIntegration",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "integration.applicationId",
+            "description": "Application ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "integration": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Blynk integration token."
+                    }
+                  },
+                  "description": "Integration object to update.",
+                  "title": "Integration object to update."
                 }
               }
             }
@@ -2225,6 +2394,19 @@
         }
       }
     },
+    "apiBlynkIntegration": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID (UUID)."
+        },
+        "token": {
+          "type": "string",
+          "description": "Blynk integration token."
+        }
+      }
+    },
     "apiCreateApplicationRequest": {
       "type": "object",
       "properties": {
@@ -2338,6 +2520,15 @@
       "properties": {
         "integration": {
           "$ref": "#/definitions/apiAzureServiceBusIntegration",
+          "description": "Integration object."
+        }
+      }
+    },
+    "apiGetBlynkIntegrationResponse": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "$ref": "#/definitions/apiBlynkIntegration",
           "description": "Integration object."
         }
       }
@@ -2523,7 +2714,8 @@
       "type": "string",
       "enum": [
         "INFLUXDB_1",
-        "INFLUXDB_2"
+        "INFLUXDB_2",
+        "INFLUXDB_3"
       ],
       "default": "INFLUXDB_1"
     },
@@ -2539,7 +2731,8 @@
         "AZURE_SERVICE_BUS",
         "PILOT_THINGS",
         "MQTT_GLOBAL",
-        "IFTTT"
+        "IFTTT",
+        "BLYNK"
       ],
       "default": "HTTP"
     },

@@ -1001,7 +1001,13 @@
                       "format": "date-time",
                       "description": "Expires at (optional).\nExpired queue-items will be automatically removed from the queue."
                     }
-                  }
+                  },
+                  "description": "Item to enqueue.",
+                  "title": "Item to enqueue."
+                },
+                "flushQueue": {
+                  "type": "boolean",
+                  "description": "Flush queue before enqueue."
                 }
               }
             }
