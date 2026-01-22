@@ -5,7 +5,7 @@ go 1.23.0
 toolchain go1.24.2
 
 require (
-	github.com/chirpstack/chirpstack/api/go/v4 v4.15.0
+	github.com/chirpstack/chirpstack/api/go/v4 v4.16.0
 	github.com/goreleaser/goreleaser v1.10.2
 	github.com/goreleaser/nfpm/v2 v2.16.0
 	github.com/gorilla/handlers v1.5.1

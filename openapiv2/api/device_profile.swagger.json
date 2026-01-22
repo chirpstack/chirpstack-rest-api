@@ -60,10 +60,31 @@
           },
           {
             "name": "tenantId",
-            "description": "Tenant ID to list the device-profiles for.",
+            "description": "Tenant ID to list the device-profiles for.\nThis value must be set, unless global_only is set to true. The result will\nbe the list of device-profiles matching the tenant_id and global tenants.\nIf you only wish to list the device-profiles matching the tenant_id, you\nmust set tenant_only to true.",
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "deviceId",
+            "description": "Device-profile device ID.\nNote that his is the device-profile ID, not the DevEUI.\nThis value requires global_only to be set to true.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "globalOnly",
+            "description": "Only list global (non-tenant) device-profiles.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "tenantOnly",
+            "description": "Only list device-profiles matching the tenant_id.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "tags": [
@@ -120,6 +141,221 @@
             }
           }
         },
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    },
+    "/api/device-profiles/devices": {
+      "get": {
+        "summary": "List the available device-profile devices.",
+        "operationId": "DeviceProfileService_ListDevices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListDeviceProfileDevicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of device-profile vendors to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "vendorId",
+            "description": "Vendor ID (UUID).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    },
+    "/api/device-profiles/devices/{id}": {
+      "get": {
+        "summary": "Get the device-profile device.",
+        "operationId": "DeviceProfileService_GetDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDeviceProfileDeviceResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Device-profile device ID.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the given device-profile device.",
+        "operationId": "DeviceProfileService_DeleteDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Device ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    },
+    "/api/device-profiles/vendors": {
+      "get": {
+        "summary": "List the available device-profile vendors.",
+        "operationId": "DeviceProfileService_ListVendors",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListDeviceProfileVendorsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of device-profile vendors to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    },
+    "/api/device-profiles/vendors/{id}": {
+      "get": {
+        "summary": "Get the device-profile vendor.",
+        "operationId": "DeviceProfileService_GetVendor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDeviceProfileVendorResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Vendor ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      },
+      "delete": {
+        "summary": "Delete the given device-profile vendor.",
+        "operationId": "DeviceProfileService_DeleteVendor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Vendor ID (UUID).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "tags": [
           "DeviceProfileService"
         ]
@@ -406,6 +642,22 @@
                     "appLayerParams": {
                       "$ref": "#/definitions/apiAppLayerParams",
                       "description": "Application Layer parameters."
+                    },
+                    "deviceId": {
+                      "type": "string",
+                      "description": "Device-profile device ID (UUID) (optiona)."
+                    },
+                    "firmwareVersion": {
+                      "type": "string",
+                      "description": "Firmware version."
+                    },
+                    "supportedUplinkDataRates": {
+                      "type": "array",
+                      "items": {
+                        "type": "integer",
+                        "format": "int64"
+                      },
+                      "description": "Supported uplink data-rates.\n\nThis option configures the data-rates that are supported by the devices\nusing this device-profile. If not set, the default min / max data-rates\nwill be used.\nExample: In case you would like to use also SF5 and SF6 in EU868, you would\nset this option to: 0, 1, 2, 3, 4, 5, 6, 7, 12, 13."
                     }
                   },
                   "description": "Device-profile object.",
@@ -476,6 +728,47 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "DeviceProfileService"
+        ]
+      }
+    },
+    "/api/device-profiles/{vendorId}/{vendorProfileId}": {
+      "get": {
+        "summary": "GetByProfileId tries to get the device-profile for the given ProfileID (see TR0005).",
+        "operationId": "DeviceProfileService_GetByProfileId",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiGetDeviceProfileByProfileIdResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "vendorId",
+            "description": "Vendor ID.",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "vendorProfileId",
+            "description": "Vendor Profile ID.",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "tags": [
@@ -822,6 +1115,73 @@
         "appLayerParams": {
           "$ref": "#/definitions/apiAppLayerParams",
           "description": "Application Layer parameters."
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "Device-profile device ID (UUID) (optiona)."
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "Firmware version."
+        },
+        "supportedUplinkDataRates": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "description": "Supported uplink data-rates.\n\nThis option configures the data-rates that are supported by the devices\nusing this device-profile. If not set, the default min / max data-rates\nwill be used.\nExample: In case you would like to use also SF5 and SF6 in EU868, you would\nset this option to: 0, 1, 2, 3, 4, 5, 6, 7, 12, 13."
+        }
+      }
+    },
+    "apiDeviceProfileDevice": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Device ID (UUID)."
+        },
+        "vendorId": {
+          "type": "string",
+          "description": "Vendor ID (UUID)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description."
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Metadata."
+        }
+      }
+    },
+    "apiDeviceProfileDeviceListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Device ID (UUID)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
         }
       }
     },
@@ -869,6 +1229,138 @@
         "supportsClassC": {
           "type": "boolean",
           "description": "Supports Class-C."
+        },
+        "vendorId": {
+          "type": "string",
+          "description": "Vendor ID.\nThis value is only available for global device-profiles."
+        },
+        "vendorName": {
+          "type": "string",
+          "description": "Vendor name.\nThis value is only available for global device-profiles."
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "Device ID.\nThis value is only available for global device-profiles."
+        },
+        "deviceName": {
+          "type": "string",
+          "description": "Device name.\nThis value is only available for global device-profiles."
+        },
+        "firmwareVersion": {
+          "type": "string",
+          "description": "Firmware version."
+        }
+      }
+    },
+    "apiDeviceProfileVendor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Vendor ID (UUID)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "vendorId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "LoRa Alliance Vendor ID."
+        },
+        "ouis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "OUIs."
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Metadata."
+        }
+      }
+    },
+    "apiDeviceProfileVendorListItem": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Vendor ID (UUID)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        },
+        "vendorId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "LoRa Alliance Vendor ID."
+        },
+        "ouis": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "OUIs."
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Metadata."
+        }
+      }
+    },
+    "apiGetDeviceProfileByProfileIdResponse": {
+      "type": "object",
+      "properties": {
+        "deviceProfile": {
+          "$ref": "#/definitions/apiDeviceProfile",
+          "description": "Device-profile object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        }
+      }
+    },
+    "apiGetDeviceProfileDeviceResponse": {
+      "type": "object",
+      "properties": {
+        "device": {
+          "$ref": "#/definitions/apiDeviceProfileDevice",
+          "description": "Device object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
         }
       }
     },
@@ -878,6 +1370,25 @@
         "deviceProfile": {
           "$ref": "#/definitions/apiDeviceProfile",
           "description": "Device-profile object."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp."
+        }
+      }
+    },
+    "apiGetDeviceProfileVendorResponse": {
+      "type": "object",
+      "properties": {
+        "vendor": {
+          "$ref": "#/definitions/apiDeviceProfileVendor",
+          "description": "Vendor object."
         },
         "createdAt": {
           "type": "string",
@@ -903,6 +1414,40 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/apiAdrAlgorithmListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiListDeviceProfileDevicesResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of devices."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDeviceProfileDeviceListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiListDeviceProfileVendorsResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of vendors."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/apiDeviceProfileVendorListItem"
           },
           "description": "Result-set."
         }
@@ -1025,7 +1570,8 @@
         "RP002_1_0_1",
         "RP002_1_0_2",
         "RP002_1_0_3",
-        "RP002_1_0_4"
+        "RP002_1_0_4",
+        "RP002_1_0_5"
       ],
       "default": "A"
     },
