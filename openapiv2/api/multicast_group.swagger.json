@@ -64,6 +64,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "devEui",
+            "description": "Device EUI (optional, HEX encoded EUI64).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
