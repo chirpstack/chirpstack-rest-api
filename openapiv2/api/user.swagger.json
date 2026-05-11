@@ -183,32 +183,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "user": {
-                  "type": "object",
-                  "properties": {
-                    "isAdmin": {
-                      "type": "boolean",
-                      "description": "Set to true to make the user a global administrator."
-                    },
-                    "isActive": {
-                      "type": "boolean",
-                      "description": "Set to false to disable the user."
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "E-mail of the user."
-                    },
-                    "note": {
-                      "type": "string",
-                      "description": "Optional note to store with the user."
-                    }
-                  },
-                  "description": "User object.",
-                  "title": "User object."
-                }
-              }
+              "$ref": "#/definitions/UserServiceUpdateBody"
             }
           }
         ],
@@ -249,13 +224,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "password": {
-                  "type": "string",
-                  "description": "Password to set."
-                }
-              }
+              "$ref": "#/definitions/UserServiceUpdatePasswordBody"
             }
           }
         ],
@@ -266,6 +235,43 @@
     }
   },
   "definitions": {
+    "UserServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "type": "object",
+          "properties": {
+            "isAdmin": {
+              "type": "boolean",
+              "description": "Set to true to make the user a global administrator."
+            },
+            "isActive": {
+              "type": "boolean",
+              "description": "Set to false to disable the user."
+            },
+            "email": {
+              "type": "string",
+              "description": "E-mail of the user."
+            },
+            "note": {
+              "type": "string",
+              "description": "Optional note to store with the user."
+            }
+          },
+          "description": "User object.",
+          "title": "User object."
+        }
+      }
+    },
+    "UserServiceUpdatePasswordBody": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Password to set."
+        }
+      }
+    },
     "apiCreateUserRequest": {
       "type": "object",
       "properties": {
@@ -280,6 +286,7 @@
         "tenants": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiUserTenant"
           },
           "description": "Add the user to the following tenants."
@@ -325,6 +332,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiUserListItem"
           },
           "description": "Result-set."
@@ -430,6 +438,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }

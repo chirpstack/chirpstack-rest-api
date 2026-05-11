@@ -60,7 +60,7 @@
           },
           {
             "name": "applicationId",
-            "description": "Application ID to list the multicast groups for.",
+            "description": "Application ID to list the multicast groups for.\nThis is mandatory unless tenant_id is set.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -68,6 +68,13 @@
           {
             "name": "devEui",
             "description": "Device EUI (optional, HEX encoded EUI64).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "description": "Tenant ID to list the multicast groups for.\nThis is mandatory unless application_id is set.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -204,68 +211,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "multicastGroup": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Name."
-                    },
-                    "applicationId": {
-                      "type": "string",
-                      "description": "Application ID.\nAfter creation, this can not be updated."
-                    },
-                    "region": {
-                      "$ref": "#/definitions/commonRegion",
-                      "description": "Region."
-                    },
-                    "mcAddr": {
-                      "type": "string",
-                      "description": "Multicast address (HEX encoded DevAddr)."
-                    },
-                    "mcNwkSKey": {
-                      "type": "string",
-                      "description": "Multicast network session key (HEX encoded AES128 key)."
-                    },
-                    "mcAppSKey": {
-                      "type": "string",
-                      "description": "Multicast application session key (HEX encoded AES128 key)."
-                    },
-                    "fCnt": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Frame-counter."
-                    },
-                    "groupType": {
-                      "$ref": "#/definitions/apiMulticastGroupType",
-                      "description": "Multicast group type."
-                    },
-                    "dr": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Data-rate."
-                    },
-                    "frequency": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Frequency (Hz)."
-                    },
-                    "classBPingSlotPeriodicity": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Class-B ping-slot periodicity (only for Class-B).\nValid options are: 0 - 7.\n\nNumber of ping-slots per beacon-period:\npingNb = 2^(7-periodicity)\n\nPeriodicity: 0 = 128 ping-slots per beacon period = ~ every 1 sec\nPeriodicity: 7 = 1 ping-slot per beacon period = ~ every 128 sec"
-                    },
-                    "classCSchedulingType": {
-                      "$ref": "#/definitions/apiMulticastGroupSchedulingType",
-                      "description": "Scheduling type (only for Class-C)."
-                    }
-                  },
-                  "description": "Multicast group object to update.",
-                  "title": "Multicast group object to update."
-                }
-              }
+              "$ref": "#/definitions/MulticastGroupServiceUpdateBody"
             }
           }
         ],
@@ -306,13 +252,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "devEui": {
-                  "type": "string",
-                  "description": "Device EUI (HEX encoded)."
-                }
-              }
+              "$ref": "#/definitions/MulticastGroupServiceAddDeviceBody"
             }
           }
         ],
@@ -393,13 +333,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "gatewayId": {
-                  "type": "string",
-                  "description": "Gateway ID (HEX encoded)."
-                }
-              }
+              "$ref": "#/definitions/MulticastGroupServiceAddGatewayBody"
             }
           }
         ],
@@ -542,36 +476,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "queueItem": {
-                  "type": "object",
-                  "properties": {
-                    "fCnt": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Downlink frame-counter.\nThis will be automatically set on enqueue."
-                    },
-                    "fPort": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "FPort (must be \u003e 0)."
-                    },
-                    "data": {
-                      "type": "string",
-                      "format": "byte",
-                      "description": "Payload."
-                    },
-                    "expiresAt": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Expires at (optional).\nExpired queue-items will be automatically removed from the queue."
-                    }
-                  },
-                  "description": "Multicast queue-item to enqueue.",
-                  "title": "Multicast queue-item to enqueue."
-                }
-              }
+              "$ref": "#/definitions/MulticastGroupServiceEnqueueBody"
             }
           }
         ],
@@ -582,6 +487,120 @@
     }
   },
   "definitions": {
+    "MulticastGroupServiceAddDeviceBody": {
+      "type": "object",
+      "properties": {
+        "devEui": {
+          "type": "string",
+          "description": "Device EUI (HEX encoded)."
+        }
+      }
+    },
+    "MulticastGroupServiceAddGatewayBody": {
+      "type": "object",
+      "properties": {
+        "gatewayId": {
+          "type": "string",
+          "description": "Gateway ID (HEX encoded)."
+        }
+      }
+    },
+    "MulticastGroupServiceEnqueueBody": {
+      "type": "object",
+      "properties": {
+        "queueItem": {
+          "type": "object",
+          "properties": {
+            "fCnt": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Downlink frame-counter.\nThis will be automatically set on enqueue."
+            },
+            "fPort": {
+              "type": "integer",
+              "format": "int64",
+              "description": "FPort (must be \u003e 0)."
+            },
+            "data": {
+              "type": "string",
+              "format": "byte",
+              "description": "Payload."
+            },
+            "expiresAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Expires at (optional).\nExpired queue-items will be automatically removed from the queue."
+            }
+          },
+          "description": "Multicast queue-item to enqueue.",
+          "title": "Multicast queue-item to enqueue."
+        }
+      }
+    },
+    "MulticastGroupServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "multicastGroup": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name."
+            },
+            "applicationId": {
+              "type": "string",
+              "description": "Application ID.\nAfter creation, this can not be updated."
+            },
+            "region": {
+              "$ref": "#/definitions/commonRegion",
+              "description": "Region."
+            },
+            "mcAddr": {
+              "type": "string",
+              "description": "Multicast address (HEX encoded DevAddr)."
+            },
+            "mcNwkSKey": {
+              "type": "string",
+              "description": "Multicast network session key (HEX encoded AES128 key)."
+            },
+            "mcAppSKey": {
+              "type": "string",
+              "description": "Multicast application session key (HEX encoded AES128 key)."
+            },
+            "fCnt": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Frame-counter."
+            },
+            "groupType": {
+              "$ref": "#/definitions/apiMulticastGroupType",
+              "description": "Multicast group type."
+            },
+            "dr": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Data-rate."
+            },
+            "frequency": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Frequency (Hz)."
+            },
+            "classBPingSlotPeriodicity": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Class-B ping-slot periodicity (only for Class-B).\nValid options are: 0 - 7.\n\nNumber of ping-slots per beacon-period:\npingNb = 2^(7-periodicity)\n\nPeriodicity: 0 = 128 ping-slots per beacon period = ~ every 1 sec\nPeriodicity: 7 = 1 ping-slot per beacon period = ~ every 128 sec"
+            },
+            "classCSchedulingType": {
+              "$ref": "#/definitions/apiMulticastGroupSchedulingType",
+              "description": "Scheduling type (only for Class-C)."
+            }
+          },
+          "description": "Multicast group object to update.",
+          "title": "Multicast group object to update."
+        }
+      }
+    },
     "apiCreateMulticastGroupRequest": {
       "type": "object",
       "properties": {
@@ -635,6 +654,7 @@
         "items": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiMulticastGroupQueueItem"
           }
         }
@@ -651,6 +671,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiMulticastGroupListItem"
           },
           "description": "Result-test."
@@ -746,6 +767,14 @@
         "groupType": {
           "$ref": "#/definitions/apiMulticastGroupType",
           "description": "Multicast group type."
+        },
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID."
+        },
+        "applicationName": {
+          "type": "string",
+          "description": "Application name."
         }
       }
     },
@@ -839,6 +868,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }

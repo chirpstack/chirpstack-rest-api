@@ -217,33 +217,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "relayGateway": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Name."
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Description."
-                    },
-                    "statsInterval": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
-                    },
-                    "regionConfigId": {
-                      "type": "string",
-                      "description": "Region configuration ID."
-                    }
-                  },
-                  "description": "Relay Gateway object.",
-                  "title": "Relay Gateway object."
-                }
-              }
+              "$ref": "#/definitions/GatewayServiceUpdateRelayGatewayBody"
             }
           }
         ],
@@ -361,51 +335,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "gateway": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Name."
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Description."
-                    },
-                    "location": {
-                      "$ref": "#/definitions/commonLocation",
-                      "description": "Gateway location."
-                    },
-                    "tenantId": {
-                      "type": "string",
-                      "description": "Tenant ID (UUID)."
-                    },
-                    "tags": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "description": "Tags."
-                    },
-                    "metadata": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "description": "Metadata (provided by the gateway)."
-                    },
-                    "statsInterval": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
-                    }
-                  },
-                  "description": "Gateway object.",
-                  "title": "Gateway object."
-                }
-              }
+              "$ref": "#/definitions/GatewayServiceUpdateBody"
             }
           }
         ],
@@ -621,6 +551,82 @@
     }
   },
   "definitions": {
+    "GatewayServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "gateway": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description."
+            },
+            "location": {
+              "$ref": "#/definitions/commonLocation",
+              "description": "Gateway location."
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "Tenant ID (UUID)."
+            },
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Tags."
+            },
+            "metadata": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Metadata (provided by the gateway)."
+            },
+            "statsInterval": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
+            }
+          },
+          "description": "Gateway object.",
+          "title": "Gateway object."
+        }
+      }
+    },
+    "GatewayServiceUpdateRelayGatewayBody": {
+      "type": "object",
+      "properties": {
+        "relayGateway": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Name."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description."
+            },
+            "statsInterval": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
+            },
+            "regionConfigId": {
+              "type": "string",
+              "description": "Region configuration ID."
+            }
+          },
+          "description": "Relay Gateway object.",
+          "title": "Relay Gateway object."
+        }
+      }
+    },
     "ListGatewaysRequestOrderBy": {
       "type": "string",
       "enum": [
@@ -871,6 +877,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiGatewayListItem"
           },
           "description": "Result-set."
@@ -888,6 +895,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiRelayGatewayListItem"
           },
           "description": "Result-set."
@@ -1040,6 +1048,7 @@
         "datasets": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/commonMetricDataset"
           },
           "description": "Datasets."
@@ -1099,6 +1108,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }

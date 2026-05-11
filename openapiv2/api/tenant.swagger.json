@@ -197,53 +197,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "tenant": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "title": "Tenant name,"
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Tenant description."
-                    },
-                    "canHaveGateways": {
-                      "type": "boolean",
-                      "title": "Can the tenant create and \"own\" Gateways?"
-                    },
-                    "maxGatewayCount": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Max. gateway count for tenant.\nWhen set to 0, the tenant can have unlimited gateways."
-                    },
-                    "maxDeviceCount": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Max. device count for tenant.\nWhen set to 0, the tenant can have unlimited devices."
-                    },
-                    "privateGatewaysUp": {
-                      "type": "boolean",
-                      "description": "Private gateways (uplink).\nIf enabled, then uplink messages will not be shared with other tenants."
-                    },
-                    "privateGatewaysDown": {
-                      "type": "boolean",
-                      "description": "Private gateways (downlink).\nIf enabled, then other tenants will not be able to schedule downlink\nmessages through the gateways of this tenant. For example, in case you\ndo want to share uplinks with other tenants (private_gateways_up=false),\nbut you want to prevent other tenants from using gateway airtime."
-                    },
-                    "tags": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "description": "Tags (user defined).\nThese tags can be used to add additional information to the tenant. These\ntags are NOT exposed in the integration events."
-                    }
-                  },
-                  "description": "Tenant object.",
-                  "title": "Tenant object."
-                }
-              }
+              "$ref": "#/definitions/TenantServiceUpdateBody"
             }
           }
         ],
@@ -409,36 +363,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "tenantUser": {
-                  "type": "object",
-                  "properties": {
-                    "userId": {
-                      "type": "string",
-                      "description": "User ID (UUID)."
-                    },
-                    "isAdmin": {
-                      "type": "boolean",
-                      "description": "User is admin within the context of the tenant.\nThere is no need to set the is_device_admin and is_gateway_admin flags."
-                    },
-                    "isDeviceAdmin": {
-                      "type": "boolean",
-                      "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups)."
-                    },
-                    "isGatewayAdmin": {
-                      "type": "boolean",
-                      "description": "User is able to modify gateways."
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "Email (only used on get and when adding a user to a tenant)."
-                    }
-                  },
-                  "description": "Tenant user object.",
-                  "title": "Tenant user object."
-                }
-              }
+              "$ref": "#/definitions/TenantServiceAddUserBody"
             }
           }
         ],
@@ -486,32 +411,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "tenantUser": {
-                  "type": "object",
-                  "properties": {
-                    "isAdmin": {
-                      "type": "boolean",
-                      "description": "User is admin within the context of the tenant.\nThere is no need to set the is_device_admin and is_gateway_admin flags."
-                    },
-                    "isDeviceAdmin": {
-                      "type": "boolean",
-                      "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups)."
-                    },
-                    "isGatewayAdmin": {
-                      "type": "boolean",
-                      "description": "User is able to modify gateways."
-                    },
-                    "email": {
-                      "type": "string",
-                      "description": "Email (only used on get and when adding a user to a tenant)."
-                    }
-                  },
-                  "description": "Tenant user object.",
-                  "title": "Tenant user object."
-                }
-              }
+              "$ref": "#/definitions/TenantServiceUpdateUserBody"
             }
           }
         ],
@@ -522,6 +422,115 @@
     }
   },
   "definitions": {
+    "TenantServiceAddUserBody": {
+      "type": "object",
+      "properties": {
+        "tenantUser": {
+          "type": "object",
+          "properties": {
+            "userId": {
+              "type": "string",
+              "description": "User ID (UUID)."
+            },
+            "isAdmin": {
+              "type": "boolean",
+              "description": "User is admin within the context of the tenant.\nThere is no need to set the is_device_admin and is_gateway_admin flags."
+            },
+            "isDeviceAdmin": {
+              "type": "boolean",
+              "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups)."
+            },
+            "isGatewayAdmin": {
+              "type": "boolean",
+              "description": "User is able to modify gateways."
+            },
+            "email": {
+              "type": "string",
+              "description": "Email (only used on get and when adding a user to a tenant)."
+            }
+          },
+          "description": "Tenant user object.",
+          "title": "Tenant user object."
+        }
+      }
+    },
+    "TenantServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "tenant": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "title": "Tenant name,"
+            },
+            "description": {
+              "type": "string",
+              "description": "Tenant description."
+            },
+            "canHaveGateways": {
+              "type": "boolean",
+              "title": "Can the tenant create and \"own\" Gateways?"
+            },
+            "maxGatewayCount": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Max. gateway count for tenant.\nWhen set to 0, the tenant can have unlimited gateways."
+            },
+            "maxDeviceCount": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Max. device count for tenant.\nWhen set to 0, the tenant can have unlimited devices."
+            },
+            "privateGatewaysUp": {
+              "type": "boolean",
+              "description": "Private gateways (uplink).\nIf enabled, then uplink messages will not be shared with other tenants."
+            },
+            "privateGatewaysDown": {
+              "type": "boolean",
+              "description": "Private gateways (downlink).\nIf enabled, then other tenants will not be able to schedule downlink\nmessages through the gateways of this tenant. For example, in case you\ndo want to share uplinks with other tenants (private_gateways_up=false),\nbut you want to prevent other tenants from using gateway airtime."
+            },
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Tags (user defined).\nThese tags can be used to add additional information to the tenant. These\ntags are NOT exposed in the integration events."
+            }
+          },
+          "description": "Tenant object.",
+          "title": "Tenant object."
+        }
+      }
+    },
+    "TenantServiceUpdateUserBody": {
+      "type": "object",
+      "properties": {
+        "tenantUser": {
+          "type": "object",
+          "properties": {
+            "isAdmin": {
+              "type": "boolean",
+              "description": "User is admin within the context of the tenant.\nThere is no need to set the is_device_admin and is_gateway_admin flags."
+            },
+            "isDeviceAdmin": {
+              "type": "boolean",
+              "description": "User is able to modify device related resources (applications,\ndevice-profiles, devices, multicast-groups)."
+            },
+            "isGatewayAdmin": {
+              "type": "boolean",
+              "description": "User is able to modify gateways."
+            },
+            "email": {
+              "type": "string",
+              "description": "Email (only used on get and when adding a user to a tenant)."
+            }
+          },
+          "description": "Tenant user object.",
+          "title": "Tenant user object."
+        }
+      }
+    },
     "apiCreateTenantRequest": {
       "type": "object",
       "properties": {
@@ -589,6 +598,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiTenantUserListItem"
           },
           "description": "Result-set."
@@ -606,6 +616,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiTenantListItem"
           },
           "description": "Result-set."
@@ -793,6 +804,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }

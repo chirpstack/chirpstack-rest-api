@@ -134,35 +134,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "application": {
-                  "type": "object",
-                  "properties": {
-                    "name": {
-                      "type": "string",
-                      "description": "Application name."
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Application description."
-                    },
-                    "tenantId": {
-                      "type": "string",
-                      "description": "Tenant ID (UUID)."
-                    },
-                    "tags": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "description": "Tags (user defined).\nThese tags can be used to add additional information to the application.\nThese tags are exposed in all the integration events of devices under\nthis application."
-                    }
-                  },
-                  "description": "Application object.",
-                  "title": "Application object."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateBody"
             }
           }
         ],
@@ -1024,36 +996,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "encoding": {
-                      "$ref": "#/definitions/apiEncoding",
-                      "description": "Encoding."
-                    },
-                    "region": {
-                      "type": "string",
-                      "description": "AWS region."
-                    },
-                    "accessKeyId": {
-                      "type": "string",
-                      "description": "AWS Access Key ID."
-                    },
-                    "secretAccessKey": {
-                      "type": "string",
-                      "description": "AWS Secret Access Key."
-                    },
-                    "topicArn": {
-                      "type": "string",
-                      "description": "Topic ARN."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateAwsSnsIntegrationBody"
             }
           }
         ],
@@ -1092,36 +1035,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "encoding": {
-                      "$ref": "#/definitions/apiEncoding",
-                      "description": "Encoding."
-                    },
-                    "region": {
-                      "type": "string",
-                      "description": "AWS region."
-                    },
-                    "accessKeyId": {
-                      "type": "string",
-                      "description": "AWS Access Key ID."
-                    },
-                    "secretAccessKey": {
-                      "type": "string",
-                      "description": "AWS Secret Access Key."
-                    },
-                    "topicArn": {
-                      "type": "string",
-                      "description": "Topic ARN."
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateAwsSnsIntegrationBody"
             }
           }
         ],
@@ -1162,28 +1076,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "encoding": {
-                      "$ref": "#/definitions/apiEncoding",
-                      "description": "Encoding."
-                    },
-                    "connectionString": {
-                      "type": "string",
-                      "description": "Connection string."
-                    },
-                    "publishName": {
-                      "type": "string",
-                      "description": "Publish name.\nThis is the name of the topic or queue."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateAzureServiceBusIntegrationBody"
             }
           }
         ],
@@ -1222,28 +1115,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "encoding": {
-                      "$ref": "#/definitions/apiEncoding",
-                      "description": "Encoding."
-                    },
-                    "connectionString": {
-                      "type": "string",
-                      "description": "Connection string."
-                    },
-                    "publishName": {
-                      "type": "string",
-                      "description": "Publish name.\nThis is the name of the topic or queue."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateAzureServiceBusIntegrationBody"
             }
           }
         ],
@@ -1284,20 +1156,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "description": "Blynk integration token."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateBlynkIntegrationBody"
             }
           }
         ],
@@ -1336,20 +1195,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "description": "Blynk integration token."
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateBlynkIntegrationBody"
             }
           }
         ],
@@ -1390,32 +1236,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "encoding": {
-                      "$ref": "#/definitions/apiEncoding",
-                      "description": "Encoding."
-                    },
-                    "credentialsFile": {
-                      "type": "string",
-                      "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following\nPub/Sub roles:\n* Pub/Sub Publisher"
-                    },
-                    "projectId": {
-                      "type": "string",
-                      "description": "Project ID."
-                    },
-                    "topicName": {
-                      "type": "string",
-                      "description": "Topic name.\nThis is the name of the Pub/Sub topic."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateGcpPubSubIntegrationBody"
             }
           }
         ],
@@ -1454,32 +1275,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "encoding": {
-                      "$ref": "#/definitions/apiEncoding",
-                      "description": "Encoding."
-                    },
-                    "credentialsFile": {
-                      "type": "string",
-                      "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following\nPub/Sub roles:\n* Pub/Sub Publisher"
-                    },
-                    "projectId": {
-                      "type": "string",
-                      "description": "Project ID."
-                    },
-                    "topicName": {
-                      "type": "string",
-                      "description": "Topic name.\nThis is the name of the Pub/Sub topic."
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateGcpPubSubIntegrationBody"
             }
           }
         ],
@@ -1520,31 +1316,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "headers": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "description": "HTTP headers to set when making requests."
-                    },
-                    "encoding": {
-                      "$ref": "#/definitions/apiEncoding",
-                      "description": "Payload encoding."
-                    },
-                    "eventEndpointUrl": {
-                      "type": "string",
-                      "description": "Event endpoint URL.\nThe HTTP integration will POST all events to this enpoint. The request\nwill contain a query parameters \"event\" containing the type of the\nevent."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateHttpIntegrationBody"
             }
           }
         ],
@@ -1583,31 +1355,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "headers": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "description": "HTTP headers to set when making requests."
-                    },
-                    "encoding": {
-                      "$ref": "#/definitions/apiEncoding",
-                      "description": "Payload encoding."
-                    },
-                    "eventEndpointUrl": {
-                      "type": "string",
-                      "description": "Event endpoint URL.\nThe HTTP integration will POST all events to this enpoint. The request\nwill contain a query parameters \"event\" containing the type of the\nevent."
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateHttpIntegrationBody"
             }
           }
         ],
@@ -1648,36 +1396,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "key": {
-                      "type": "string",
-                      "description": "Key.\nThis key can be obtained from the IFTTT Webhooks documentation page."
-                    },
-                    "uplinkValues": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "description": "Notes: The first value is always used for the DevEUI.\nIgnored if arbitrary_json is set to true.",
-                      "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
-                    },
-                    "arbitraryJson": {
-                      "type": "boolean",
-                      "description": "Arbitrary JSON.\nIf set to true, ChirpStack events will be sent as-is as arbitrary JSON\npayload. If set to false (default), the 3 JSON values format will be used."
-                    },
-                    "eventPrefix": {
-                      "type": "string",
-                      "description": "Event prefix.\nIf set, the event name will be PREFIX_EVENT. For example if event_prefix\nis set to weatherstation, and uplink event will be sent as\nweatherstation_up to the IFTTT webhook.\nNote: Only characters in the A-Z, a-z and 0-9 range are allowed."
-                    }
-                  },
-                  "description": "Integration object.",
-                  "title": "Integration object."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateIftttIntegrationBody"
             }
           }
         ],
@@ -1716,36 +1435,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "key": {
-                      "type": "string",
-                      "description": "Key.\nThis key can be obtained from the IFTTT Webhooks documentation page."
-                    },
-                    "uplinkValues": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "description": "Notes: The first value is always used for the DevEUI.\nIgnored if arbitrary_json is set to true.",
-                      "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
-                    },
-                    "arbitraryJson": {
-                      "type": "boolean",
-                      "description": "Arbitrary JSON.\nIf set to true, ChirpStack events will be sent as-is as arbitrary JSON\npayload. If set to false (default), the 3 JSON values format will be used."
-                    },
-                    "eventPrefix": {
-                      "type": "string",
-                      "description": "Event prefix.\nIf set, the event name will be PREFIX_EVENT. For example if event_prefix\nis set to weatherstation, and uplink event will be sent as\nweatherstation_up to the IFTTT webhook.\nNote: Only characters in the A-Z, a-z and 0-9 range are allowed."
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateIftttIntegrationBody"
             }
           }
         ],
@@ -1786,56 +1476,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "endpoint": {
-                      "type": "string",
-                      "description": "InfluxDb API write endpoint (e.g. http://localhost:8086/write)."
-                    },
-                    "db": {
-                      "type": "string",
-                      "title": "InfluxDb database name. (InfluxDb v1)"
-                    },
-                    "username": {
-                      "type": "string",
-                      "title": "InfluxDb username. (InfluxDb v1)"
-                    },
-                    "password": {
-                      "type": "string",
-                      "title": "InfluxDb password. (InfluxDb v1)"
-                    },
-                    "retentionPolicyName": {
-                      "type": "string",
-                      "title": "InfluxDb retention policy name. (InfluxDb v1)"
-                    },
-                    "precision": {
-                      "$ref": "#/definitions/apiInfluxDbPrecision",
-                      "description": "InfluxDb timestamp precision (InfluxDb v1)."
-                    },
-                    "version": {
-                      "$ref": "#/definitions/apiInfluxDbVersion",
-                      "description": "InfluxDb version."
-                    },
-                    "token": {
-                      "type": "string",
-                      "title": "Token. (InfluxDb v2)"
-                    },
-                    "organization": {
-                      "type": "string",
-                      "title": "Organization. (InfluxDb v2)"
-                    },
-                    "bucket": {
-                      "type": "string",
-                      "title": "Bucket. (InfluxDb v2)"
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateInfluxDbIntegrationBody"
             }
           }
         ],
@@ -1874,56 +1515,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "endpoint": {
-                      "type": "string",
-                      "description": "InfluxDb API write endpoint (e.g. http://localhost:8086/write)."
-                    },
-                    "db": {
-                      "type": "string",
-                      "title": "InfluxDb database name. (InfluxDb v1)"
-                    },
-                    "username": {
-                      "type": "string",
-                      "title": "InfluxDb username. (InfluxDb v1)"
-                    },
-                    "password": {
-                      "type": "string",
-                      "title": "InfluxDb password. (InfluxDb v1)"
-                    },
-                    "retentionPolicyName": {
-                      "type": "string",
-                      "title": "InfluxDb retention policy name. (InfluxDb v1)"
-                    },
-                    "precision": {
-                      "$ref": "#/definitions/apiInfluxDbPrecision",
-                      "description": "InfluxDb timestamp precision (InfluxDb v1)."
-                    },
-                    "version": {
-                      "$ref": "#/definitions/apiInfluxDbVersion",
-                      "description": "InfluxDb version."
-                    },
-                    "token": {
-                      "type": "string",
-                      "title": "Token. (InfluxDb v2)"
-                    },
-                    "organization": {
-                      "type": "string",
-                      "title": "Organization. (InfluxDb v2)"
-                    },
-                    "bucket": {
-                      "type": "string",
-                      "title": "Bucket. (InfluxDb v2)"
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateInfluxDbIntegrationBody"
             }
           }
         ],
@@ -1964,20 +1556,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "endpoint": {
-                      "type": "string",
-                      "description": "myDevices API endpoint."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateMyDevicesIntegrationBody"
             }
           }
         ],
@@ -2016,20 +1595,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "endpoint": {
-                      "type": "string",
-                      "description": "myDevices API endpoint."
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateMyDevicesIntegrationBody"
             }
           }
         ],
@@ -2070,24 +1636,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "server": {
-                      "type": "string",
-                      "description": "Server URL."
-                    },
-                    "token": {
-                      "type": "string",
-                      "description": "Authentication token."
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreatePilotThingsIntegrationBody"
             }
           }
         ],
@@ -2126,24 +1675,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "server": {
-                      "type": "string",
-                      "description": "Server URL."
-                    },
-                    "token": {
-                      "type": "string",
-                      "description": "Authentication token."
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdatePilotThingsIntegrationBody"
             }
           }
         ],
@@ -2184,20 +1716,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "server": {
-                      "type": "string",
-                      "title": "ThingsBoard server endpoint, e.g. https://example.com"
-                    }
-                  },
-                  "description": "Integration object to create.",
-                  "title": "Integration object to create."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceCreateThingsBoardIntegrationBody"
             }
           }
         ],
@@ -2236,20 +1755,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "integration": {
-                  "type": "object",
-                  "properties": {
-                    "server": {
-                      "type": "string",
-                      "title": "ThingsBoard server endpoint, e.g. https://example.com"
-                    }
-                  },
-                  "description": "Integration object to update.",
-                  "title": "Integration object to update."
-                }
-              }
+              "$ref": "#/definitions/ApplicationServiceUpdateThingsBoardIntegrationBody"
             }
           }
         ],
@@ -2260,6 +1766,563 @@
     }
   },
   "definitions": {
+    "ApplicationServiceCreateAwsSnsIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "encoding": {
+              "$ref": "#/definitions/apiEncoding",
+              "description": "Encoding."
+            },
+            "region": {
+              "type": "string",
+              "description": "AWS region."
+            },
+            "accessKeyId": {
+              "type": "string",
+              "description": "AWS Access Key ID."
+            },
+            "secretAccessKey": {
+              "type": "string",
+              "description": "AWS Secret Access Key."
+            },
+            "topicArn": {
+              "type": "string",
+              "description": "Topic ARN."
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceCreateAzureServiceBusIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "encoding": {
+              "$ref": "#/definitions/apiEncoding",
+              "description": "Encoding."
+            },
+            "connectionString": {
+              "type": "string",
+              "description": "Connection string."
+            },
+            "publishName": {
+              "type": "string",
+              "description": "Publish name.\nThis is the name of the topic or queue."
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceCreateBlynkIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "Blynk integration token."
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceCreateGcpPubSubIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "encoding": {
+              "$ref": "#/definitions/apiEncoding",
+              "description": "Encoding."
+            },
+            "credentialsFile": {
+              "type": "string",
+              "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following\nPub/Sub roles:\n* Pub/Sub Publisher"
+            },
+            "projectId": {
+              "type": "string",
+              "description": "Project ID."
+            },
+            "topicName": {
+              "type": "string",
+              "description": "Topic name.\nThis is the name of the Pub/Sub topic."
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceCreateHttpIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "headers": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "HTTP headers to set when making requests."
+            },
+            "encoding": {
+              "$ref": "#/definitions/apiEncoding",
+              "description": "Payload encoding."
+            },
+            "eventEndpointUrl": {
+              "type": "string",
+              "description": "Event endpoint URL.\nThe HTTP integration will POST all events to this enpoint. The request\nwill contain a query parameters \"event\" containing the type of the\nevent."
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceCreateIftttIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "Key.\nThis key can be obtained from the IFTTT Webhooks documentation page."
+            },
+            "uplinkValues": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Notes: The first value is always used for the DevEUI.\nIgnored if arbitrary_json is set to true.",
+              "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
+            },
+            "arbitraryJson": {
+              "type": "boolean",
+              "description": "Arbitrary JSON.\nIf set to true, ChirpStack events will be sent as-is as arbitrary JSON\npayload. If set to false (default), the 3 JSON values format will be used."
+            },
+            "eventPrefix": {
+              "type": "string",
+              "description": "Event prefix.\nIf set, the event name will be PREFIX_EVENT. For example if event_prefix\nis set to weatherstation, and uplink event will be sent as\nweatherstation_up to the IFTTT webhook.\nNote: Only characters in the A-Z, a-z and 0-9 range are allowed."
+            }
+          },
+          "description": "Integration object.",
+          "title": "Integration object."
+        }
+      }
+    },
+    "ApplicationServiceCreateInfluxDbIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "InfluxDb API write endpoint (e.g. http://localhost:8086/write)."
+            },
+            "db": {
+              "type": "string",
+              "title": "InfluxDb database name. (InfluxDb v1)"
+            },
+            "username": {
+              "type": "string",
+              "title": "InfluxDb username. (InfluxDb v1)"
+            },
+            "password": {
+              "type": "string",
+              "title": "InfluxDb password. (InfluxDb v1)"
+            },
+            "retentionPolicyName": {
+              "type": "string",
+              "title": "InfluxDb retention policy name. (InfluxDb v1)"
+            },
+            "precision": {
+              "$ref": "#/definitions/apiInfluxDbPrecision",
+              "description": "InfluxDb timestamp precision (InfluxDb v1)."
+            },
+            "version": {
+              "$ref": "#/definitions/apiInfluxDbVersion",
+              "description": "InfluxDb version."
+            },
+            "token": {
+              "type": "string",
+              "title": "Token. (InfluxDb v2)"
+            },
+            "organization": {
+              "type": "string",
+              "title": "Organization. (InfluxDb v2)"
+            },
+            "bucket": {
+              "type": "string",
+              "title": "Bucket. (InfluxDb v2)"
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceCreateMyDevicesIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "myDevices API endpoint."
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceCreatePilotThingsIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "server": {
+              "type": "string",
+              "description": "Server URL."
+            },
+            "token": {
+              "type": "string",
+              "description": "Authentication token."
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceCreateThingsBoardIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "server": {
+              "type": "string",
+              "title": "ThingsBoard server endpoint, e.g. https://example.com"
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceUpdateAwsSnsIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "encoding": {
+              "$ref": "#/definitions/apiEncoding",
+              "description": "Encoding."
+            },
+            "region": {
+              "type": "string",
+              "description": "AWS region."
+            },
+            "accessKeyId": {
+              "type": "string",
+              "description": "AWS Access Key ID."
+            },
+            "secretAccessKey": {
+              "type": "string",
+              "description": "AWS Secret Access Key."
+            },
+            "topicArn": {
+              "type": "string",
+              "description": "Topic ARN."
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
+    "ApplicationServiceUpdateAzureServiceBusIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "encoding": {
+              "$ref": "#/definitions/apiEncoding",
+              "description": "Encoding."
+            },
+            "connectionString": {
+              "type": "string",
+              "description": "Connection string."
+            },
+            "publishName": {
+              "type": "string",
+              "description": "Publish name.\nThis is the name of the topic or queue."
+            }
+          },
+          "description": "Integration object to create.",
+          "title": "Integration object to create."
+        }
+      }
+    },
+    "ApplicationServiceUpdateBlynkIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "token": {
+              "type": "string",
+              "description": "Blynk integration token."
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
+    "ApplicationServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "application": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Application name."
+            },
+            "description": {
+              "type": "string",
+              "description": "Application description."
+            },
+            "tenantId": {
+              "type": "string",
+              "description": "Tenant ID (UUID)."
+            },
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Tags (user defined).\nThese tags can be used to add additional information to the application.\nThese tags are exposed in all the integration events of devices under\nthis application."
+            }
+          },
+          "description": "Application object.",
+          "title": "Application object."
+        }
+      }
+    },
+    "ApplicationServiceUpdateGcpPubSubIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "encoding": {
+              "$ref": "#/definitions/apiEncoding",
+              "description": "Encoding."
+            },
+            "credentialsFile": {
+              "type": "string",
+              "title": "Credentials file.\nThis IAM service-account credentials file (JSON) must have the following\nPub/Sub roles:\n* Pub/Sub Publisher"
+            },
+            "projectId": {
+              "type": "string",
+              "description": "Project ID."
+            },
+            "topicName": {
+              "type": "string",
+              "description": "Topic name.\nThis is the name of the Pub/Sub topic."
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
+    "ApplicationServiceUpdateHttpIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "headers": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "HTTP headers to set when making requests."
+            },
+            "encoding": {
+              "$ref": "#/definitions/apiEncoding",
+              "description": "Payload encoding."
+            },
+            "eventEndpointUrl": {
+              "type": "string",
+              "description": "Event endpoint URL.\nThe HTTP integration will POST all events to this enpoint. The request\nwill contain a query parameters \"event\" containing the type of the\nevent."
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
+    "ApplicationServiceUpdateIftttIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string",
+              "description": "Key.\nThis key can be obtained from the IFTTT Webhooks documentation page."
+            },
+            "uplinkValues": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Notes: The first value is always used for the DevEUI.\nIgnored if arbitrary_json is set to true.",
+              "title": "Values.\nUp to 2 values can be forwarded to IFTTT. These values must map to the\ndecoded payload keys. For example:\n{\n  \"batteryLevel\": 75.3,\n  \"buttons\": [{\"pressed\": false}, {\"pressed\": true}]\n}\nYou would specify the following fields:\nuplink_values = [\"batteryLevel\", \"buttons_0_pressed\"]"
+            },
+            "arbitraryJson": {
+              "type": "boolean",
+              "description": "Arbitrary JSON.\nIf set to true, ChirpStack events will be sent as-is as arbitrary JSON\npayload. If set to false (default), the 3 JSON values format will be used."
+            },
+            "eventPrefix": {
+              "type": "string",
+              "description": "Event prefix.\nIf set, the event name will be PREFIX_EVENT. For example if event_prefix\nis set to weatherstation, and uplink event will be sent as\nweatherstation_up to the IFTTT webhook.\nNote: Only characters in the A-Z, a-z and 0-9 range are allowed."
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
+    "ApplicationServiceUpdateInfluxDbIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "InfluxDb API write endpoint (e.g. http://localhost:8086/write)."
+            },
+            "db": {
+              "type": "string",
+              "title": "InfluxDb database name. (InfluxDb v1)"
+            },
+            "username": {
+              "type": "string",
+              "title": "InfluxDb username. (InfluxDb v1)"
+            },
+            "password": {
+              "type": "string",
+              "title": "InfluxDb password. (InfluxDb v1)"
+            },
+            "retentionPolicyName": {
+              "type": "string",
+              "title": "InfluxDb retention policy name. (InfluxDb v1)"
+            },
+            "precision": {
+              "$ref": "#/definitions/apiInfluxDbPrecision",
+              "description": "InfluxDb timestamp precision (InfluxDb v1)."
+            },
+            "version": {
+              "$ref": "#/definitions/apiInfluxDbVersion",
+              "description": "InfluxDb version."
+            },
+            "token": {
+              "type": "string",
+              "title": "Token. (InfluxDb v2)"
+            },
+            "organization": {
+              "type": "string",
+              "title": "Organization. (InfluxDb v2)"
+            },
+            "bucket": {
+              "type": "string",
+              "title": "Bucket. (InfluxDb v2)"
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
+    "ApplicationServiceUpdateMyDevicesIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "endpoint": {
+              "type": "string",
+              "description": "myDevices API endpoint."
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
+    "ApplicationServiceUpdatePilotThingsIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "server": {
+              "type": "string",
+              "description": "Server URL."
+            },
+            "token": {
+              "type": "string",
+              "description": "Authentication token."
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
+    "ApplicationServiceUpdateThingsBoardIntegrationBody": {
+      "type": "object",
+      "properties": {
+        "integration": {
+          "type": "object",
+          "properties": {
+            "server": {
+              "type": "string",
+              "title": "ThingsBoard server endpoint, e.g. https://example.com"
+            }
+          },
+          "description": "Integration object to update.",
+          "title": "Integration object to update."
+        }
+      }
+    },
     "apiApplication": {
       "type": "object",
       "properties": {
@@ -2751,6 +2814,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiApplicationDeviceProfileListItem"
           },
           "description": "Device-profiles."
@@ -2763,6 +2827,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiApplicationDeviceTagListItem"
           },
           "description": "Device tags."
@@ -2780,6 +2845,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiApplicationListItem"
           },
           "description": "Result-set."
@@ -2797,6 +2863,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiIntegrationListItem"
           },
           "description": "Integrations within result-set."
@@ -2868,6 +2935,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }

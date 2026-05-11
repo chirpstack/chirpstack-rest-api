@@ -393,277 +393,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "type": "object",
-              "properties": {
-                "deviceProfile": {
-                  "type": "object",
-                  "properties": {
-                    "tenantId": {
-                      "type": "string",
-                      "description": "Tenant ID (UUID)."
-                    },
-                    "name": {
-                      "type": "string",
-                      "description": "Name."
-                    },
-                    "description": {
-                      "type": "string",
-                      "description": "Description."
-                    },
-                    "region": {
-                      "$ref": "#/definitions/commonRegion",
-                      "description": "Region."
-                    },
-                    "macVersion": {
-                      "$ref": "#/definitions/commonMacVersion",
-                      "description": "LoRaWAN mac-version."
-                    },
-                    "regParamsRevision": {
-                      "$ref": "#/definitions/commonRegParamsRevision",
-                      "description": "Regional parameters revision."
-                    },
-                    "adrAlgorithmId": {
-                      "type": "string",
-                      "description": "ADR algorithm ID."
-                    },
-                    "payloadCodecRuntime": {
-                      "$ref": "#/definitions/apiCodecRuntime",
-                      "description": "Payload codec runtime."
-                    },
-                    "payloadCodecScript": {
-                      "type": "string",
-                      "description": "Payload codec script."
-                    },
-                    "flushQueueOnActivate": {
-                      "type": "boolean",
-                      "description": "Flush queue on device activation."
-                    },
-                    "uplinkInterval": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Uplink interval (seconds).\nThis defines the expected uplink interval which the device uses for\ncommunication. If the uplink interval has expired and no uplink has\nbeen received, the device is considered inactive."
-                    },
-                    "deviceStatusReqInterval": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the\ndevice-status from the device."
-                    },
-                    "supportsOtaa": {
-                      "type": "boolean",
-                      "description": "Supports OTAA."
-                    },
-                    "supportsClassB": {
-                      "type": "boolean",
-                      "description": "Supports Class B."
-                    },
-                    "supportsClassC": {
-                      "type": "boolean",
-                      "description": "Supports Class-C."
-                    },
-                    "classBTimeout": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement\nfrom the device (if requested)."
-                    },
-                    "classBPingSlotPeriodicity": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Class-B ping-slot periodicity.\nValid options are: 0 - 7.\n\nNumber of ping-slots per beacon-period:\npingNb = 2^(7-periodicity)\n\nPeriodicity: 0 = 128 ping-slots per beacon period = ~ every 1 sec\nPeriodicity: 7 = 1 ping-slot per beacon period = ~ every 128 sec"
-                    },
-                    "classBPingSlotDr": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Class-B ping-slot DR."
-                    },
-                    "classBPingSlotFreq": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Class-B ping-slot freq (Hz)."
-                    },
-                    "classCTimeout": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement\nfrom the device (if requested)."
-                    },
-                    "abpRx1Delay": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "RX1 delay (for ABP)."
-                    },
-                    "abpRx1DrOffset": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "RX1 DR offset (for ABP)."
-                    },
-                    "abpRx2Dr": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "RX2 DR (for ABP)."
-                    },
-                    "abpRx2Freq": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "RX2 frequency (for ABP, Hz)."
-                    },
-                    "tags": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "type": "string"
-                      },
-                      "description": "Tags (user defined).\nThese tags can be used to add additional information the the\ndevice-profile. These tags are exposed in all the integration events of\ndevices using this device-profile."
-                    },
-                    "measurements": {
-                      "type": "object",
-                      "additionalProperties": {
-                        "$ref": "#/definitions/apiMeasurement"
-                      },
-                      "description": "Measurements.\nIf defined, ChirpStack will visualize these metrics in the web-interface."
-                    },
-                    "autoDetectMeasurements": {
-                      "type": "boolean",
-                      "description": "Auto-detect measurements.\nIf set to true, measurements will be automatically added based on the\nkeys of the decoded payload. In cases where the decoded payload contains\nrandom keys in the data, you want to set this to false."
-                    },
-                    "regionConfigId": {
-                      "type": "string",
-                      "description": "Region configuration ID.\nIf set, devices will only use the associated region. If let blank, then\ndevices will use all regions matching the selected common-name. Note\nthat multiple region configurations can exist for the same common-name,\ne.g. to provide an 8 channel and 16 channel configuration for the US915\nband."
-                    },
-                    "isRelay": {
-                      "type": "boolean",
-                      "description": "Device is a Relay device.\nEnable this in case the device is a Relay. A Relay device implements TS011\nand is able to relay data from relay capable devices.\nSee for more information the TS011 specification."
-                    },
-                    "isRelayEd": {
-                      "type": "boolean",
-                      "description": "Device is a Relay end-device.\nEnable this in case the device is an end-device that can operate under a\nRelay. Please refer to the TS011 specification for more information."
-                    },
-                    "relayEdRelayOnly": {
-                      "type": "boolean",
-                      "description": "End-device only accept data through relay.\nOnly accept data for this device through a relay. This setting is useful\nfor testing as in case of a test-setup, the end-device is usually within\nrange of the gateway."
-                    },
-                    "relayEnabled": {
-                      "type": "boolean",
-                      "description": "Relay must be enabled."
-                    },
-                    "relayCadPeriodicity": {
-                      "$ref": "#/definitions/apiCadPeriodicity",
-                      "description": "Relay CAD periodicity."
-                    },
-                    "relayDefaultChannelIndex": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay default channel index.\nValid values are 0 and 1, please refer to the RP002 specification for\nthe meaning of these values."
-                    },
-                    "relaySecondChannelFreq": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay second channel frequency (Hz)."
-                    },
-                    "relaySecondChannelDr": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay second channel DR."
-                    },
-                    "relaySecondChannelAckOffset": {
-                      "$ref": "#/definitions/apiSecondChAckOffset",
-                      "description": "Relay second channel ACK offset."
-                    },
-                    "relayEdActivationMode": {
-                      "$ref": "#/definitions/apiRelayModeActivation",
-                      "description": "Relay end-device activation mode."
-                    },
-                    "relayEdSmartEnableLevel": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay end-device smart-enable level."
-                    },
-                    "relayEdBackOff": {
-                      "type": "integer",
-                      "format": "int64",
-                      "title": "Relay end-device back-off (in case it does not receive WOR ACK frame).\n0 = Always send a LoRaWAN uplink\n1..63 = Send a LoRaWAN uplink after X WOR frames without a WOR ACK"
-                    },
-                    "relayEdUplinkLimitBucketSize": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay end-device uplink limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
-                    },
-                    "relayEdUplinkLimitReloadRate": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay end-device uplink limit reload rate.\n\nValid values:\n  * 0 - 62 = X tokens every hour\n  * 63     = no limitation"
-                    },
-                    "relayJoinReqLimitReloadRate": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay join-request limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
-                    },
-                    "relayNotifyLimitReloadRate": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay notify limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
-                    },
-                    "relayGlobalUplinkLimitReloadRate": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay global uplink limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
-                    },
-                    "relayOverallLimitReloadRate": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay overall limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
-                    },
-                    "relayJoinReqLimitBucketSize": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay join-request limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
-                    },
-                    "relayNotifyLimitBucketSize": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay notify limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
-                    },
-                    "relayGlobalUplinkLimitBucketSize": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay globak uplink limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
-                    },
-                    "relayOverallLimitBucketSize": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "Relay overall limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
-                    },
-                    "allowRoaming": {
-                      "type": "boolean",
-                      "description": "Allow roaming.\n\nIf set to true, it means that the device is allowed to use roaming."
-                    },
-                    "rx1Delay": {
-                      "type": "integer",
-                      "format": "int64",
-                      "description": "RX1 Delay.\n\nThis makes it possible to override the system RX1 Delay. Please note that\nthis values only has effect in case it is higher than the system value.\nIn other words, it can be used to increase the RX1 Delay but not to decrease\nit.\nValid options are 1 - 15 (0 = always use system RX1 Delay)."
-                    },
-                    "appLayerParams": {
-                      "$ref": "#/definitions/apiAppLayerParams",
-                      "description": "Application Layer parameters."
-                    },
-                    "deviceId": {
-                      "type": "string",
-                      "description": "Device-profile device ID (UUID) (optiona)."
-                    },
-                    "firmwareVersion": {
-                      "type": "string",
-                      "description": "Firmware version."
-                    },
-                    "supportedUplinkDataRates": {
-                      "type": "array",
-                      "items": {
-                        "type": "integer",
-                        "format": "int64"
-                      },
-                      "description": "Supported uplink data-rates.\n\nThis option configures the data-rates that are supported by the devices\nusing this device-profile. If not set, the default min / max data-rates\nwill be used.\nExample: In case you would like to use also SF5 and SF6 in EU868, you would\nset this option to: 0, 1, 2, 3, 4, 5, 6, 7, 12, 13."
-                    }
-                  },
-                  "description": "Device-profile object.",
-                  "title": "Device-profile object."
-                }
-              }
+              "$ref": "#/definitions/DeviceProfileServiceUpdateBody"
             }
           }
         ],
@@ -778,6 +508,279 @@
     }
   },
   "definitions": {
+    "DeviceProfileServiceUpdateBody": {
+      "type": "object",
+      "properties": {
+        "deviceProfile": {
+          "type": "object",
+          "properties": {
+            "tenantId": {
+              "type": "string",
+              "description": "Tenant ID (UUID)."
+            },
+            "name": {
+              "type": "string",
+              "description": "Name."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description."
+            },
+            "region": {
+              "$ref": "#/definitions/commonRegion",
+              "description": "Region."
+            },
+            "macVersion": {
+              "$ref": "#/definitions/commonMacVersion",
+              "description": "LoRaWAN mac-version."
+            },
+            "regParamsRevision": {
+              "$ref": "#/definitions/commonRegParamsRevision",
+              "description": "Regional parameters revision."
+            },
+            "adrAlgorithmId": {
+              "type": "string",
+              "description": "ADR algorithm ID."
+            },
+            "payloadCodecRuntime": {
+              "$ref": "#/definitions/apiCodecRuntime",
+              "description": "Payload codec runtime."
+            },
+            "payloadCodecScript": {
+              "type": "string",
+              "description": "Payload codec script."
+            },
+            "flushQueueOnActivate": {
+              "type": "boolean",
+              "description": "Flush queue on device activation."
+            },
+            "uplinkInterval": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Uplink interval (seconds).\nThis defines the expected uplink interval which the device uses for\ncommunication. If the uplink interval has expired and no uplink has\nbeen received, the device is considered inactive."
+            },
+            "deviceStatusReqInterval": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Device-status request interval (times / day).\nThis defines the times per day that ChirpStack will request the\ndevice-status from the device."
+            },
+            "supportsOtaa": {
+              "type": "boolean",
+              "description": "Supports OTAA."
+            },
+            "supportsClassB": {
+              "type": "boolean",
+              "description": "Supports Class B."
+            },
+            "supportsClassC": {
+              "type": "boolean",
+              "description": "Supports Class-C."
+            },
+            "classBTimeout": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Class-B timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement\nfrom the device (if requested)."
+            },
+            "classBPingSlotPeriodicity": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Class-B ping-slot periodicity.\nValid options are: 0 - 7.\n\nNumber of ping-slots per beacon-period:\npingNb = 2^(7-periodicity)\n\nPeriodicity: 0 = 128 ping-slots per beacon period = ~ every 1 sec\nPeriodicity: 7 = 1 ping-slot per beacon period = ~ every 128 sec"
+            },
+            "classBPingSlotDr": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Class-B ping-slot DR."
+            },
+            "classBPingSlotFreq": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Class-B ping-slot freq (Hz)."
+            },
+            "classCTimeout": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Class-C timeout (seconds).\nThis is the maximum time ChirpStack will wait to receive an acknowledgement\nfrom the device (if requested)."
+            },
+            "abpRx1Delay": {
+              "type": "integer",
+              "format": "int64",
+              "description": "RX1 delay (for ABP)."
+            },
+            "abpRx1DrOffset": {
+              "type": "integer",
+              "format": "int64",
+              "description": "RX1 DR offset (for ABP)."
+            },
+            "abpRx2Dr": {
+              "type": "integer",
+              "format": "int64",
+              "description": "RX2 DR (for ABP)."
+            },
+            "abpRx2Freq": {
+              "type": "integer",
+              "format": "int64",
+              "description": "RX2 frequency (for ABP, Hz)."
+            },
+            "tags": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Tags (user defined).\nThese tags can be used to add additional information the the\ndevice-profile. These tags are exposed in all the integration events of\ndevices using this device-profile."
+            },
+            "measurements": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/apiMeasurement"
+              },
+              "description": "Measurements.\nIf defined, ChirpStack will visualize these metrics in the web-interface."
+            },
+            "autoDetectMeasurements": {
+              "type": "boolean",
+              "description": "Auto-detect measurements.\nIf set to true, measurements will be automatically added based on the\nkeys of the decoded payload. In cases where the decoded payload contains\nrandom keys in the data, you want to set this to false."
+            },
+            "regionConfigId": {
+              "type": "string",
+              "description": "Region configuration ID.\nIf set, devices will only use the associated region. If let blank, then\ndevices will use all regions matching the selected common-name. Note\nthat multiple region configurations can exist for the same common-name,\ne.g. to provide an 8 channel and 16 channel configuration for the US915\nband."
+            },
+            "isRelay": {
+              "type": "boolean",
+              "description": "Device is a Relay device.\nEnable this in case the device is a Relay. A Relay device implements TS011\nand is able to relay data from relay capable devices.\nSee for more information the TS011 specification."
+            },
+            "isRelayEd": {
+              "type": "boolean",
+              "description": "Device is a Relay end-device.\nEnable this in case the device is an end-device that can operate under a\nRelay. Please refer to the TS011 specification for more information."
+            },
+            "relayEdRelayOnly": {
+              "type": "boolean",
+              "description": "End-device only accept data through relay.\nOnly accept data for this device through a relay. This setting is useful\nfor testing as in case of a test-setup, the end-device is usually within\nrange of the gateway."
+            },
+            "relayEnabled": {
+              "type": "boolean",
+              "description": "Relay must be enabled."
+            },
+            "relayCadPeriodicity": {
+              "$ref": "#/definitions/apiCadPeriodicity",
+              "description": "Relay CAD periodicity."
+            },
+            "relayDefaultChannelIndex": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay default channel index.\nValid values are 0 and 1, please refer to the RP002 specification for\nthe meaning of these values."
+            },
+            "relaySecondChannelFreq": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay second channel frequency (Hz)."
+            },
+            "relaySecondChannelDr": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay second channel DR."
+            },
+            "relaySecondChannelAckOffset": {
+              "$ref": "#/definitions/apiSecondChAckOffset",
+              "description": "Relay second channel ACK offset."
+            },
+            "relayEdActivationMode": {
+              "$ref": "#/definitions/apiRelayModeActivation",
+              "description": "Relay end-device activation mode."
+            },
+            "relayEdSmartEnableLevel": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay end-device smart-enable level."
+            },
+            "relayEdBackOff": {
+              "type": "integer",
+              "format": "int64",
+              "title": "Relay end-device back-off (in case it does not receive WOR ACK frame).\n0 = Always send a LoRaWAN uplink\n1..63 = Send a LoRaWAN uplink after X WOR frames without a WOR ACK"
+            },
+            "relayEdUplinkLimitBucketSize": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay end-device uplink limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+            },
+            "relayEdUplinkLimitReloadRate": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay end-device uplink limit reload rate.\n\nValid values:\n  * 0 - 62 = X tokens every hour\n  * 63     = no limitation"
+            },
+            "relayJoinReqLimitReloadRate": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay join-request limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+            },
+            "relayNotifyLimitReloadRate": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay notify limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+            },
+            "relayGlobalUplinkLimitReloadRate": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay global uplink limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+            },
+            "relayOverallLimitReloadRate": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay overall limit reload rate.\n\nValid values:\n  * 0 - 126 = X tokens every hour\n  * 127     = no limitation"
+            },
+            "relayJoinReqLimitBucketSize": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay join-request limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+            },
+            "relayNotifyLimitBucketSize": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay notify limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+            },
+            "relayGlobalUplinkLimitBucketSize": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay globak uplink limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+            },
+            "relayOverallLimitBucketSize": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Relay overall limit bucket size.\n\nThis field indicates the multiplier to determine the bucket size\naccording to the following formula:\nBucketSize TOKEN = _reload_rate x _bucket_size\n\nValid values (0 - 3):\n  0 = 1\n  1 = 2\n  2 = 4\n  3 = 12"
+            },
+            "allowRoaming": {
+              "type": "boolean",
+              "description": "Allow roaming.\n\nIf set to true, it means that the device is allowed to use roaming."
+            },
+            "rx1Delay": {
+              "type": "integer",
+              "format": "int64",
+              "description": "RX1 Delay.\n\nThis makes it possible to override the system RX1 Delay. Please note that\nthis values only has effect in case it is higher than the system value.\nIn other words, it can be used to increase the RX1 Delay but not to decrease\nit.\nValid options are 1 - 15 (0 = always use system RX1 Delay)."
+            },
+            "appLayerParams": {
+              "$ref": "#/definitions/apiAppLayerParams",
+              "description": "Application Layer parameters."
+            },
+            "deviceId": {
+              "type": "string",
+              "description": "Device-profile device ID (UUID) (optiona)."
+            },
+            "firmwareVersion": {
+              "type": "string",
+              "description": "Firmware version."
+            },
+            "supportedUplinkDataRates": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "description": "Supported uplink data-rates.\n\nThis option configures the data-rates that are supported by the devices\nusing this device-profile. If not set, the default min / max data-rates\nwill be used.\nExample: In case you would like to use also SF5 and SF6 in EU868, you would\nset this option to: 0, 1, 2, 3, 4, 5, 6, 7, 12, 13."
+            }
+          },
+          "description": "Device-profile object.",
+          "title": "Device-profile object."
+        }
+      }
+    },
     "apiAdrAlgorithmListItem": {
       "type": "object",
       "properties": {
@@ -1413,6 +1416,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiAdrAlgorithmListItem"
           },
           "description": "Result-set."
@@ -1430,6 +1434,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiDeviceProfileDeviceListItem"
           },
           "description": "Result-set."
@@ -1447,6 +1452,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiDeviceProfileVendorListItem"
           },
           "description": "Result-set."
@@ -1464,6 +1470,7 @@
         "result": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/apiDeviceProfileListItem"
           },
           "description": "Result-set."
@@ -1618,6 +1625,7 @@
         "details": {
           "type": "array",
           "items": {
+            "type": "object",
             "$ref": "#/definitions/protobufAny"
           }
         }
