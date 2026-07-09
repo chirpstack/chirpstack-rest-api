@@ -3,7 +3,7 @@ module github.com/chirpstack/chirpstack-rest-api
 go 1.26.2
 
 require (
-	github.com/chirpstack/chirpstack/api/go/v4 v4.18.0
+	github.com/chirpstack/chirpstack/api/go/v4 v4.19.0
 	github.com/goreleaser/goreleaser/v2 v2.15.4
 	github.com/goreleaser/nfpm/v2 v2.46.3
 	github.com/gorilla/handlers v1.5.2

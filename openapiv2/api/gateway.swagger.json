@@ -591,6 +591,11 @@
               "type": "integer",
               "format": "int64",
               "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
+            },
+            "downlinkPriority": {
+              "type": "integer",
+              "format": "int64",
+              "description": "Downlink priority.\nChirpStack selects downlink gateways based on SNR, RSSI, uplink history\nand an user-defined downlink priority which can be used as a positive or\nnegative bias in the downlink gateway selection."
             }
           },
           "description": "Gateway object.",
@@ -686,6 +691,11 @@
           "type": "integer",
           "format": "int64",
           "description": "Stats interval (seconds).\nThis defines the expected interval in which the gateway sends its\nstatistics."
+        },
+        "downlinkPriority": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Downlink priority.\nChirpStack selects downlink gateways based on SNR, RSSI, uplink history\nand an user-defined downlink priority which can be used as a positive or\nnegative bias in the downlink gateway selection."
         }
       }
     },
@@ -737,6 +747,11 @@
         "state": {
           "$ref": "#/definitions/apiGatewayState",
           "description": "Gateway state.\nPlease note that the state of the gateway is driven by the stats\npackages that are sent by the gateway."
+        },
+        "downlinkPriority": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Downlink priority.\nChirpStack selects downlink gateways based on SNR, RSSI, uplink history\nand an user-defined downlink priority which can be used as a positive or\nnegative bias in the downlink gateway selection."
         }
       }
     },

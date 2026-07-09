@@ -44,6 +44,7 @@ generate:
 	${GW_GEN} api/multicast_group.proto
 	${GW_GEN} api/tenant.proto
 	${GW_GEN} api/user.proto
+	${GW_GEN} api/relay.proto
 
 	${GRPC_GEN} api/application.proto
 	${GRPC_GEN} api/device.proto
@@ -52,6 +53,7 @@ generate:
 	${GRPC_GEN} api/multicast_group.proto
 	${GRPC_GEN} api/tenant.proto
 	${GRPC_GEN} api/user.proto
+	${GRPC_GEN} api/relay.proto
 
 	${API_GEN} api/application.proto
 	${API_GEN} api/device.proto
@@ -60,5 +62,6 @@ generate:
 	${API_GEN} api/multicast_group.proto
 	${API_GEN} api/tenant.proto
 	${API_GEN} api/user.proto
+	${API_GEN} api/relay.proto
 
 	cd ui && go run merge.go ${VERSION} ../openapiv2/api > api.json

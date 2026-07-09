@@ -774,6 +774,10 @@
                 "format": "int64"
               },
               "description": "Supported uplink data-rates.\n\nThis option configures the data-rates that are supported by the devices\nusing this device-profile. If not set, the default min / max data-rates\nwill be used.\nExample: In case you would like to use also SF5 and SF6 in EU868, you would\nset this option to: 0, 1, 2, 3, 4, 5, 6, 7, 12, 13."
+            },
+            "classBDownlinkOnly": {
+              "type": "boolean",
+              "description": "Class-B downlink only.\n\nIf enabled and if the device is operating as Class-B device, then ChirpStack will\nonly send application payload as Class-B ping slots. This means that if the device\nsends a Class-A uplink, ChirpStack will only respond with mac-commands (if needed).\nEnabling this option can reduce the risk of out-of-order downlinks in cases where\nChirpStack might schedule a Class-B ping-slot downlink but before this is\ntransmitted by the gateway, it also responsed with a Class-A downlink."
             }
           },
           "description": "Device-profile object.",
@@ -1134,6 +1138,10 @@
             "format": "int64"
           },
           "description": "Supported uplink data-rates.\n\nThis option configures the data-rates that are supported by the devices\nusing this device-profile. If not set, the default min / max data-rates\nwill be used.\nExample: In case you would like to use also SF5 and SF6 in EU868, you would\nset this option to: 0, 1, 2, 3, 4, 5, 6, 7, 12, 13."
+        },
+        "classBDownlinkOnly": {
+          "type": "boolean",
+          "description": "Class-B downlink only.\n\nIf enabled and if the device is operating as Class-B device, then ChirpStack will\nonly send application payload as Class-B ping slots. This means that if the device\nsends a Class-A uplink, ChirpStack will only respond with mac-commands (if needed).\nEnabling this option can reduce the risk of out-of-order downlinks in cases where\nChirpStack might schedule a Class-B ping-slot downlink but before this is\ntransmitted by the gateway, it also responsed with a Class-A downlink."
         }
       }
     },

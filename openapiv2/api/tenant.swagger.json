@@ -102,6 +102,38 @@
         ]
       }
     },
+    "/api/tenants/by-devaddr-prefix-overlap": {
+      "get": {
+        "summary": "Get the list of tenants with DevAddr prefix overlap.",
+        "operationId": "TenantService_ListByDevAddrPrefixOverlap",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListTenantsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "devAddrPrefix",
+            "description": "DevAddr prefix.\nThis will check if there is any tenant that has an overlapping DevAddr prefix\nconfiguration associated which overlaps (either sub-set or super-set) with\nthis dev_addr_prefix.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TenantService"
+        ]
+      }
+    },
     "/api/tenants/{id}": {
       "get": {
         "summary": "Get the tenant for the given ID.",
@@ -496,6 +528,13 @@
                 "type": "string"
               },
               "description": "Tags (user defined).\nThese tags can be used to add additional information to the tenant. These\ntags are NOT exposed in the integration events."
+            },
+            "devAddrPrefixes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "DevAddr Prefixes.\n\nThis must be one or multiple sub-sets of the global DevAddr pool, or\nand error will be raised on create or update.\n\nExample prefix: 0000ff00/24\n(0000ff00 - 0000ffff)\n\nIf left blank, ChirpStack will use the global DevAddr pool."
             }
           },
           "description": "Tenant object.",
@@ -666,6 +705,13 @@
             "type": "string"
           },
           "description": "Tags (user defined).\nThese tags can be used to add additional information to the tenant. These\ntags are NOT exposed in the integration events."
+        },
+        "devAddrPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "DevAddr Prefixes.\n\nThis must be one or multiple sub-sets of the global DevAddr pool, or\nand error will be raised on create or update.\n\nExample prefix: 0000ff00/24\n(0000ff00 - 0000ffff)\n\nIf left blank, ChirpStack will use the global DevAddr pool."
         }
       }
     },

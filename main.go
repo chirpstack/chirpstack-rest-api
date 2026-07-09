@@ -102,6 +102,9 @@ func getGatewayHandler(ctx context.Context) (http.Handler, error) {
 	if err := gw.RegisterUserServiceHandlerFromEndpoint(ctx, mux, *server, opts); err != nil {
 		return nil, err
 	}
+	if err := gw.RegisterRelayServiceHandlerFromEndpoint(ctx, mux, *server, opts); err != nil {
+		return nil, err
+	}
 
 	return mux, nil
 }

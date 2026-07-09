@@ -1,0 +1,301 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/relay.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "RelayService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/relays": {
+      "get": {
+        "summary": "List lists the relays for the given application id.",
+        "operationId": "RelayService_List",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListRelaysResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "limit",
+            "description": "Max number of devices to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "applicationId",
+            "description": "Application ID (UUID).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RelayService"
+        ]
+      }
+    },
+    "/api/relays/{relayDevEui}/devices": {
+      "get": {
+        "summary": "ListDevices lists the devices for the given relay.",
+        "operationId": "RelayService_ListDevices",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/apiListRelayDevicesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "relayDevEui",
+            "description": "Relay DevEUI (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "description": "Max number of multicast groups to return in the result-set.\nIf not set, it will be treated as 0, and the response will only return the total_count.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "offset",
+            "description": "Offset in the result-set (for pagination).",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "RelayService"
+        ]
+      },
+      "post": {
+        "summary": "AddDevice adds the given device to the relay.",
+        "operationId": "RelayService_AddDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "relayDevEui",
+            "description": "Relay DevEUI (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RelayServiceAddDeviceBody"
+            }
+          }
+        ],
+        "tags": [
+          "RelayService"
+        ]
+      }
+    },
+    "/api/relays/{relayDevEui}/devices/{deviceDevEui}": {
+      "delete": {
+        "summary": "RemoveDevice removes the given device from the relay.",
+        "operationId": "RelayService_RemoveDevice",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "relayDevEui",
+            "description": "Relay DevEUI (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deviceDevEui",
+            "description": "Device DevEUI (EUI64).",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "RelayService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "RelayServiceAddDeviceBody": {
+      "type": "object",
+      "properties": {
+        "deviceDevEui": {
+          "type": "string",
+          "description": "Device DevEUI (EUI64)."
+        }
+      }
+    },
+    "apiListRelayDevicesResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of devices."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiRelayDeviceListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiListRelaysResponse": {
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total number of relays."
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiRelayListItem"
+          },
+          "description": "Result-set."
+        }
+      }
+    },
+    "apiRelayDeviceListItem": {
+      "type": "object",
+      "properties": {
+        "devEui": {
+          "type": "string",
+          "description": "DevEUI (EUI64)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created at timestamp."
+        },
+        "name": {
+          "type": "string",
+          "description": "Device name."
+        }
+      }
+    },
+    "apiRelayListItem": {
+      "type": "object",
+      "properties": {
+        "devEui": {
+          "type": "string",
+          "description": "DevEUI (EUI64)."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name."
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

@@ -296,6 +296,8 @@ github.com/charmbracelet/x/windows v0.2.2 h1:IofanmuvaxnKHuV04sC0eBy/smG6kIKrWG2
 github.com/charmbracelet/x/windows v0.2.2/go.mod h1:/8XtdKZzedat74NQFn0NGlGL4soHB0YQZrETF96h75k=
 github.com/chirpstack/chirpstack/api/go/v4 v4.18.0 h1:PRiWWY+tQU4x8jCQhmOR1vsuPCESDIPe2DHWS55olSQ=
 github.com/chirpstack/chirpstack/api/go/v4 v4.18.0/go.mod h1:V7+3YnVEN0AgYaoVhrfzKhcvhcp4FzzvdGplAW8Nk+Y=
+github.com/chirpstack/chirpstack/api/go/v4 v4.19.0 h1:43f7k1gcML3ABN8a8fsObGMF2/l2DJUjWkvELfkzpBQ=
+github.com/chirpstack/chirpstack/api/go/v4 v4.19.0/go.mod h1:V7+3YnVEN0AgYaoVhrfzKhcvhcp4FzzvdGplAW8Nk+Y=
 github.com/chrismellard/docker-credential-acr-env v0.0.0-20230304212654-82a0ddb27589 h1:krfRl01rzPzxSxyLyrChD+U+MzsBXbm0OwYYB67uF+4=
 github.com/chrismellard/docker-credential-acr-env v0.0.0-20230304212654-82a0ddb27589/go.mod h1:OuDyvmLnMCwa2ep4Jkm6nyA0ocJuZlGyk2gGseVzERM=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
