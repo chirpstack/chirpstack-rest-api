@@ -479,6 +479,22 @@
             "email": {
               "type": "string",
               "description": "Email (only used on get and when adding a user to a tenant)."
+            },
+            "deviceProfiles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/apiTenantUserDeviceProfile"
+              },
+              "description": "Device Profile IDs."
+            },
+            "applications": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/apiTenantUserApplication"
+              },
+              "description": "Application IDs."
             }
           },
           "description": "Tenant user object.",
@@ -563,6 +579,22 @@
             "email": {
               "type": "string",
               "description": "Email (only used on get and when adding a user to a tenant)."
+            },
+            "deviceProfiles": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/apiTenantUserDeviceProfile"
+              },
+              "description": "Device Profile IDs."
+            },
+            "applications": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "$ref": "#/definitions/apiTenantUserApplication"
+              },
+              "description": "Application IDs."
             }
           },
           "description": "Tenant user object.",
@@ -786,6 +818,44 @@
         "email": {
           "type": "string",
           "description": "Email (only used on get and when adding a user to a tenant)."
+        },
+        "deviceProfiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiTenantUserDeviceProfile"
+          },
+          "description": "Device Profile IDs."
+        },
+        "applications": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/apiTenantUserApplication"
+          },
+          "description": "Application IDs."
+        }
+      }
+    },
+    "apiTenantUserApplication": {
+      "type": "object",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "Application ID."
+        },
+        "isReadOnly": {
+          "type": "boolean",
+          "description": "Is read-only."
+        }
+      }
+    },
+    "apiTenantUserDeviceProfile": {
+      "type": "object",
+      "properties": {
+        "deviceProfileId": {
+          "type": "string",
+          "description": "Device Profile ID."
         }
       }
     },

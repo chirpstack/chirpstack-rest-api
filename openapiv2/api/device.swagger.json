@@ -365,9 +365,16 @@
         "parameters": [
           {
             "name": "devEui",
-            "description": "DevEUI (EUI64).",
+            "description": "DevEUI (EUI64).\nEither dev_eui or tenant_id must be set.",
             "in": "path",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tenantId",
+            "description": "Tenant ID.\nEither dev_eui or tenant_id must be set.",
+            "in": "query",
+            "required": false,
             "type": "string"
           }
         ],
